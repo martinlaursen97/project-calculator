@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+
+<body style="background-color: var(--main)">
+
+<div class="center">
+    <div class="login-form-box">
+        <img src="images/logo1.png" class="login-form-logo" alt=""/>
+
+        <form name="loginVerify" action="/login/verify" method="POST">
+            <div class="col-sm">
+                <div class="col">
+                    <label for="email" style="margin-top: 10px" class="control-label"></label>
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="col-sm">
+                    <label for="password" class="control-label"></label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="col">
+                    <div class="nav-links">
+                        <ul>
+                            <button name="post" type="submit" class="login-form-btn" style="margin-top: 20px">log in</button>
+                        </ul>
+                    </div>
+                </div>
+                <span title="I am hovering over the text">Why can't i register?</span>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

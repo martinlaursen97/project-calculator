@@ -12,16 +12,17 @@
 <div class="center">
     <div class="login-form-box">
         <img src="images/logo1.png" class="login-form-logo" alt=""/>
+        <div class="error" th:text="${error}"></div>
 
-        <form name="loginVerify" action="/login/verify" method="POST">
+        <form name="loginVerify" action="/verify" method="POST">
             <div class="col-sm">
                 <div class="col">
-                    <label for="email" style="margin-top: 10px" class="control-label"></label>
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <label for="email" class="control-label"></label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                 </div>
                 <div class="col-sm">
                     <label for="password" class="control-label"></label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 </div>
                 <div class="col">
                     <div class="nav-links">
@@ -30,7 +31,7 @@
                         </ul>
                     </div>
                 </div>
-                <span title="I am hovering over the text">Why can't i register?</span>
+                <span title="I am hovering over the text">Why can't I register?</span>
             </div>
         </form>
 

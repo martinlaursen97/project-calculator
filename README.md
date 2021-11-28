@@ -1,4 +1,4 @@
-# project-calculator
+# Kalkulationsværktøj (Eksamensprojekt)
 
 ## Opgaven
 

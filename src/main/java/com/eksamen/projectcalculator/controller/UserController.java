@@ -1,6 +1,7 @@
 package com.eksamen.projectcalculator.controller;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
+import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.domain.service.UserService;
@@ -28,18 +29,21 @@ public class UserController {
 
 
 
+
             ArrayList<Task> tasks = new ArrayList<>();
 
             Task task1 = new Task(1L, "Rapport-skrivning", "Gruppe", null, null, "2021 11 10", "2021 12 17", 20);
             Task task2 = new Task(2L, "Domæne model", "Gruppe", null, null, "2021 11 25", "2021 11 26", 100);
             Task task3 = new Task(3L, "Virksomhed", "Gruppe", null, null, "2021 11 10", "2021 11 15", 20);
 
+
             tasks.add(task1);
             tasks.add(task2);
             tasks.add(task3);
 
+            Project project = new Project("Eksamen", tasks);
 
-            model.addAttribute("test", tasks);
+            model.addAttribute("project", project);
 
             return "index";
         } catch (LoginException e) {

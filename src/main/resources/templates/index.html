@@ -2,13 +2,15 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" th:inline="javascript"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script type="text/javascript" th:inline="javascript">
         google.charts.load('current', {'packages':['gantt']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            /*<![CDATA[*/
+
 
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Task ID');
@@ -20,17 +22,12 @@
             data.addColumn('number', 'Percent Complete');
             data.addColumn('string', 'Dependencies');
 
-            function daysToMilliseconds(days) {
-                return days * 24 * 60 * 60 * 1000;
-            }
-
-            //[Id, Name, Resource, Start, Finish, Duration, Percent done, Dependencies]
-
             /*<![CDATA[*/
-            var list = /*[[${test}]]*/ "Test";
+            var project = /*[[${project}]]*/ "Test";
+            var tasks = project.tasks;
 
-            for (var i = 0; i < list.length; i++) {
-                var task = list[i];
+            for (var i = 0; i < tasks.length; i++) {
+                var task = tasks[i];
 
                 var id = task.taskId.toString();
                 var name = task.taskName;
@@ -47,20 +44,40 @@
                 ]);
             }
 
+            var height = tasks.length * 30;
+
             var options = {
-                height: 400,
+                title: "test",
+                height: height + 30,
+                width: 1200,
+                legend: 'none',
                 gantt: {
                     trackHeight: 30
                 }
             };
 
             var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-
             chart.draw(data, options);
         }
     </script>
 </head>
 <body>
-<div id="chart_div"></div>
+
+<div class="sidenav">
+    <img src="images/logo5.png" class="menu-img" alt=""/>
+    <a href="#" style="margin-top:30px">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+
+<div class="main">
+    <div class="chart-box">
+        <div class="chart-box-title" th:text="${project.projectName}"></div>
+        <div class="chart-box-options"></div>
+        <div id="chart_div" style="display: block; margin: 10px auto 0;align-self: center;"></div>
+    </div>
+</div>
 </body>
 </html>

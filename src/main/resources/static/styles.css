@@ -128,7 +128,7 @@ body {
 }
 
 @media screen and (max-height: 450px) {
-    .sidenav {
+     .sidenav {
         padding-top: 15px;
     }
 

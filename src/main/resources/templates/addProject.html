@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<body>
+<div class="sidenav">
+    <img src="images/logo5.png" class="menu-img" alt=""/>
+    <a href="#" style="margin-top:30px">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+
+<div class="main">
+    <div class="project-form-box">
+
+
+        <form name="addProject" action="/addVerify" method="POST">
+            <div class="col-sm">
+                <div class="col">
+                    <label for="name" class="control-label"></label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                </div>
+                <div class="col">
+                    <div class="nav-links">
+                        <ul>
+                            <button name="post" type="submit" class="login-form-btn" style="margin-top: 20px">Add
+                            </button>
+                            <button name="post" type="button" class="login-form-btn" style="margin-top: 20px" onclick="window.history.go(-1); return false;">Back
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

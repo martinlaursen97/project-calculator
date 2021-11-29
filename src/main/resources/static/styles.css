@@ -10,9 +10,9 @@ body {
 
 }
 
-.padding-0{
-    padding-right:0;
-    padding-left:0;
+.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .center {
@@ -103,7 +103,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color:var(--main);
+    background-color: var(--main);
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -128,14 +128,27 @@ body {
 }
 
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
 .menu-img {
     height: auto;
     width: 190px;
     margin: 5px;
+}
+
+.project-form-box {
+    width: 500px;
+    height: 200px;
+    margin-left: 200px;
+    background-color: whitesmoke;
+
 }
 
 

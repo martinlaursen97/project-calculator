@@ -24,6 +24,7 @@ public class Task {
         this.percentComplete = percentComplete;
     }
 
+    // Getters and Setters
     public long getTaskId() {
         return taskId;
     }

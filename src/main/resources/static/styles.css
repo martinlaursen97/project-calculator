@@ -10,9 +10,9 @@ body {
 
 }
 
-.padding-0{
-    padding-right:0;
-    padding-left:0;
+.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .center {
@@ -64,6 +64,92 @@ body {
     background-color: var(--main-hover);
 }
 
+.menu-bar {
+    height: 2000px;
+    width: 300px;
+    background-color: var(--main);
+    box-shadow: 1px 1px 20px;
+    position: fixed;
+}
+
+.menu-page-center {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-left: 200px;
+}
+
+.chart-box {
+    width: 1200px;
+    margin-top: 75px;
+    margin-left: 100px;
+}
+
+.chart-box-title {
+    color: var(--main);
+}
+
+.chart-box-options {
+    margin-top: 10px;
+    height: 60px;
+    background-color: whitesmoke;
+    border-radius: 3px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--main);
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.menu-img {
+    height: auto;
+    width: 190px;
+    margin: 5px;
+}
+
+.project-form-box {
+    width: 500px;
+    height: 200px;
+    margin-left: 200px;
+    background-color: whitesmoke;
+
+}
 
 
 

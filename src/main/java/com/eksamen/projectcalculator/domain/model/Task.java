@@ -1,23 +1,30 @@
 package com.eksamen.projectcalculator.domain.model;
 
+import java.util.Date;
+
 public class Task {
 
     private long taskId;
     private String taskName;
-    private String taskDescription;
-    private double sumOfHourlyRate;
-    private double dailyWorkHours;
-    private double estimatedHoursInTotal;
+    private String resource;
+    private Date start;
+    private Date finish;
+    private String startStr;
+    private String finishStr;
+    private int percentComplete;
 
-    public Task(long taskId, String taskName, String taskDescription, double sumOfHourlyRate, double dailyWorkHours, double estimatedHoursInTotal) {
+    public Task(long taskId, String taskName, String resource, Date start, Date finish, String startStr, String finishStr, int percentComplete) {
         this.taskId = taskId;
         this.taskName = taskName;
-        this.taskDescription = taskDescription;
-        this.sumOfHourlyRate = sumOfHourlyRate;
-        this.dailyWorkHours = dailyWorkHours;
-        this.estimatedHoursInTotal = estimatedHoursInTotal;
+        this.resource = resource;
+        this.start = start;
+        this.finish = finish;
+        this.startStr = startStr;
+        this.finishStr = finishStr;
+        this.percentComplete = percentComplete;
     }
 
+    // Getters and Setters
     public long getTaskId() {
         return taskId;
     }
@@ -34,35 +41,51 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getResource() {
+        return resource;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setResource(String resource) {
+        this.resource = resource;
     }
 
-    public double getSumOfHourlyRate() {
-        return sumOfHourlyRate;
+    public Date getStart() {
+        return start;
     }
 
-    public void setSumOfHourlyRate(double sumOfHourlyRate) {
-        this.sumOfHourlyRate = sumOfHourlyRate;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
-    public double getDailyWorkHours() {
-        return dailyWorkHours;
+    public Date getFinish() {
+        return finish;
     }
 
-    public void setDailyWorkHours(double dailyWorkHours) {
-        this.dailyWorkHours = dailyWorkHours;
+    public void setFinish(Date finish) {
+        this.finish = finish;
     }
 
-    public double getEstimatedHoursInTotal() {
-        return estimatedHoursInTotal;
+    public String getStartStr() {
+        return startStr;
     }
 
-    public void setEstimatedHoursInTotal(double estimatedHoursInTotal) {
-        this.estimatedHoursInTotal = estimatedHoursInTotal;
+    public void setStartStr(String startStr) {
+        this.startStr = startStr;
+    }
+
+    public String getFinishStr() {
+        return finishStr;
+    }
+
+    public void setFinishStr(String finishStr) {
+        this.finishStr = finishStr;
+    }
+
+    public int getPercentComplete() {
+        return percentComplete;
+    }
+
+    public void setPercentComplete(int percentComplete) {
+        this.percentComplete = percentComplete;
     }
 }

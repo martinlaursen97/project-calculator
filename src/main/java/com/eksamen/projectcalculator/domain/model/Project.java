@@ -9,20 +9,41 @@ import java.util.List;
 
 public class Project {
 
-    private Date startDate;
-    private Date deadline;
     private String projectName;
-    private String projectDescription;
     private List<Task> tasks;
     private List<Project> subprojects;
 
-    public Project (String projectName, String projectDescription) {
+    public Project(String projectName, List<Task> tasks, List<Project> subprojects) {
         this.projectName = projectName;
-        this.projectDescription = projectDescription;
-        tasks = new ArrayList<>();
-        subprojects = new ArrayList<>();
+        this.tasks = tasks;
+        this.subprojects = subprojects;
     }
 
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Project> getSubprojects() {
+        return subprojects;
+    }
+
+    public void setSubprojects(List<Project> subprojects) {
+        this.subprojects = subprojects;
+    }
+
+    /*
     public void addSubproject(Project project){
         subprojects.add(project);
     }
@@ -76,4 +97,6 @@ public class Project {
 
 
     }
+
+ */
 }

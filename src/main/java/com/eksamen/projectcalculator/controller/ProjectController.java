@@ -1,45 +1,62 @@
 package com.eksamen.projectcalculator.controller;
 
+import com.eksamen.projectcalculator.domain.exception.ProjectException;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.service.ProjectService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+
+import java.util.ArrayList;
 
 @Controller
 public class ProjectController {
 
     private final ProjectService PROJECT_SERVICE = new ProjectService();
 
-    @GetMapping("/add")
-    public String createProject() {
-        return "addProject";
+    @GetMapping("/projects")
+    public String projects(WebRequest request) {
+        if (request.getAttribute("user", WebRequest.SCOPE_SESSION) == null) return "login";
+
+        return "projects";
     }
 
     @PostMapping("/addVerify")
-    public String createProjectVerify(WebRequest webRequest) {
-        String projectName = webRequest.getParameter("name");
-        if (projectName.length() != 0) {
+    public String createProjectVerify(WebRequest request, Model model) {
+        if (request.getAttribute("user", WebRequest.SCOPE_SESSION) == null) return "login";
+
+        try {
+            String projectName = request.getParameter("name");
             PROJECT_SERVICE.createProject(projectName);
+        } catch (ProjectException e) {
+            model.addAttribute("error", e.getMessage());
         }
-        // Go to Exception page
-        return "";
+        return "redirect:/projects";
     }
 
-    //@GetMapping("/")
-    //public String test(){
-//
-    //    Task task = new Task(1,"Første task", "Denne task er vigtig",
-    //            5,  8, 120);
-//
-//
-    //    Project project1 = new Project("Første projekt", "Vigtigt projekt");
-    //    project1.addTask(task);
-    //    project1.getDeadline();
-    //    return "index";
-    //}
+    @GetMapping("/gantt")
+    public String test(Model model) {
+
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        Task task1 = new Task(1L, "Rapport-skrivning", "Gruppe", null, null, "2021 11 10", "2021 12 17", 20);
+        Task task2 = new Task(2L, "Domæne model", "Gruppe", null, null, "2021 11 25", "2021 11 26", 100);
+        Task task3 = new Task(3L, "Virksomhed", "Gruppe", null, null, "2021 11 10", "2021 11 15", 20);
+
+
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
+
+        Project project = new Project("Eksamen", tasks, null);
+
+        model.addAttribute("project", project);
+
+        return "inspectProject";
+    }
 
 
 }

@@ -143,13 +143,47 @@ body {
     margin: 5px;
 }
 
-.project-form-box {
-    width: 500px;
-    height: 200px;
-    margin-left: 200px;
+.project-list {
+    margin-top: 75px;
+    margin-left: 100px;
+    width: 600px;
+    height: 900px;
     background-color: whitesmoke;
-
+    outline: 1px solid grey;
 }
+
+
+
+.project-form-box {
+    width: 600px;
+    height: 46px;
+    background-color: whitesmoke;
+    outline: 1px solid grey;
+}
+
+.project-add-btn {
+    height: 35px;
+    width: 35px;
+    background-color: white;
+    color: var(--main);
+    cursor: pointer;
+    padding: 0;
+    border: 2px solid var(--main);
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 35px;
+}
+
+.project-add-btn:hover {
+    color: white;
+    background-color: var(--main);
+}
+
+.plus {
+    margin-top: -14px;
+    position: relative;
+}
+
 
 
 

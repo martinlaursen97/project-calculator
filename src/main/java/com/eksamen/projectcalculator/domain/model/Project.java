@@ -9,14 +9,28 @@ import java.util.List;
 
 public class Project {
 
+    private long projectId;
     private String projectName;
     private List<Task> tasks;
     private List<Project> subprojects;
 
-    public Project(String projectName, List<Task> tasks, List<Project> subprojects) {
+    public Project(long projectId, String projectName, List<Task> tasks, List<Project> subprojects) {
+        this.projectId = projectId;
         this.projectName = projectName;
         this.tasks = tasks;
         this.subprojects = subprojects;
+    }
+
+    public Project() {
+
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {
@@ -42,6 +56,8 @@ public class Project {
     public void setSubprojects(List<Project> subprojects) {
         this.subprojects = subprojects;
     }
+
+
 
     /*
     public void addSubproject(Project project){

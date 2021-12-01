@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
@@ -18,9 +19,10 @@ public class ProjectController {
     private final ProjectService PROJECT_SERVICE = new ProjectService();
 
     @GetMapping("/projects")
-    public String projects(WebRequest request) {
+    public String projects(WebRequest request, Model model) {
         if (request.getAttribute("user", WebRequest.SCOPE_SESSION) == null) return "login";
 
+        model.addAttribute("projects", PROJECT_SERVICE.getProjects());
         return "projects";
     }
 
@@ -51,12 +53,19 @@ public class ProjectController {
         tasks.add(task2);
         tasks.add(task3);
 
-        Project project = new Project("Eksamen", tasks, null);
+        Project project = new Project(1, "Eksamen", tasks, null);
 
         model.addAttribute("project", project);
 
         return "inspectProject";
     }
+
+    @GetMapping("/project")
+    public String showProject(@RequestParam (name="id") long id, Model model){
+        model.addAttribute("project", PROJECT_SERVICE.getProjectById(id));
+        return "inspectProject";
+    }
+
 
 
 }

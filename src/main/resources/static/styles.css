@@ -147,12 +147,9 @@ body {
     margin-top: 75px;
     margin-left: 100px;
     width: 600px;
-    height: 900px;
     background-color: whitesmoke;
     outline: 1px solid grey;
 }
-
-
 
 .project-form-box {
     width: 600px;
@@ -182,6 +179,12 @@ body {
 .plus {
     margin-top: -14px;
     position: relative;
+}
+
+.project-list-item {
+    height: 40px;
+    width: 600px;
+    border-bottom: 2px solid grey;
 }
 
 

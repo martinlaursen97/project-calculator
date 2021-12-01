@@ -37,6 +37,11 @@
                     </div>
                 </div>
             </form>
+            <tr th:each="project: ${projects}">
+                <a type="button" style="text-decoration: none; color: black;" th:href="@{/project(id=${project.projectId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                    <td th:text="${project.projectName}"></td>
+                </a>
+            </tr>
         </div>
     </div>
 </div>

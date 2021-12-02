@@ -32,4 +32,9 @@ public class UserController {
             return "login";
         }
     }
+
+    @PostMapping("/registerVerify")
+    public String registerVerify(WebRequest request, Model model) {
+        return "";
+    }
 }

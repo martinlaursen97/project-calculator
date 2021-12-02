@@ -12,6 +12,11 @@ public class FrontController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/register")
+    public String registerUser() {
+        return "register";
+    }
 }
 
 

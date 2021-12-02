@@ -2,6 +2,9 @@ package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Project;
 
+import com.eksamen.projectcalculator.domain.exception.LoginException;
+import com.eksamen.projectcalculator.domain.model.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +26,19 @@ public class ProjectRepository {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean projectExists(String projectName) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT * FROM project WHERE project_name = '" + projectName + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException ignore) {
+
+        }
+        return false;
     }
 
     public List<Project> getProjects() {

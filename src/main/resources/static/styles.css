@@ -182,9 +182,15 @@ body {
 }
 
 .project-list-item {
-    height: 40px;
+    min-height: 40px;
     width: 600px;
-    border-bottom: 2px solid grey;
+    outline: 1px solid grey;
+    background-color: whitesmoke;
+    float: left;
+}
+
+.project-list-item:hover {
+    background-color: #b6b6b6;
 }
 
 

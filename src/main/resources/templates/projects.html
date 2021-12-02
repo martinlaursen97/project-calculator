@@ -18,12 +18,11 @@
 <div class="main">
     <div class="project-list">
         <div class="project-form-box">
-            <div class="error" th:text="${error}"></div>
             <form name="addProject" action="/addVerify" method="POST">
                 <div class="row">
                     <div class="row">
                         <label for="name" class="control-label"></label>
-                        <input type="text" name="name" class="form-control" id="name"
+                        <input type="text" minlength="1" maxlength="50" name="name" class="form-control" id="name"
                                style="width:200px; height: 35px; margin-left: 375px; margin-top: 5px;" placeholder="Name">
                     </div>
                     <div class="row">

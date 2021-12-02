@@ -12,10 +12,10 @@ public class ProjectService {
     private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
 
     public void createProject(String projectName) throws ProjectException {
-        if (projectName.length() > 0) {
+        if (projectName.length() > 0 && projectName.length() <= 50) {
             PROJECT_REPOSITORY.createProject(projectName);
         } else {
-            throw new ProjectException("Input field cannot be empty");
+            throw new ProjectException("Invalid input");
         }
     }
 

@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class ProjectController {
@@ -39,30 +42,32 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    @GetMapping("/gantt")
-    public String test(Model model) {
+    @GetMapping("/project")
+    public String showProject(@RequestParam (name="id") long id, Model model){
+        Project project = PROJECT_SERVICE.getProjectById(id);
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        Task task1 = new Task(1L, "Rapport-skrivning", "Gruppe", null, null, "2021 11 10", "2021 12 17", 20);
-        Task task2 = new Task(2L, "Domæne model", "Gruppe", null, null, "2021 11 25", "2021 11 26", 100);
-        Task task3 = new Task(3L, "Virksomhed", "Gruppe", null, null, "2021 11 10", "2021 11 15", 20);
+        //DateFormat df = new SimpleDateFormat("y M d");
+        //Date date = new Date();
+        //String dateStr = df.format(date);
+
+        Task task1 = new Task(1L, "Rapport-skrivning", "Gruppe","2021 11 10", "2021 12 17", 20);
+        Task task2 = new Task(2L, "Domæne model", "Gruppe", "2021 11 25", "2021 11 26", 100);
+        Task task3 = new Task(3L, "Virksomhed", "Gruppe", "2021 11 10", "2021 11 15", 20);
 
 
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
 
-        Project project = new Project(1, "Eksamen", tasks, null);
+
+        project.setTasks(tasks);
+
+        System.out.println(project.getTasks().size());
+        System.out.println(project.getProjectId());;
 
         model.addAttribute("project", project);
-
-        return "inspectProject";
-    }
-
-    @GetMapping("/project")
-    public String showProject(@RequestParam (name="id") long id, Model model){
-        model.addAttribute("project", PROJECT_SERVICE.getProjectById(id));
         return "inspectProject";
     }
 

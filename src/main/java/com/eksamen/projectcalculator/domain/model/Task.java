@@ -1,30 +1,41 @@
 package com.eksamen.projectcalculator.domain.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Task {
 
     private long taskId;
     private String taskName;
     private String resource;
-    private Date start;
-    private Date finish;
-    private String startStr;
-    private String finishStr;
+    private String startDateStr; // til javascript
+    private String finishDateStr;
     private int percentComplete;
+    private List<Subtask> subtasks;
 
-    public Task(long taskId, String taskName, String resource, Date start, Date finish, String startStr, String finishStr, int percentComplete) {
+    public Task(long taskId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.resource = resource;
-        this.start = start;
-        this.finish = finish;
-        this.startStr = startStr;
-        this.finishStr = finishStr;
+        this.startDateStr = startDateStr;
+        this.finishDateStr = finishDateStr;
+        this.percentComplete = percentComplete;
+        this.subtasks = subtasks;
+    }
+
+    public Task(long taskId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete) {
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.resource = resource;
+        this.startDateStr = startDateStr;
+        this.finishDateStr = finishDateStr;
         this.percentComplete = percentComplete;
     }
 
-    // Getters and Setters
+    public Task() {
+
+    }
+
     public long getTaskId() {
         return taskId;
     }
@@ -49,36 +60,20 @@ public class Task {
         this.resource = resource;
     }
 
-    public Date getStart() {
-        return start;
+    public String getStartDateStr() {
+        return startDateStr;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setStartDateStr(String startDateStr) {
+        this.startDateStr = startDateStr;
     }
 
-    public Date getFinish() {
-        return finish;
+    public String getFinishDateStr() {
+        return finishDateStr;
     }
 
-    public void setFinish(Date finish) {
-        this.finish = finish;
-    }
-
-    public String getStartStr() {
-        return startStr;
-    }
-
-    public void setStartStr(String startStr) {
-        this.startStr = startStr;
-    }
-
-    public String getFinishStr() {
-        return finishStr;
-    }
-
-    public void setFinishStr(String finishStr) {
-        this.finishStr = finishStr;
+    public void setFinishDateStr(String finishDateStr) {
+        this.finishDateStr = finishDateStr;
     }
 
     public int getPercentComplete() {
@@ -87,5 +82,13 @@ public class Task {
 
     public void setPercentComplete(int percentComplete) {
         this.percentComplete = percentComplete;
+    }
+
+    public List<Subtask> getSubtasks() {
+        return subtasks;
+    }
+
+    public void setSubtasks(List<Subtask> subtasks) {
+        this.subtasks = subtasks;
     }
 }

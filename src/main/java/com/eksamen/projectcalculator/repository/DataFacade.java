@@ -11,6 +11,10 @@ public class DataFacade {
     private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
 
     // User
+    public void createUser(String email, String password, boolean isAdmin) throws LoginException {
+        USER_REPOSITORY.createUser(email, password, isAdmin);
+    }
+
     public User loginValid(String email, String password) throws LoginException {
         return USER_REPOSITORY.loginValid(email, password);
     }
@@ -27,4 +31,6 @@ public class DataFacade {
     public Project getProjectById(long id) {
         return PROJECT_REPOSITORY.getProjectById(id);
     }
+
+
 }

@@ -35,6 +35,22 @@ public class UserController {
 
     @PostMapping("/registerVerify")
     public String registerVerify(WebRequest request, Model model) {
-        return "";
+
+        try {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            String admin = request.getParameter("admin");
+            boolean isAdmin = false;
+
+            if (admin != null) {
+                isAdmin = true;
+            }
+            USER_SERVICE.createUser(email, password, isAdmin);
+            return "redirect:/users";
+        } catch (LoginException e) {
+            model.addAttribute("error", e.getMessage());
+            return "register";
+        }
+
     }
 }

@@ -66,23 +66,23 @@ public class ProjectRepository {
 
     public Project getProjectById(long id) {
         try {
-        Connection connection = DBManager.getConnection();
+            Connection connection = DBManager.getConnection();
 
-        String query = "SELECT * FROM project WHERE project_id = " + id;
+            String query = "SELECT * FROM project WHERE project_id = " + id;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        ResultSet resultSet = preparedStatement.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        if (resultSet.next()) {
-            Project project = new Project();
-            project.setProjectId(resultSet.getLong("project_id"));
-            project.setProjectName(resultSet.getString("project_name"));
-            return project;
+            if (resultSet.next()) {
+                Project project = new Project();
+                project.setProjectId(resultSet.getLong("project_id"));
+                project.setProjectName(resultSet.getString("project_name"));
+                return project;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
         return null;
     }
 }

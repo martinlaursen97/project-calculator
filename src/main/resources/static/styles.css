@@ -128,7 +128,7 @@ body {
 }
 
 @media screen and (max-height: 450px) {
-     .sidenav {
+    .sidenav {
         padding-top: 15px;
     }
 
@@ -192,7 +192,4 @@ body {
 .project-list-item:hover {
     background-color: #b6b6b6;
 }
-
-
-
 

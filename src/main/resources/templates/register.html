@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+<div class="sidenav">
+    <img src="images/logo5.png" class="menu-img" alt=""/>
+    <a th:href="@{/projects}" style="margin-top:30px">Projects</a>
+    <a th:href="@{/gantt}">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+
+<div class="main">
+    <div class="center">
+        <div class="login-form-box">
+            <div class="error" th:text="${error}"></div>
+            <form name="registerVerify" action="/registerVerify" method="POST">
+                <div class="col-sm">
+                    <div class="col">
+                        <label for="email" class="control-label"></label>
+                        <input type="email" name="email" class="form-control" id="email" required
+                               placeholder="Email">
+                    </div>
+                    <div class="col-sm">
+                        <label for="password" class="control-label"></label>
+                        <input type="password" name="password" class="form-control" id="password" required
+                               placeholder="Password">
+                    </div>
+                    <div class="col-sm">
+                        <label for="password2" class="control-label"></label>
+                        <input type="password2" name="password2" class="form-control" id="password2" required
+                               placeholder="Confirm Password">
+                    </div>
+
+
+                    <div class="checkbox">
+                        <label for="admin" style="margin-top: 20px">
+                            <span>Admin user</span>
+                            <input type="checkbox" class="checkbox style-2 " checked="checked" name="admin" id="admin"
+                                   value="true">
+                        </label>
+                    </div>
+
+
+                    <div class="col">
+                        <div class="nav-links">
+                            <ul>
+                                <button name="post" type="submit" class="login-form-btn" style="margin-top: 20px">
+                                    Register
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

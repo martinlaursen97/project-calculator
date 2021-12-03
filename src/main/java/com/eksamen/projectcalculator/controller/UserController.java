@@ -7,6 +7,7 @@ import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.domain.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
@@ -31,5 +32,10 @@ public class UserController {
             model.addAttribute("error", e.getMessage());
             return "login";
         }
+    }
+
+    @GetMapping("/adminOverview")
+    public String getAdminOverview(){
+        return "adminOverview";
     }
 }

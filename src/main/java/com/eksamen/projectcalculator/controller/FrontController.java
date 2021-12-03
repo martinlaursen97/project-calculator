@@ -8,6 +8,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class FrontController {
 
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
+
     @GetMapping("/")
     public String login() {
         return "login";

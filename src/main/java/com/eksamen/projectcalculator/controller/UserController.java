@@ -25,7 +25,7 @@ public class UserController {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             User user = USER_SERVICE.loginValid(email, password);
-            request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+            request.setAttribute("userId", user.getUserId(), WebRequest.SCOPE_SESSION);
             return "redirect:/projects";
         } catch (LoginException e) {
             model.addAttribute("error", e.getMessage());
@@ -40,11 +40,8 @@ public class UserController {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String admin = request.getParameter("admin");
-            boolean isAdmin = false;
+            boolean isAdmin = admin != null;
 
-            if (admin != null) {
-                isAdmin = true;
-            }
             USER_SERVICE.createUser(email, password, isAdmin);
             return "redirect:/users";
         } catch (LoginException e) {

@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title></title>
 </head>
 <body>
+
+<div class="sidenav">
+    <img src="images/logo5.png" class="menu-img" alt=""/>
+    <a th:href="@{/projects}" style="margin-top:30px">Projects</a>
+    <a th:href="@{/gantt}">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+<div class="main">
+    <div class="center">
+        <div class="login-form-box">
+            <form name="addTaskVerify" th:action="@{/project/addTaskVerify(id=${id})}" method="POST">
+                <div class="col-sm">
+                    <div class="col">
+                        <label for="name" class="control-label"></label>
+                        <input type="text" name="name" class="form-control" id="name" required
+                               placeholder="Task name">
+                    </div>
+                    <div class="col-sm">
+                        <label for="resource" class="control-label"></label>
+                        <input type="text" name="resource" class="form-control" id="resource" required
+                               placeholder="Resource">
+                    </div>
+                    <div class="col-sm">
+                        <label for="start" class="control-label"></label>
+                        <input type="date" name="start" class="form-control" id="start" required
+                               placeholder="Start date">
+                    </div>
+                    <div class="col-sm">
+                        <label for="finish" class="control-label"></label>
+                        <input type="date" name="finish" class="form-control" id="finish" required
+                               placeholder="Finish date">
+                    </div>
+                    <div class="col-sm">
+                        <label for="completion" class="control-label"></label>
+                        <input type="number" name="completion" class="form-control" id="completion"
+                               placeholder="Completion percentage">
+                    </div>
+                    <div class="col">
+                        <div class="nav-links">
+                            <ul>
+                                <button name="post" type="submit" class="login-form-btn" style="margin-top: 20px">
+                                    Add
+                                </button>
+                                <a type="button" class="login-form-btn" href="javascript:history.back()">
+                                   Cancel
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

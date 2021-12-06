@@ -1,12 +1,15 @@
 package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
+import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository {
     public User loginValid(String email, String password) throws LoginException {
@@ -64,5 +67,30 @@ public class UserRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<User> getUser(String user) {
+
+        try {
+            Connection connection = DBManager.getConnection();
+
+            List<User> users = new ArrayList<>();
+
+            String query = "SELECT * FROM user";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                User aUser = new User();
+                aUser.setUserId(resultSet.getLong("user_id"));
+                aUser.setEmail(resultSet.getString("email"));
+                users.add(aUser);
+            }
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

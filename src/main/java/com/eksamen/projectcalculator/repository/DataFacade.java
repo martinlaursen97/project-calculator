@@ -33,4 +33,7 @@ public class DataFacade {
     }
 
 
+    public List<User> getUser(String user) {
+        return USER_REPOSITORY.getUser(user);
+    }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+
+<!--Sidemenu-->
+<div class="sidenav">
+    <img src="images/logo5.png" class="menu-img" alt=""/>
+    <a th:href="@{/projects}" style="margin-top:30px">Projects</a>
+    <a th:href="@{/gantt}">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+
+<div class="main">
+    <div class="project-list">
+        <div class="project-form-box">
+            <form name="adminOverview" action="/adminOverviewVerify" method="POST">
+                <div class="row">
+                    <div class="row">
+                        <label for="user" class="control-label"></label>
+                        <input type="text" minlength="1" maxlength="50" name="user" class="form-control" id="user"
+                               style="width:200px; height: 35px; margin-left: 375px; margin-top: 5px;" placeholder="User E-mail">
+                    </div>
+                    <div class="row">
+                        <div class="nav-links">
+                            <ul>
+                                <button name="post" type="submit" class="project-add-btn">
+                                    <p class="plus"></p>
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <tr th:each="user: ${user}">
+                <a type="button" style="text-decoration: none; color: black;" th:href="@{/adminOverview(id=${user.email})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                    <td th:text="${user.userEmail}"></td>
+                </a>
+            </tr>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

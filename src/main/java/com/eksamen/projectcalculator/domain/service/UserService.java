@@ -4,6 +4,8 @@ import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.repository.DataFacade;
 
+import java.util.List;
+
 public class UserService {
 
     private final DataFacade FACADE = new DataFacade();
@@ -14,5 +16,9 @@ public class UserService {
 
     public void createUser(String email, String password, boolean isAdmin) throws LoginException {
         FACADE.createUser(email, password, isAdmin);
+    }
+
+    public List<User> getUser(String user) {
+        return FACADE.getUser(user);
     }
 }

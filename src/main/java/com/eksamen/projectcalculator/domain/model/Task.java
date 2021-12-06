@@ -111,4 +111,18 @@ public class Task {
     public void setSubtasks(List<Subtask> subtasks) {
         this.subtasks = subtasks;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", projectId=" + projectId +
+                ", taskName='" + taskName + '\'' +
+                ", resource='" + resource + '\'' +
+                ", startDateStr='" + startDateStr + '\'' +
+                ", finishDateStr='" + finishDateStr + '\'' +
+                ", percentComplete=" + percentComplete +
+                ", subtasks=" + subtasks +
+                '}';
+    }
 }

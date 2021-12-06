@@ -2,13 +2,16 @@ package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.Project;
+import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.model.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class DataFacade {
+    private final SubtaskRepository SUBTASK_REPOSITORY = new SubtaskRepository();
     private final UserRepository USER_REPOSITORY = new UserRepository();
     private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
     private final TaskRepository TASK_REPOSITORY = new TaskRepository();
@@ -34,6 +37,14 @@ public class DataFacade {
     public Project getProjectById(long id) {
         Project project = PROJECT_REPOSITORY.getProjectById(id);
         List<Task> tasks = TASK_REPOSITORY.getTasksByProjectId(id);
+
+        for (Task task : tasks) {
+            List<Subtask> subtasks = SUBTASK_REPOSITORY.getSubtasksByTaskId(task.getTaskId());
+            if (subtasks != null) {
+                task.setSubtasks(subtasks);
+            }
+        }
+
         project.setTasks(tasks);
         return project;
     }

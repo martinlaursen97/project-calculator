@@ -4,13 +4,14 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" th:inline="javascript"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script type="text/javascript" th:inline="javascript">
         google.charts.load('current', {'packages':['gantt']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-
+            /*<![CDATA[*/
 
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Task ID');
@@ -22,11 +23,15 @@
             data.addColumn('number', 'Percent Complete');
             data.addColumn('string', 'Dependencies');
 
-            /*<![CDATA[*/
             var project = /*[[${project}]]*/ "Test";
             var tasks = project.tasks;
 
+            var height = 0;
+            var trackHeight = 30;
+
             for (var i = 0; i < tasks.length; i++) {
+                height += trackHeight;
+
                 var task = tasks[i];
 
                 var id = task.taskId.toString();
@@ -36,26 +41,56 @@
                 var finish = task.finishDateStr;
                 var percent = task.percentComplete;
 
-                /*]]>*/
+                data.addRow([id, name, null, new Date(start), new Date(finish), null, percent, null]);
 
-                data.addRows([
-                    [id, name, resource, new Date(start), new Date(finish), 0, percent, null]
-                ]);
+                if (task.subtasks != null) {
+//
+                    for (var j = 0; j < task.subtasks.length; j++) {
+                        height += trackHeight;
+//
+                        var subtask = task.subtasks[j];
+//
+                        var subtaskId = subtask.subtaskId.toString();
+                        var subtaskName = subtask.subtaskName;
+                        var subtaskStart = subtask.startDateStr;
+                        var subtaskFinish = subtask.finishDateStr;
+                        var subtaskPercent = subtask.percentComplete;
+                        var subtaskResource = subtask.resource;
+                        var dependency = subtask.taskId.toString();
+//
+                        data.addRow([subtaskId, subtaskName, null, new Date(subtaskStart), new Date(subtaskFinish), null, subtaskPercent, dependency]);
+                    }
+                }
             }
 
-            var height = tasks.length * 30;
-
             var options = {
-                title: "test",
-                height: height + 30,
-                width: 1200,
+                height: 1200,
                 gantt: {
-                    trackHeight: 30
+                    criticalPathEnabled: false,
+                    trackHeight: trackHeight,
+                    arrow: {
+                        angle: 0,
+                        width: 0,
+                        color: "white",
+                        radius: 0,
+                        legend: {position: 'none'}
+                    }
                 }
             };
 
             var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+            google.visualization.events.addListener(chart, 'select', selectHandler);
+
             chart.draw(data, options);
+            function selectHandler() {
+                var selections = chart.getSelection();
+                if (selections.length !== 0) {
+                    var selection = selections[0];
+                    var id = data.getValue(selection.row, 0);
+                    document.getElementById("taskLink").href = "project/task?id=" + id;
+                }
+            }
+            /*]]>*/
         }
     </script>
 </head>
@@ -76,8 +111,11 @@
             <a class="btn btn-secondary" th:href="@{/project/add(id=${project.projectId})}">Add task</a>
             <a class="btn btn-secondary" th:href="@{/project/delete(id=${project.projectId})}">Test</a>
             <a class="btn btn-secondary" th:href="@{/project/statistics(id=${project.projectId})}">Statistics</a>
+            <a class="btn btn-secondary" th:id="taskLink">Statistics</a>
         </div>
         <div id="chart_div" style="display: block; margin: 10px auto 0;align-self: center;"></div>
+
+
     </div>
 </div>
 

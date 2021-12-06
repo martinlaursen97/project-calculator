@@ -35,6 +35,15 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="nav-links">
+                            <ul>
+                                <a style="text-decoration: none" type="button" th:href="@{/register}" class="create-user-btn">
+                                    Create user
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </form>
             <tr th:each="user: ${users}">

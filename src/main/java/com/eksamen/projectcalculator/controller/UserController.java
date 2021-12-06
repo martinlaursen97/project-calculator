@@ -10,11 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
 @Controller
 public class UserController {
     private final UserService USER_SERVICE = new UserService();
@@ -26,7 +21,7 @@ public class UserController {
             String password = request.getParameter("password");
             User user = USER_SERVICE.loginValid(email, password);
             request.setAttribute("userId", user.getUserId(), WebRequest.SCOPE_SESSION);
-            return "redirect:/projects";
+            return "redirect:/index";
         } catch (LoginException e) {
             model.addAttribute("error", e.getMessage());
             return "login";

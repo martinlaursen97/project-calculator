@@ -2,13 +2,19 @@ package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.Project;
+import com.eksamen.projectcalculator.domain.model.Subtask;
+import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.model.User;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataFacade {
+    private final SubtaskRepository SUBTASK_REPOSITORY = new SubtaskRepository();
     private final UserRepository USER_REPOSITORY = new UserRepository();
     private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
+    private final TaskRepository TASK_REPOSITORY = new TaskRepository();
 
     // User
     public void createUser(String email, String password, boolean isAdmin) throws LoginException {
@@ -20,20 +26,35 @@ public class DataFacade {
     }
 
     // Project
-    public void createProject(String projectName) {
-        PROJECT_REPOSITORY.createProject(projectName);
+    public void createProject(long id, String projectName) {
+        PROJECT_REPOSITORY.createProject(id, projectName);
     }
 
-    public List<Project> getProjects() {
-        return PROJECT_REPOSITORY.getProjects();
+    public List<Project> getProjectsByUserId(long userId) {
+        return PROJECT_REPOSITORY.getProjectsByUserId(userId);
     }
 
     public Project getProjectById(long id) {
-        return PROJECT_REPOSITORY.getProjectById(id);
+        Project project = PROJECT_REPOSITORY.getProjectById(id);
+        List<Task> tasks = TASK_REPOSITORY.getTasksByProjectId(id);
+
+        for (Task task : tasks) {
+            List<Subtask> subtasks = SUBTASK_REPOSITORY.getSubtasksByTaskId(task.getTaskId());
+            if (subtasks != null) {
+                task.setSubtasks(subtasks);
+            }
+        }
+
+        project.setTasks(tasks);
+        return project;
     }
 
 
-    public List<User> getUser(String user) {
-        return USER_REPOSITORY.getUser(user);
+    public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion) {
+        TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion);
+    }
+
+    public boolean projectIsUsers(long userId, long id) {
+        return PROJECT_REPOSITORY.projectIsUsers(userId, id);
     }
 }

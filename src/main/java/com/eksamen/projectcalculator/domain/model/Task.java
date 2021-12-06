@@ -6,12 +6,24 @@ import java.util.List;
 public class Task {
 
     private long taskId;
+    private long projectId;
     private String taskName;
     private String resource;
     private String startDateStr; // til javascript
     private String finishDateStr;
     private int percentComplete;
     private List<Subtask> subtasks;
+
+    public Task(long taskId, long projectId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks) {
+        this.taskId = taskId;
+        this.projectId = projectId;
+        this.taskName = taskName;
+        this.resource = resource;
+        this.startDateStr = startDateStr;
+        this.finishDateStr = finishDateStr;
+        this.percentComplete = percentComplete;
+        this.subtasks = subtasks;
+    }
 
     public Task(long taskId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks) {
         this.taskId = taskId;
@@ -42,6 +54,14 @@ public class Task {
 
     public void setTaskId(long taskId) {
         this.taskId = taskId;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public String getTaskName() {
@@ -90,5 +110,19 @@ public class Task {
 
     public void setSubtasks(List<Subtask> subtasks) {
         this.subtasks = subtasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", projectId=" + projectId +
+                ", taskName='" + taskName + '\'' +
+                ", resource='" + resource + '\'' +
+                ", startDateStr='" + startDateStr + '\'' +
+                ", finishDateStr='" + finishDateStr + '\'' +
+                ", percentComplete=" + percentComplete +
+                ", subtasks=" + subtasks +
+                '}';
     }
 }

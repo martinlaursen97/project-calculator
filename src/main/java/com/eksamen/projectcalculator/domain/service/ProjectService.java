@@ -12,19 +12,23 @@ public class ProjectService {
 
     private final DataFacade FACADE = new DataFacade();
 
-    public void createProject(String projectName) throws ProjectException {
+    public void createProject(long id, String projectName) throws ProjectException {
         if (projectName.length() > 0 && projectName.length() <= 50) {
-            FACADE.createProject(projectName);
+            FACADE.createProject(id, projectName);
         } else {
             throw new ProjectException("Invalid input");
         }
     }
 
-    public List<Project> getProjects() {
-        return FACADE.getProjects();
+    public List<Project> getProjectsByUserId(long userId) {
+        return FACADE.getProjectsByUserId(userId);
     }
 
     public Project getProjectById(long id) {
         return FACADE.getProjectById(id);
+    }
+
+    public boolean projectIsUsers(long userId, long id) {
+        return FACADE.projectIsUsers(userId, id);
     }
 }

@@ -13,19 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectRepository {
-    public void createProject(String projectName) {
+    public void createProject(long id, String projectName) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "INSERT INTO project(project_name) VALUES (?)";
+            String query = "INSERT INTO project(user_id, project_name) VALUES (?, ?)";
             PreparedStatement preparedStatement;
 
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, projectName);
+            preparedStatement.setLong(1, id);
+            preparedStatement.setString(2, projectName);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public boolean projectExists(String projectName) {
@@ -41,11 +41,11 @@ public class ProjectRepository {
         return false;
     }
 
-    public List<Project> getProjects() {
+    public List<Project> getProjectsByUserId(long userId) {
         try {
             Connection connection = DBManager.getConnection();
             List<Project> projects = new ArrayList<>();
-            String query = "SELECT * FROM project";
+            String query = "SELECT * FROM project WHERE user_id = " + userId;
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -84,5 +84,18 @@ public class ProjectRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean projectIsUsers(long userId, long id) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT * FROM project WHERE project_id = " + id + " AND user_id = " + userId;
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException ignore) {
+
+        }
+        return false;
     }
 }

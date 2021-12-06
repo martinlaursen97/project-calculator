@@ -7,9 +7,10 @@
 </head>
 <body>
 <div class="sidenav">
-    <img src="images/logo5.png" class="menu-img" alt=""/>
-    <a th:href="@{/projects}" style="margin-top:30px">Projects</a>
-    <a th:href="@{/index}">Start</a>
+    <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
+    <a th:href="@{/index}" style="margin-top:30px">Home</a>
+    <a th:href="@{/projects}">Projects</a>
+    <div th:if="${session.user.isAdmin}" ><a th:href="@{/users}">Administration</a></div>
 </div>
 
 <div class="main">

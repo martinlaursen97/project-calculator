@@ -24,6 +24,7 @@ public class UserRepository {
                 user.setUserId(resultSet.getLong(1));
                 user.setEmail(resultSet.getString(2));
                 user.setPassword(resultSet.getString(3));
+                user.setAdmin(resultSet.getBoolean(4));
                 return user;
             } else {
                 throw new LoginException("Incorrect details");
@@ -69,7 +70,7 @@ public class UserRepository {
         return false;
     }
 
-    public List<User> getUser(String user) {
+    public List<User> getUsers() {
 
         try {
             Connection connection = DBManager.getConnection();
@@ -84,6 +85,32 @@ public class UserRepository {
                 User aUser = new User();
                 aUser.setUserId(resultSet.getLong("user_id"));
                 aUser.setEmail(resultSet.getString("email"));
+                aUser.setAdmin(resultSet.getBoolean("admin"));
+                users.add(aUser);
+            }
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<User> getUserByEmail(String email) {
+        try {
+            Connection connection = DBManager.getConnection();
+
+            List<User> users = new ArrayList<>();
+
+            String query = "SELECT * FROM user WHERE email = '" + email + "'";//LIKE '%" + email + "%'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                User aUser = new User();
+                aUser.setUserId(resultSet.getLong("user_id"));
+                aUser.setEmail(resultSet.getString("email"));
+                aUser.setAdmin(resultSet.getBoolean("admin"));
                 users.add(aUser);
             }
             return users;

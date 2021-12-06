@@ -9,23 +9,22 @@
 
 <!--Sidemenu-->
 <div class="sidenav">
-    <img src="images/logo5.png" class="menu-img" alt=""/>
-    <a th:href="@{/projects}" style="margin-top:30px">Projects</a>
-    <a th:href="@{/gantt}">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
+    <a th:href="@{/index}" style="margin-top:30px">Home</a>
+    <a th:href="@{/projects}">Projects</a>
+    <div th:if="${session.user.isAdmin}" ><a th:href="@{/users}">Administration</a></div>
 </div>
 
 
 <div class="main">
     <div class="project-list">
         <div class="project-form-box">
-            <form name="adminOverview" action="/adminOverviewVerify" method="POST">
+            <form name="adminOverview" th:action="@{/test}" method="POST">
                 <div class="row">
                     <div class="row">
-                        <label for="user" class="control-label"></label>
-                        <input type="text" minlength="1" maxlength="50" name="user" class="form-control" id="user"
-                               style="width:200px; height: 35px; margin-left: 375px; margin-top: 5px;" placeholder="User E-mail">
+                        <label for="email" class="control-label"></label>
+                        <input type="text" minlength="1" maxlength="50" name="email" class="form-control" id="email"
+                               style="width:200px; height: 35px; margin-left: 40px; margin-top: 5px;" placeholder="User E-mail">
                     </div>
                     <div class="row">
                         <div class="nav-links">
@@ -38,9 +37,9 @@
                     </div>
                 </div>
             </form>
-            <tr th:each="user: ${user}">
-                <a type="button" style="text-decoration: none; color: black;" th:href="@{/adminOverview(id=${user.email})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
-                    <td th:text="${user.userEmail}"></td>
+            <tr th:each="user: ${users}">
+                <a type="button" style="text-decoration: none; color: black;" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                    <td th:text="${user.email}"></td>
                 </a>
             </tr>
         </div>

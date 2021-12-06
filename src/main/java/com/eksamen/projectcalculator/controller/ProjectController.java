@@ -25,11 +25,11 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public String projects(WebRequest request, Model model) {
-        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
-        if (userId == null) return "login";
+        if (user == null) return "login";
 
-        model.addAttribute("projects", PROJECT_SERVICE.getProjectsByUserId(userId));
+        model.addAttribute("projects", PROJECT_SERVICE.getProjectsByUserId(user.getUserId()));
         return "projects";
     }
 
@@ -51,11 +51,11 @@ public class ProjectController {
 
     @GetMapping("/project")
     public String showProject(@RequestParam (name="id") long id, Model model, WebRequest request) {
-        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        User user = (User)  request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
-        if (userId == null) return "login";
+        if (user == null) return "login";
 
-        if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
+        if (PROJECT_SERVICE.projectIsUsers(user.getUserId(), id)) {
             Project project = PROJECT_SERVICE.getProjectById(id);
             model.addAttribute("project", project);
             return "inspectProject";

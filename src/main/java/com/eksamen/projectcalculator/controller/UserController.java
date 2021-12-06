@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -24,7 +25,8 @@ public class UserController {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             User user = USER_SERVICE.loginValid(email, password);
-            request.setAttribute("userId", user.getUserId(), WebRequest.SCOPE_SESSION);
+            System.out.println(user);
+            request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
             return "redirect:/index";
         } catch (LoginException e) {
             model.addAttribute("error", e.getMessage());
@@ -49,19 +51,22 @@ public class UserController {
         }
     }
 
-    @GetMapping("/adminOverview")
-    public String getAdminOverview(){
+    @GetMapping("/users")
+    public String getAdminOverview(Model model){
+        model.addAttribute("users", USER_SERVICE.getUsers());
         return "adminOverview";
     }
 
-    @PostMapping("/adminOverviewVerify")
+
+    @PostMapping("/test")
     public String getUser(WebRequest request, Model model) {
+        String email = request.getParameter("email");
+        model.addAttribute("users", USER_SERVICE.getUserByEmail(email));
+        System.out.println(email);
 
-        if (request.getAttribute("user", WebRequest.SCOPE_SESSION) == null) return "adminOverview";
-
-        String user = request.getParameter("user");
-        USER_SERVICE.getUser(user);
-        return "redirect:/adminOverview";
+        return "adminOverview";
     }
+
+
 
 }

@@ -4,6 +4,15 @@ public class User {
     private long userId;
     private String email;
     private String password;
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public User(long userId, String email, String password) {
         this.userId = userId;
@@ -43,6 +52,7 @@ public class User {
                 "userId=" + userId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

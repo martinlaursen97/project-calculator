@@ -25,6 +25,10 @@ public class DataFacade {
         return USER_REPOSITORY.loginValid(email, password);
     }
 
+    public List<User> getUsers() {
+        return USER_REPOSITORY.getUsers();
+    }
+
     // Project
     public void createProject(long id, String projectName) {
         PROJECT_REPOSITORY.createProject(id, projectName);
@@ -56,5 +60,9 @@ public class DataFacade {
 
     public boolean projectIsUsers(long userId, long id) {
         return PROJECT_REPOSITORY.projectIsUsers(userId, id);
+    }
+
+    public List<User> getUserByEmail(String email) {
+        return USER_REPOSITORY.getUserByEmail(email);
     }
 }

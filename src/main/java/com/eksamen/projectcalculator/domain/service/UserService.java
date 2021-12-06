@@ -18,7 +18,11 @@ public class UserService {
         FACADE.createUser(email, password, isAdmin);
     }
 
-    public List<User> getUser(String user) {
-        return FACADE.getUser(user);
+    public List<User> getUsers() {
+        return FACADE.getUsers();
+    }
+
+    public List<User> getUserByEmail(String email) {
+        return FACADE.getUserByEmail(email);
     }
 }

@@ -11,6 +11,9 @@ public class Subtask {
     private String startDateStr; // til javascript
     private String finishDateStr;
     private int percentComplete;
+    private double pricePerHour = 500;
+    private double dailyWorkHours = 10;
+
 
     public Subtask(long subtaskId, long taskId, String subtaskName, String resource, String startDateStr, String finishDateStr, int percentComplete) {
         this.subtaskId = subtaskId;
@@ -24,6 +27,22 @@ public class Subtask {
 
     public Subtask() {
 
+    }
+
+    public double getDailyWorkHours() {
+        return dailyWorkHours;
+    }
+
+    public void setDailyWorkHours(double dailyWorkHours) {
+        this.dailyWorkHours = dailyWorkHours;
+    }
+
+    public double getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setPricePerHour(double pricePerHour) {
+        this.pricePerHour = pricePerHour;
     }
 
     public long getSubtaskId() {

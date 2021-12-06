@@ -35,14 +35,15 @@ public class ProjectController {
 
     @PostMapping("/addVerify")
     public String createProjectVerify(WebRequest request, Model model) {
-        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
-        if (userId == null) return "login";
+        if (user == null) return "login";
+        ;
 
 
         try {
             String projectName = request.getParameter("name");
-            PROJECT_SERVICE.createProject(userId, projectName);
+            PROJECT_SERVICE.createProject(user.getUserId(), projectName);
         } catch (ProjectException e) {
             model.addAttribute("error", e.getMessage());
         }
@@ -50,8 +51,8 @@ public class ProjectController {
     }
 
     @GetMapping("/project")
-    public String showProject(@RequestParam (name="id") long id, Model model, WebRequest request) {
-        User user = (User)  request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    public String showProject(@RequestParam(name = "id") long id, Model model, WebRequest request) {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
         if (user == null) return "login";
 

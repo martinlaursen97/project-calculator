@@ -12,17 +12,23 @@ public class Project {
     private long projectId;
     private String projectName;
     private List<Task> tasks;
-    private List<Project> subprojects;
+    private double projectPrice;
 
-    public Project(long projectId, String projectName, List<Task> tasks, List<Project> subprojects) {
+    public Project(long projectId, String projectName, List<Task> tasks, double projectPrice) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.tasks = tasks;
-        this.subprojects = subprojects;
+        this.projectPrice = projectPrice;
     }
 
     public Project() {
 
+    }
+
+    public Project(long projectId, String projectName, List<Task> tasks) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.tasks = tasks;
     }
 
     public long getProjectId() {
@@ -49,70 +55,11 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public List<Project> getSubprojects() {
-        return subprojects;
+    public double getProjectPrice() {
+        return projectPrice;
     }
 
-    public void setSubprojects(List<Project> subprojects) {
-        this.subprojects = subprojects;
+    public void setProjectPrice(double projectPrice) {
+        this.projectPrice = projectPrice;
     }
-
-
-
-    /*
-    public void addSubproject(Project project){
-        subprojects.add(project);
-    }
-
-    public void addTask(Task task) {
-        tasks.add(task);
-        System.out.println(tasks);
-    }
-
-    //Lav unit test
-    //samlet tidshorisont for alle tasks
-    public double getSumOfTaskHours(){
-        int sum = 0;
-
-        for (Task task : tasks) {
-            sum += task.getEstimatedHoursInTotal();
-        }
-        return sum;
-    }
-
-    //omkostninger i timen for en task
-    public double getSumOfHourlyRates(){
-        int sum = 0;
-
-        for (Task task: tasks) {
-            sum += task.getSumOfHourlyRate();
-        }
-        return sum;
-    }
-
-    //hvor mange gennemsnitlige daglige arbejdstimer for alle tasks i et projekt
-   public double getAvgWorkHoursPrDay() {
-       double sum = 0;
-        for (int i = 0; i < tasks.size(); i++ ) {
-            sum += tasks.get(i).getDailyWorkHours();
-        }
-        return sum / tasks.size(); //divideret med hvor mange tasks der er
-   }
-
-    public void getDeadline() {
-        startDate = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startDate);
-        double endDate = getSumOfTaskHours() / getAvgWorkHoursPrDay();
-
-        calendar.add(Calendar.DATE, (int)endDate);
-        Date deadline = calendar.getTime();
-        System.out.println(deadline);
-        System.out.println(getSumOfTaskHours());
-        System.out.println(getAvgWorkHoursPrDay());
-
-
-    }
-
- */
 }

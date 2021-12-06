@@ -13,6 +13,8 @@ public class Task {
     private String finishDateStr;
     private int percentComplete;
     private List<Subtask> subtasks;
+    private double pricePerHour = 800;
+    private double dailyWorkHours = 10;
 
     public Task(long taskId, long projectId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks) {
         this.taskId = taskId;
@@ -46,6 +48,22 @@ public class Task {
 
     public Task() {
 
+    }
+
+    public double getDailyWorkHours() {
+        return dailyWorkHours;
+    }
+
+    public void setDailyWorkHours(double dailyWorkHours) {
+        this.dailyWorkHours = dailyWorkHours;
+    }
+
+    public double getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setPricePerHour(double pricePerHour) {
+        this.pricePerHour = pricePerHour;
     }
 
     public long getTaskId() {

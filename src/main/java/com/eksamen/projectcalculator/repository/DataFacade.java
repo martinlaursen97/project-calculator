@@ -75,4 +75,7 @@ public class DataFacade {
     }
 
 
+    public User getUserById(long id) {
+        return USER_REPOSITORY.getUserById(id);
+    }
 }

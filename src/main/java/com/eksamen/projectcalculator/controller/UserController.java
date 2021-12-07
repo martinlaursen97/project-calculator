@@ -57,7 +57,6 @@ public class UserController {
         return "adminOverview";
     }
 
-
     @PostMapping("/test")
     public String getUser(WebRequest request, Model model) {
         String email = request.getParameter("email");
@@ -65,6 +64,14 @@ public class UserController {
         System.out.println(email);
 
         return "adminOverview";
+    }
+
+    @PostMapping("/showUser")
+    public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+
+        model.addAttribute("user", USER_SERVICE.getUserById(id));
+        return "inspectUser";
     }
 
 

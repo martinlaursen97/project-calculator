@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+<div class="sidenav">
+    <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
+    <a th:href="@{/index}" style="margin-top:30px">Home</a>
+    <a th:href="@{/projects}">Projects</a>
+    <div th:if="${session.user.isAdmin}" ><a th:href="@{/users}">Administration</a></div>
+
+</div>
+
+
+<div class="main">
+    <div class="project-list">
+        <div class="project-form-box">
+            <form name="addProject" action="/addVerify" method="POST">
+                <div class="row">
+                    <div class="row">
+                        <label for="name" class="control-label"></label>
+                        <input type="text" minlength="1" maxlength="50" name="name" class="form-control" id="name"
+                               style="width:200px; height: 35px; margin-left: 375px; margin-top: 5px;" placeholder="Name">
+                    </div>
+                    <div class="row">
+                        <div class="nav-links">
+                            <ul>
+                                <button name="post" type="submit" class="project-add-btn">
+                                    <p class="plus">+</p>
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <tr th:each="user: ${users}">
+                <a type="button" style="text-decoration: none; color: black;" th:href="@{/showUser(id=${user.userId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                    <td th:text="${user.email}"></td>
+                </a>
+            </tr>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

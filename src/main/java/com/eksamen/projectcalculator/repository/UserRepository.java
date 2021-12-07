@@ -120,4 +120,26 @@ public class UserRepository {
         }
         return null;
     }
+
+    public User getUserById(long id) {
+        try {
+            Connection connection = DBManager.getConnection();
+
+            String query = "SELECT * FROM user WHERE user_id = " + id;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getLong("user_id"));
+                user.setEmail(resultSet.getString("email"));
+                return user;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

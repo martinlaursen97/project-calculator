@@ -25,4 +25,8 @@ public class UserService {
     public List<User> getUserByEmail(String email) {
         return FACADE.getUserByEmail(email);
     }
+
+    public User getUserById(long id) {
+        return FACADE.getUserById(id);
+    }
 }

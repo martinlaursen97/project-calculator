@@ -42,10 +42,15 @@ public class TaskController {
     }
 
     @GetMapping("project/task")
-    public String test(@RequestParam long id, Model model) {
+    public String inspectTask(@RequestParam long id, Model model) {
         System.out.println(id);
-        return "newpage";
+        return "inspectTask";
     }
 
-
+    @GetMapping("/project/clear/confirm")
+    public String clearConfirm(@RequestParam(name = "id") long id, RedirectAttributes redirectAttributes) {
+        TASK_SERVICE.clearTasksByProjectId(id);
+        redirectAttributes.addAttribute("id", id);
+        return "redirect:/project";
+    }
 }

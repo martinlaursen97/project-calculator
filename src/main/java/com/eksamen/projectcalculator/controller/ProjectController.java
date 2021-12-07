@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -64,4 +65,26 @@ public class ProjectController {
             return "error";
         }
     }
+
+    @GetMapping("/project/clear")
+    public String clear(@RequestParam(name = "id") long id, Model model) {
+        model.addAttribute("project", PROJECT_SERVICE.getProjectById(id));
+        model.addAttribute("message", "Are you sure?");
+        return "Confirm";
+    }
+
+    @GetMapping("/project/delete")
+    public String deleteProject(@RequestParam(name = "id") long id, Model model) {
+        model.addAttribute("project", PROJECT_SERVICE.getProjectById(id));
+        model.addAttribute("message", "Are you sure?");
+        return "deleteProject";
+    }
+
+    @GetMapping("/project/deleteConfirm")
+    public String deleteProjectConfirm(@RequestParam(name = "id") long id, RedirectAttributes redirectAttributes) {
+        PROJECT_SERVICE.deleteProjectById(id);
+        return "redirect:/projects";
+    }
+
+
 }

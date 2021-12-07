@@ -62,4 +62,16 @@ public class TaskRepository {
         }
         return null;
     }
+
+    public void clearTasksByProjectId(long id) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "DELETE FROM task WHERE project_id = " + id;
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,11 +2,16 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
+
+
+
     <link rel="stylesheet" href="styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" th:inline="javascript"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script type="text/javascript" th:inline="javascript">
+
         google.charts.load('current', {'packages':['gantt']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -64,7 +69,7 @@
             }
 
             var options = {
-                height: 1200,
+                height: 900,
                 gantt: {
                     criticalPathEnabled: false,
                     trackHeight: trackHeight,
@@ -105,17 +110,26 @@
 </div>
 
 <div class="main">
+
     <div class="chart-box">
-        <div class="chart-box-title" th:text="${project.projectName}"></div>
+
         <div class="chart-box-options">
-            <a class="btn btn-secondary" th:href="@{/project/add(id=${project.projectId})}">Add task</a>
-            <a class="btn btn-secondary" th:href="@{/project/delete(id=${project.projectId})}">Test</a>
-            <a class="btn btn-secondary" th:href="@{/project/statistics(id=${project.projectId})}">Statistics</a>
-            <a class="btn btn-secondary" th:id="taskLink">Statistics</a>
+            <div class="chart-box-title" th:text="${project.projectName}"></div>
+            <div class="test">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <p class="actions">Actions</p>
+                </button>
+                <div class="dropdown-content">
+                    <a th:id="taskLink">Edit selected task</a>
+                    <a th:href="@{/project/add(id=${project.projectId})}">Create task</a>
+                    <a th:href="@{/project/clear(id=${project.projectId})}">Clear tasks</a>
+                    <a th:href="@{/project/delete(id=${project.projectId})}">Delete project</a>
+                </div>
+            </div>
+        </div>
         </div>
         <div id="chart_div" style="display: block; margin: 10px auto 0;align-self: center;"></div>
-
-
     </div>
 </div>
 

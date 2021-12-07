@@ -4,7 +4,7 @@ body {
 }
 
 :root {
-    --main: #59869d;
+    --main: #4c7586;
     --main-hover: #3b6d81;
     --second: whitesmoke;
 
@@ -76,17 +76,19 @@ body {
     display: flex;
     text-align: center;
     justify-content: center;
-    margin-left: 200px;
+    margin-left: 150px;
 }
 
 .chart-box {
-    width: 1200px;
-    margin-top: 75px;
+    width: 900px;
+    margin-top: 200px;
     margin-left: 100px;
 }
 
 .chart-box-title {
-    color: var(--main);
+    font-size: 30px;
+    position: absolute;
+    color: grey;
 }
 
 .chart-box-options {
@@ -209,4 +211,94 @@ body {
     color: white;
     background-color: var(--main);
 }
+.test {
+    margin-left: 800px;
+}
+.dropbtn {
+    height: 40px;
+    right: 0;
+    float: right;
+    background-color: var(--main);
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: var(--main);
+}
+
+.actions {
+    margin-top: -13px;
+    position: relative;
+}
+
+.small-box {
+    background-color: var(--second);
+    width: 200px;
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 200px;
+    box-shadow: 5px 10px 10px;
+}
+
+.small-box-header {
+    height: 50px;
+}
+
+.small-box-footer {
+    height: 50px;
+}
+
+.small-box-btn {
+    height: 40px;
+    width: 75px;
+    background-color: var(--main);
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+}
+
+
+
+
+
+
 

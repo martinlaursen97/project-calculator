@@ -11,4 +11,8 @@ public class TaskService {
     public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion) {
         FACADE.createTask(projectId, taskName, resource, startDate, finishDate, completion);
     }
+
+    public void clearTasksByProjectId(long id) {
+        FACADE.clearTasksByProjectId(id);
+    }
 }

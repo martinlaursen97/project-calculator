@@ -29,7 +29,15 @@ public class DataFacade {
         return USER_REPOSITORY.getUsers();
     }
 
+    public List<User> getUserByEmail(String email) {
+        return USER_REPOSITORY.getUserByEmail(email);
+    }
+
     // Project
+    public void deleteProjectById(long id) {
+        PROJECT_REPOSITORY.deleteProjectById(id);
+    }
+
     public void createProject(long id, String projectName) {
         PROJECT_REPOSITORY.createProject(id, projectName);
     }
@@ -53,16 +61,18 @@ public class DataFacade {
         return project;
     }
 
+    public boolean projectIsUsers(long userId, long id) {
+        return PROJECT_REPOSITORY.projectIsUsers(userId, id);
+    }
+
+    // Task
+    public void clearTasksByProjectId(long id) {
+        TASK_REPOSITORY.clearTasksByProjectId(id);
+    }
 
     public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion) {
         TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion);
     }
 
-    public boolean projectIsUsers(long userId, long id) {
-        return PROJECT_REPOSITORY.projectIsUsers(userId, id);
-    }
 
-    public List<User> getUserByEmail(String email) {
-        return USER_REPOSITORY.getUserByEmail(email);
-    }
 }

@@ -79,4 +79,8 @@ public class ProjectService {
     public boolean projectIsUsers(long userId, long id) {
         return FACADE.projectIsUsers(userId, id);
     }
+
+    public void deleteProjectById(long id) {
+        FACADE.deleteProjectById(id);
+    }
 }

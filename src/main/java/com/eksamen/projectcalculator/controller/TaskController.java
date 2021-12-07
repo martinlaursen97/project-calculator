@@ -24,7 +24,7 @@ public class TaskController {
 
 
 
-    @GetMapping("/test")
+    @GetMapping("/project/add")
     public String addTask(@RequestParam(name="id") long id, Model model) {
         model.addAttribute("id", id);
         return "addTask";

@@ -186,6 +186,7 @@ body {
     min-height: 40px;
     width: 600px;
     outline: 1px solid grey;
+    cursor: pointer;
     background-color: whitesmoke;
     float: left;
 }

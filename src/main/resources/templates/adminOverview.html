@@ -47,7 +47,7 @@
                 </div>
             </form>
             <tr th:each="user: ${users}">
-                <a type="button" style="text-decoration: none; color: black;" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                <a type="button" style="text-decoration: none; color: black;" th:href="@{/showUser(id=${user.userId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
                     <td th:text="${user.email}"></td>
                 </a>
             </tr>

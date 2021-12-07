@@ -22,7 +22,9 @@ public class TaskController {
 
     private final TaskService TASK_SERVICE = new TaskService();
 
-    @GetMapping("/project/add")
+
+
+    @GetMapping("/test")
     public String addTask(@RequestParam(name="id") long id, Model model) {
         model.addAttribute("id", id);
         return "addTask";

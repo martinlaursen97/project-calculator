@@ -27,15 +27,9 @@ public class ProjectController {
 
     @PostMapping("/addVerify")
     public String createProjectVerify(WebRequest request, Model model) {
-<<<<<<< HEAD
-        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
-        if (user == null) return "login";
-
-=======
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
->>>>>>> ac6f18c5177aeac43e9f92a876680042a753bec5
 
         try {
             String projectName = request.getParameter("name");

@@ -5,12 +5,10 @@ import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.repository.DataFacade;
-import com.eksamen.projectcalculator.repository.ProjectRepository;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

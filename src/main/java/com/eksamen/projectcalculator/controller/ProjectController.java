@@ -39,7 +39,6 @@ public class ProjectController {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
         if (user == null) return "login";
-        ;
 
 
         try {

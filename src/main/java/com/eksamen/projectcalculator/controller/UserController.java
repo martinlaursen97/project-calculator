@@ -66,7 +66,7 @@ public class UserController {
         return "adminOverview";
     }
 
-    @PostMapping("/showUser")
+    @GetMapping("/showUser")
     public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 

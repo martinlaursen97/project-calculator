@@ -58,7 +58,7 @@ public class TaskRepository {
 
                 task.setPercentComplete(resultSet.getInt("percent_complete"));
                 task.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
-                task.setDailyWorkHours(resultSet.getDouble("price_per_hour"));
+                task.setPricePerHour(resultSet.getDouble("price_per_hour"));
                 tasks.add(task);
             }
             return tasks;
@@ -104,7 +104,7 @@ public class TaskRepository {
 
             task.setPercentComplete(resultSet.getInt("percent_complete"));
             task.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
-            task.setDailyWorkHours(resultSet.getDouble("price_per_hour"));
+            task.setPricePerHour(resultSet.getDouble("price_per_hour"));
 
             return task;
         } catch (SQLException e) {

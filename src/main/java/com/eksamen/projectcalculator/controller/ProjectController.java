@@ -48,6 +48,8 @@ public class ProjectController {
 
         if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
             Project project = PROJECT_SERVICE.getProjectById(id);
+            System.out.println(project.getTotalProjectPrice());
+
             model.addAttribute("project", project);
             return "inspectProject";
         } else {

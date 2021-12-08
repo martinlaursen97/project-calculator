@@ -4,10 +4,7 @@ import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,13 +41,16 @@ public class UserRepository {
             String query = "INSERT INTO user(email, password, admin) VALUES (?,?,?)";
             PreparedStatement preparedStatement;
 
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             preparedStatement.setBoolean(3, isAdmin);
             preparedStatement.executeUpdate();
+
+
+            System.out.println(preparedStatement.getGeneratedKeys().getLong(1));
         } catch (SQLException e) {
-            throw new LoginException("Email taken");
+            throw new LoginException("Error");
         }
     }
 

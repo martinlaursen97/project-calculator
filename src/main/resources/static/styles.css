@@ -80,8 +80,8 @@ body {
 }
 
 .chart-box {
-    width: 900px;
-    margin-top: 200px;
+    width: 1200px;
+    margin-top: 100px;
     margin-left: 100px;
 }
 
@@ -128,13 +128,6 @@ body {
     height: 100%;
 }
 
-.userinfo {
-    margin-left: 0px;
-    text-align: center;
-    justify-content: center;
-    height: 100%;
-    border: 2px;
-}
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
@@ -159,13 +152,6 @@ body {
     outline: 1px solid grey;
 }
 
-.user-list {
-    margin-top: 10px;
-    margin-left: 100px;
-    width: 600px;
-    background-color: whitesmoke;
-    outline: 1px solid grey;
-}
 .project-form-box {
     width: 600px;
     height: 46px;
@@ -196,16 +182,39 @@ body {
     position: relative;
 }
 
+.project-list-item-desc {
+    min-height: 40px;
+    width: 600px;
+    outline: 1px solid grey;
+    background-color: #cbcbcb;
+    overflow: hidden;
+}
+
 .project-list-item {
     min-height: 40px;
     width: 600px;
     outline: 1px solid grey;
+    cursor: pointer;
     background-color: whitesmoke;
-    float: left;
+    overflow: hidden;
 }
 
 .project-list-item:hover {
     background-color: #b6b6b6;
+}
+
+.project-list-item-id {
+    min-height: 40px;
+    width: 50px;
+    border-right: 1px solid grey;
+    float:left;
+
+}
+
+.project-list-item-name {
+    min-height: 40px;
+    width: 550px;
+    overflow: hidden;
 }
 
 .create-user-btn {
@@ -226,7 +235,7 @@ body {
     background-color: var(--main);
 }
 .test {
-    margin-left: 800px;
+    margin-left: 1100px;
 }
 .dropbtn {
     height: 40px;
@@ -300,8 +309,8 @@ body {
 }
 
 .small-box-btn {
-    height: 40px;
-    width: 75px;
+    height: 28px;
+    width: 85px;
     background-color: var(--main);
     color: white;
     cursor: pointer;
@@ -310,9 +319,16 @@ body {
     border-radius: 4px;
 }
 
+.big-form-box {
+    background-color: var(--second);
+    width: 400px;
+    height: 600px;
+    border-radius: 20px;
+    margin-top: 200px;
+    box-shadow: 5px 10px 10px;
+}
 
-
-
-
-
-
+.text-move {
+    margin-top: 7px;
+    position: relative;
+}

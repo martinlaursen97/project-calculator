@@ -49,7 +49,6 @@ public class TaskRepository {
                 task.setTaskName(resultSet.getString("task_name"));
                 task.setResource(resultSet.getString("resource"));
 
-                //
                 String startDate = resultSet.getString("start_date");
                 String finishDate = resultSet.getString("finish_date");
 

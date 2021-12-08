@@ -6,12 +6,15 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
+
 <div class="sidenav">
     <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
     <a th:href="@{/index}" style="margin-top:30px">Home</a>
     <a th:href="@{/projects}">Projects</a>
-    <div th:if="${session.user.isAdmin}" ><a th:href="@{/users}">Administration</a></div>
-
+    <div th:if="${session.isAdmin}">
+        <a th:href="@{/users}">Admin</a>
+    </div>
+    <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
 </div>
 
 
@@ -37,8 +40,22 @@
                 </div>
             </form>
             <tr th:each="project: ${projects}">
+                <div class="project-list-item-desc">
+                    <div class="project-list-item-id">
+                        <b>ID:</b>
+                    </div>
+                    <div class="project-list-item-name">
+                        <b>Project name:</b>
+                    </div>
+                </div>
+
                 <a type="button" style="text-decoration: none; color: black;" th:href="@{/project(id=${project.projectId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
-                    <td th:text="${project.projectName}"></td>
+                    <div class="project-list-item-id">
+                        <td th:text="${project.projectId}"></td>
+                    </div>
+                    <div class="project-list-item-name">
+                        <td th:text="${project.projectName}"></td>
+                    </div>
                 </a>
             </tr>
         </div>

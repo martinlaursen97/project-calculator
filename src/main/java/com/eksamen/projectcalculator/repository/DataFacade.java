@@ -70,12 +70,17 @@ public class DataFacade {
         TASK_REPOSITORY.clearTasksByProjectId(id);
     }
 
-    public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion) {
-        TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion);
+    public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
 
 
     public User getUserById(long id) {
         return USER_REPOSITORY.getUserById(id);
+    }
+
+
+    public Task getTaskById(long id) {
+        return TASK_REPOSITORY.getTaskById(id);
     }
 }

@@ -11,11 +11,10 @@ public class Subtask {
     private String startDateStr; // til javascript
     private String finishDateStr;
     private int percentComplete;
-    private double pricePerHour = 500;
-    private double dailyWorkHours = 10;
+    private double dailyWorkHours;
+    private double pricePerHour;
 
-
-    public Subtask(long subtaskId, long taskId, String subtaskName, String resource, String startDateStr, String finishDateStr, int percentComplete) {
+    public Subtask(long subtaskId, long taskId, String subtaskName, String resource, String startDateStr, String finishDateStr, int percentComplete, double dailyWorkHours, double pricePerHour) {
         this.subtaskId = subtaskId;
         this.taskId = taskId;
         this.subtaskName = subtaskName;
@@ -23,26 +22,12 @@ public class Subtask {
         this.startDateStr = startDateStr;
         this.finishDateStr = finishDateStr;
         this.percentComplete = percentComplete;
+        this.dailyWorkHours = dailyWorkHours;
+        this.pricePerHour = pricePerHour;
     }
 
     public Subtask() {
 
-    }
-
-    public double getDailyWorkHours() {
-        return dailyWorkHours;
-    }
-
-    public void setDailyWorkHours(double dailyWorkHours) {
-        this.dailyWorkHours = dailyWorkHours;
-    }
-
-    public double getPricePerHour() {
-        return pricePerHour;
-    }
-
-    public void setPricePerHour(double pricePerHour) {
-        this.pricePerHour = pricePerHour;
     }
 
     public long getSubtaskId() {
@@ -101,16 +86,19 @@ public class Subtask {
         this.percentComplete = percentComplete;
     }
 
-    @Override
-    public String toString() {
-        return "Subtask{" +
-                "subtaskId=" + subtaskId +
-                ", taskId=" + taskId +
-                ", subtaskName='" + subtaskName + '\'' +
-                ", resource='" + resource + '\'' +
-                ", startDateStr='" + startDateStr + '\'' +
-                ", finishDateStr='" + finishDateStr + '\'' +
-                ", percentComplete=" + percentComplete +
-                '}';
+    public double getDailyWorkHours() {
+        return dailyWorkHours;
+    }
+
+    public void setDailyWorkHours(double dailyWorkHours) {
+        this.dailyWorkHours = dailyWorkHours;
+    }
+
+    public double getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setPricePerHour(double pricePerHour) {
+        this.pricePerHour = pricePerHour;
     }
 }

@@ -12,12 +12,15 @@
     <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
     <a th:href="@{/index}" style="margin-top:30px">Home</a>
     <a th:href="@{/projects}">Projects</a>
-    <div th:if="${session.user.isAdmin}" ><a th:href="@{/users}">Administration</a></div>
+    <div th:if="${session.isAdmin}">
+        <a th:href="@{/users}">Admin</a>
+    </div>
+    <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
 </div>
 
 <div class="main">
     <div class="center">
-        <div class="login-form-box">
+        <div class="big-form-box">
             <form name="addTaskVerify" th:action="@{/project/addTaskVerify(id=${id})}" method="POST">
                 <div class="col-sm">
                     <div class="col">
@@ -45,14 +48,26 @@
                         <input type="number" name="completion" class="form-control" id="completion"
                                placeholder="Completion percentage">
                     </div>
+
+                    <div class="col-sm">
+                        <label for="hours" class="control-label"></label>
+                        <input type="number" name="hours" class="form-control" id="hours"
+                               placeholder="Daily work hours">
+                    </div>
+                    <div class="col-sm">
+                        <label for="priceprhr" class="control-label"></label>
+                        <input type="number" name="priceprhr" class="form-control" id="priceprhr"
+                               placeholder="Price per hour">
+                    </div>
+
                     <div class="col">
                         <div class="nav-links">
                             <ul>
                                 <button name="post" type="submit" class="login-form-btn" style="margin-top: 20px">
                                     Add
                                 </button>
-                                <a type="button" class="login-form-btn" href="javascript:history.back()">
-                                   Cancel
+                                <a type="button" class="login-form-btn" style="text-decoration: none; color: white; margin-top: 10px;" th:href="@{/project(id=${id})}">
+                                    <p class="text-move">Cancel</p>
                                 </a>
                             </ul>
                         </div>

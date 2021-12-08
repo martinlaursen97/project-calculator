@@ -12,7 +12,10 @@
     <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
     <a th:href="@{/index}" style="margin-top:30px">Home</a>
     <a th:href="@{/projects}">Projects</a>
-    <div th:if="${session.user.isAdmin}" ><a th:href="@{/users}">Administration</a></div>
+    <div th:if="${session.isAdmin}">
+        <a th:href="@{/users}">Admin</a>
+    </div>
+    <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
 </div>
 
 

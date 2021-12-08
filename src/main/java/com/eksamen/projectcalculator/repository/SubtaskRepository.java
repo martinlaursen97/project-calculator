@@ -1,8 +1,6 @@
 package com.eksamen.projectcalculator.repository;
 
-import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Subtask;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +32,9 @@ public class SubtaskRepository {
                 subtask.setFinishDateStr(String.join(" ", finishDate.split("-")));
 
                 subtask.setPercentComplete(resultSet.getInt("percent_complete"));
+                subtask.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
+                subtask.setDailyWorkHours(resultSet.getDouble("price_per_hour"));
+
                 subtasks.add(subtask);
             }
             return subtasks;

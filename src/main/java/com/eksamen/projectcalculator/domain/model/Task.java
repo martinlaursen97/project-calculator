@@ -13,10 +13,10 @@ public class Task {
     private String finishDateStr;
     private int percentComplete;
     private List<Subtask> subtasks;
-    private double pricePerHour = 800;
-    private double dailyWorkHours = 10;
+    private double dailyWorkHours;
+    private double pricePerHour;
 
-    public Task(long taskId, long projectId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks) {
+    public Task(long taskId, long projectId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks, double dailyWorkHours, double pricePerHour) {
         this.taskId = taskId;
         this.projectId = projectId;
         this.taskName = taskName;
@@ -25,45 +25,12 @@ public class Task {
         this.finishDateStr = finishDateStr;
         this.percentComplete = percentComplete;
         this.subtasks = subtasks;
-    }
-
-    public Task(long taskId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete, List<Subtask> subtasks) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.resource = resource;
-        this.startDateStr = startDateStr;
-        this.finishDateStr = finishDateStr;
-        this.percentComplete = percentComplete;
-        this.subtasks = subtasks;
-    }
-
-    public Task(long taskId, String taskName, String resource, String startDateStr, String finishDateStr, int percentComplete) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.resource = resource;
-        this.startDateStr = startDateStr;
-        this.finishDateStr = finishDateStr;
-        this.percentComplete = percentComplete;
+        this.dailyWorkHours = dailyWorkHours;
+        this.pricePerHour = pricePerHour;
     }
 
     public Task() {
 
-    }
-
-    public double getDailyWorkHours() {
-        return dailyWorkHours;
-    }
-
-    public void setDailyWorkHours(double dailyWorkHours) {
-        this.dailyWorkHours = dailyWorkHours;
-    }
-
-    public double getPricePerHour() {
-        return pricePerHour;
-    }
-
-    public void setPricePerHour(double pricePerHour) {
-        this.pricePerHour = pricePerHour;
     }
 
     public long getTaskId() {
@@ -130,17 +97,19 @@ public class Task {
         this.subtasks = subtasks;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "taskId=" + taskId +
-                ", projectId=" + projectId +
-                ", taskName='" + taskName + '\'' +
-                ", resource='" + resource + '\'' +
-                ", startDateStr='" + startDateStr + '\'' +
-                ", finishDateStr='" + finishDateStr + '\'' +
-                ", percentComplete=" + percentComplete +
-                ", subtasks=" + subtasks +
-                '}';
+    public double getDailyWorkHours() {
+        return dailyWorkHours;
+    }
+
+    public void setDailyWorkHours(double dailyWorkHours) {
+        this.dailyWorkHours = dailyWorkHours;
+    }
+
+    public double getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setPricePerHour(double pricePerHour) {
+        this.pricePerHour = pricePerHour;
     }
 }

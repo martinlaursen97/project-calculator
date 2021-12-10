@@ -30,7 +30,10 @@ public class ProjectService {
     }
 
     public Project getProjectById(long id) {
-        return FACADE.getProjectById(id);
+        Project project = FACADE.getProjectById(id);
+        project.setStartDateStr(FACADE.getProjectStartDateById(id));
+        project.setDeadlineDateStr(FACADE.getProjectDeadlineById(id));
+        return project;
     }
 
     public boolean projectIsUsers(long userId, long id) {

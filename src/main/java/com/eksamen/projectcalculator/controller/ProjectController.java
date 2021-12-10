@@ -2,6 +2,7 @@ package com.eksamen.projectcalculator.controller;
 
 import com.eksamen.projectcalculator.domain.exception.ProjectException;
 import com.eksamen.projectcalculator.domain.model.Project;
+import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +49,6 @@ public class ProjectController {
 
         if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
             Project project = PROJECT_SERVICE.getProjectById(id);
-            System.out.println(project.getTotalProjectPrice());
-
             model.addAttribute("project", project);
             return "inspectProject";
         } else {

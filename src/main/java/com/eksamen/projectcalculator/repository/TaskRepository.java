@@ -154,4 +154,38 @@ public class TaskRepository {
             e.printStackTrace();
         }
     }
+
+    public String getProjectStartDateById(long projectId) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT start_date FROM task WHERE project_id = " + projectId + " ORDER BY start_date";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getProjectDeadlineById(long projectId) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT finish_date FROM task WHERE project_id = " + projectId + " ORDER BY finish_date";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

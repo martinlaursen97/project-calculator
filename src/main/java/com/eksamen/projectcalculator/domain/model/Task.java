@@ -112,4 +112,22 @@ public class Task {
     public void setPricePerHour(double pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
+
+    public double getPrice() {
+        return Calculator.getDaysBetweenDates(startDateStr, finishDateStr) * dailyWorkHours * pricePerHour;
+    }
+
+    public double getSubtasksPrice() {
+        double sum = 0.0;
+        if (subtasks != null) {
+            for (Subtask subtask : subtasks) {
+                sum += subtask.getPrice();
+            }
+        }
+        return sum;
+    }
+
+    public double getTaskTotalPrice() {
+        return getPrice() + getSubtasksPrice();
+    }
 }

@@ -33,7 +33,7 @@ public class SubtaskRepository {
 
                 subtask.setPercentComplete(resultSet.getInt("percent_complete"));
                 subtask.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
-                subtask.setDailyWorkHours(resultSet.getDouble("price_per_hour"));
+                subtask.setPricePerHour(resultSet.getDouble("price_per_hour"));
 
                 subtasks.add(subtask);
             }

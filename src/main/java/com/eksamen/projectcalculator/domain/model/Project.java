@@ -12,12 +12,15 @@ public class Project {
     private long projectId;
     private String projectName;
     private List<Task> tasks;
+    private String startDateStr;
+    private String deadlineDateStr;
 
-    public Project(long projectId, String projectName, List<Task> tasks) {
+    public Project(long projectId, String projectName, List<Task> tasks, String startDateStr, String deadlineDateStr) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.tasks = tasks;
-
+        this.startDateStr = startDateStr;
+        this.deadlineDateStr = deadlineDateStr;
     }
 
     public Project() {
@@ -48,21 +51,30 @@ public class Project {
         this.tasks = tasks;
     }
 
+    public String getStartDateStr() {
+        return startDateStr;
+    }
+
+    public void setStartDateStr(String startDateStr) {
+        this.startDateStr = startDateStr;
+    }
+
+    public String getDeadlineDateStr() {
+        return deadlineDateStr;
+    }
+
+    public void setDeadlineDateStr(String deadlineDateStr) {
+        this.deadlineDateStr = deadlineDateStr;
+    }
+
     public double getTotalProjectPrice() {
         if (tasks == null) return 0.0;
 
         double sum = 0.0;
 
         for (Task task : tasks) {
-            sum += Calculator.getDaysBetweenDates(task.getStartDateStr(), task.getFinishDateStr()) * task.getDailyWorkHours() * task.getPricePerHour();
-            if (task.getSubtasks() != null) {
-                for (Subtask subtask : task.getSubtasks()) {
-                    sum += Calculator.getDaysBetweenDates(subtask.getStartDateStr(), subtask.getFinishDateStr()) * subtask.getDailyWorkHours() * subtask.getPricePerHour();
-
-                }
-            }
+            sum += task.getPrice() + task.getSubtasksPrice();
         }
-
         return sum;
     }
 }

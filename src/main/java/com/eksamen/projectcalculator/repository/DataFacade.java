@@ -101,4 +101,12 @@ public class DataFacade {
     public void deleteTaskById(long id) {
         TASK_REPOSITORY.deleteTaskById(id);
     }
+
+    public String getProjectStartDateById(long id) {
+        return TASK_REPOSITORY.getProjectStartDateById(id);
+    }
+
+    public String getProjectDeadlineById(long id) {
+        return TASK_REPOSITORY.getProjectDeadlineById(id);
+    }
 }

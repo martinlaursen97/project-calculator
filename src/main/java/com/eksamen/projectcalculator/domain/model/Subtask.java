@@ -101,4 +101,12 @@ public class Subtask {
     public void setPricePerHour(double pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
+
+    public double getPrice() {
+        System.out.println(startDateStr);
+        System.out.println(finishDateStr);
+        System.out.println(dailyWorkHours);
+        System.out.println(pricePerHour);
+        return Calculator.getDaysBetweenDates(startDateStr, finishDateStr) * dailyWorkHours * pricePerHour;
+    }
 }

@@ -69,7 +69,7 @@
             }
 
             var options = {
-                height: height + trackHeight,
+                height: height + (trackHeight*2),
                 width: 1200,
                 gantt: {
                     criticalPathEnabled: false,
@@ -113,26 +113,26 @@
 </div>
 
 <div class="main">
-
-    <div class="chart-box">
-
-        <div class="chart-box-options">
-            <div class="chart-box-title" th:text="${project.projectName}"></div>
-            <div class="test">
-            <div class="dropdown">
-                <button class="dropbtn">
-                    <p class="actions">Actions</p>
-                </button>
-                <div class="dropdown-content">
-                    <a th:id="taskLink">Edit selected task</a>
-                    <a th:href="@{/project/add(id=${project.projectId})}">Create task</a>
-                    <a th:href="@{/project/clear(id=${project.projectId})}">Clear tasks</a>
-                    <a th:href="@{/project/delete(id=${project.projectId})}">Delete project</a>
+    <div class="center">
+        <div class="chart-box">
+            <div class="chart-box-options">
+                <div class="chart-box-title" th:text="${project.projectName}"></div>
+                <div class="test">
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            <p class="actions">Actions</p>
+                        </button>
+                        <div class="dropdown-content">
+                            <a th:id="taskLink">Edit selected task</a>
+                            <a th:href="@{/project/add(id=${project.projectId})}">Create task</a>
+                            <a th:href="@{/project/clear(id=${project.projectId})}">Clear tasks</a>
+                            <a th:href="@{/project/delete(id=${project.projectId})}">Delete project</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div id="chart_div" style="display: block; margin: 10px auto 0;align-self: center;"></div>
         </div>
-        </div>
-        <div id="chart_div" style="display: block; margin: 10px auto 0;align-self: center;"></div>
     </div>
 </div>
 

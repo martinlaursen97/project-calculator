@@ -93,8 +93,8 @@ public class ProjectRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
-        } catch (SQLException ignore) {
-
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }

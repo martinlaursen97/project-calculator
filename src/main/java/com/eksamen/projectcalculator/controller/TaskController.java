@@ -51,17 +51,16 @@ public class TaskController {
         }
     }
 
-
-    // FIX DET HER... skal give project id OG task id - se i projects html
-    @GetMapping("project/task")
-    public String inspectTask(@RequestParam long projectId, @RequestParam long id, Model model, WebRequest request) {
+    @GetMapping("/project/task")
+    public String inspectTask(@RequestParam long id, Model model, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
-        if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
-            model.addAttribute("task", TASK_SERVICE.getTaskById(projectId));
+        if (TASK_SERVICE.taskIsUsers(userId, id)) {
+            model.addAttribute("task", TASK_SERVICE.getTaskById(id));
             return "inspectTask";
         } else {
+            System.out.println("NOT USERS");
             return "error";
         }
     }
@@ -78,5 +77,39 @@ public class TaskController {
         } else {
             return "error";
         }
+    }
+
+    @GetMapping("/project/task/delete")
+    public String deleteTask(@RequestParam(name = "id") long id, WebRequest request, Model model) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (TASK_SERVICE.taskIsUsers(userId, id)) {
+            model.addAttribute("taskId", id);
+            model.addAttribute("message", "Are you sure? This will delete the task.");
+            return "deleteTask";
+        } else {
+            return "error";
+        }
+    }
+
+    @GetMapping("/project/task/delete-confirm")
+    public String deleteTaskConfirm(@RequestParam(name = "id") long id, WebRequest request, RedirectAttributes redirectAttributes)  {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (TASK_SERVICE.taskIsUsers(userId, id)) {
+            long projectId = TASK_SERVICE.getProjectIdById(id);
+            redirectAttributes.addAttribute("id", projectId);
+            TASK_SERVICE.deleteTaskById(id);
+            return "redirect:/project";
+        } else {
+            return "error";
+        }
+    }
+
+    @GetMapping("/project/task/add-subtask")
+    public String addSubtask(@RequestParam(name = "id") long id) {
+        return "";
     }
 }

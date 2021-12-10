@@ -81,6 +81,24 @@ public class DataFacade {
 
 
     public Task getTaskById(long id) {
-        return TASK_REPOSITORY.getTaskById(id);
+        Task task = TASK_REPOSITORY.getTaskById(id);
+        List<Subtask> subtasks = SUBTASK_REPOSITORY.getSubtasksByTaskId(task.getTaskId());
+        task.setSubtasks(subtasks);
+        return task;
+    }
+
+    public boolean taskIsUsers(long userId, long taskId) {
+        long projectId = TASK_REPOSITORY.getProjectIdByTaskId(taskId);
+
+        return PROJECT_REPOSITORY.projectIsUsers(userId, projectId);
+    }
+
+
+    public long getProjectIdById(long id) {
+        return TASK_REPOSITORY.getProjectIdByTaskId(id);
+    }
+
+    public void deleteTaskById(long id) {
+        TASK_REPOSITORY.deleteTaskById(id);
     }
 }

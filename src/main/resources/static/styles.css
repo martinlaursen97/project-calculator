@@ -145,8 +145,8 @@ body {
 }
 
 .project-list {
-    margin-top: 75px;
-    margin-left: 100px;
+    margin-top: 100px;
+
     width: 600px;
     background-color: whitesmoke;
     outline: 1px solid grey;
@@ -234,9 +234,11 @@ body {
     color: white;
     background-color: var(--main);
 }
+
 .test {
     margin-left: 1100px;
 }
+
 .dropbtn {
     height: 40px;
     right: 0;
@@ -262,7 +264,7 @@ body {
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Links inside the dropdown */
@@ -332,3 +334,82 @@ body {
     margin-top: 7px;
     position: relative;
 }
+
+.task-container {
+    margin-top: 100px;
+    width: 500px;
+    min-height: 150px;
+}
+
+.task-box-header {
+    height: 50px;
+    width: 500px;
+}
+
+.task-box-header-title {
+    width: 400px;
+    height: 50px;
+    overflow: hidden;
+    float: left;
+    text-align: left;
+    font-size: 30px;
+}
+
+.task-box-header-btn {
+    width: 80px;
+    height: 40px;
+
+    float: right;
+}
+
+.task-box {
+    background-color: var(--second);
+    width: 500px;
+
+    min-height: 100px;
+    border: 1px solid grey;
+    overflow:auto
+}
+
+.task-box-item {
+    height: 35px;
+    outline: 1px solid grey;
+    width: 470px;
+    margin-left: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.task-box-item-name {
+    float: left;
+    height: 35px;
+    width: 300px;
+    outline: 1px solid grey;
+    text-align: left;
+    text-indent:1em;
+}
+
+.task-box-item-price {
+    float: right;
+    height: 35px;
+    width: 170px;
+    text-align: left; text-indent:1em;
+}
+
+.task-box-item-desc {
+    height: 35px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.task-box-divider {
+    height: 20px;
+}
+
+.task-box-dates {
+    width: 200px;
+    height: 35px;
+    overflow:auto;
+    background-color: blue;
+}
+

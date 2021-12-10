@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+<div class="sidenav">
+    <img src="/images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
+    <a th:href="@{/index}" style="margin-top:30px">Home</a>
+    <a th:href="@{/projects}">Projects</a>
+    <div th:if="${session.isAdmin}">
+        <a th:href="@{/users}">Admin</a>
+    </div>
+    <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
+</div>
+
+<div class="main">
+    <div class="center">
+        <div class="task-container">
+            <div class="task-box-header">
+                <div class="task-box-header-title" th:text="${task.taskName}"></div>
+
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            <p class="actions">Actions</p>
+                        </button>
+                        <div class="dropdown-content">
+                            <a th:href="@{/project/task/delete(id=${task.taskId})}">Delete task</a>
+                            <a th:href="@{/project/task/add-subtask(id=${task.taskId})}">Add subtask</a>
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="task-box">
+                <div class="task-box-item-desc">
+                    Subtasks:
+                </div>
+                <div class="task-box-item">
+                    <b><div class="task-box-item-name">name:</div></b>
+                    <b><div class="task-box-item-price">price:</div></b>
+                </div>
+                <tr th:each="subtask: ${task.subtasks}">
+                    <div class="task-box-item">
+                        <div class="task-box-item-name" th:text="${subtask.subtaskName}"></div>
+                        <div class="task-box-item-price"></div>
+                    </div>
+                </tr>
+                <div class="task-box-divider"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -17,46 +17,47 @@
     <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
 </div>
 
-
 <div class="main">
-    <div class="project-list">
-        <div class="project-form-box">
-            <form name="addProject" action="/addVerify" method="POST">
-                <div class="row">
+    <div class="center">
+        <div class="project-list">
+            <div class="project-form-box">
+                <form name="addProject" action="/addVerify" method="POST">
                     <div class="row">
-                        <label for="name" class="control-label"></label>
-                        <input type="text" minlength="1" maxlength="50" name="name" class="form-control" id="name"
-                               style="width:200px; height: 35px; margin-left: 375px; margin-top: 5px;" placeholder="Name">
-                    </div>
-                    <div class="row">
-                        <div class="nav-links">
-                            <ul>
-                                <button name="post" type="submit" class="project-add-btn">
-                                    <p class="plus">+</p>
-                                </button>
-                            </ul>
+                        <div class="row">
+                            <label for="name" class="control-label"></label>
+                            <input type="text" minlength="1" maxlength="50" name="name" class="form-control" id="name"
+                                   style="width:200px; height: 35px; margin-left: 375px; margin-top: 5px;" placeholder="Name">
+                        </div>
+                        <div class="row">
+                            <div class="nav-links">
+                                <ul>
+                                    <button name="post" type="submit" class="project-add-btn">
+                                        <p class="plus">+</p>
+                                    </button>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            <div class="project-list-item-desc">
-                <div class="project-list-item-id">
-                    <b>ID:</b>
-                </div>
-                <div class="project-list-item-name">
-                    <b>Project name:</b>
-                </div>
-            </div>
-            <tr th:each="project: ${projects}">
-                <a type="button" style="text-decoration: none; color: black;" th:href="@{/project(id=${project.projectId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                </form>
+                <div class="project-list-item-desc">
                     <div class="project-list-item-id">
-                        <td th:text="${project.projectId}"></td>
+                        <b>ID:</b>
                     </div>
                     <div class="project-list-item-name">
-                        <td th:text="${project.projectName}"></td>
+                        <b>Project name:</b>
                     </div>
-                </a>
-            </tr>
+                </div>
+                <tr th:each="project: ${projects}">
+                    <a type="button" style="text-decoration: none; color: black;" th:href="@{/project(id=${project.projectId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                        <div class="project-list-item-id">
+                            <td th:text="${project.projectId}"></td>
+                        </div>
+                        <div class="project-list-item-name">
+                            <td th:text="${project.projectName}"></td>
+                        </div>
+                    </a>
+                </tr>
+            </div>
         </div>
     </div>
 </div>

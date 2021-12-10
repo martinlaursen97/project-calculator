@@ -87,28 +87,71 @@ public class TaskRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            Task task = new Task();
+            if (resultSet.next()) {
+                Task task = new Task();
+                task.setTaskId(resultSet.getLong("task_id"));
+                task.setProjectId(resultSet.getLong("project_id"));
+                task.setTaskName(resultSet.getString("task_name"));
+                task.setResource(resultSet.getString("resource"));
 
-            task.setTaskId(resultSet.getLong("task_id"));
-            task.setProjectId(resultSet.getLong("project_id"));
-            task.setTaskName(resultSet.getString("task_name"));
-            task.setResource(resultSet.getString("resource"));
+                String startDate = resultSet.getString("start_date");
+                String finishDate = resultSet.getString("finish_date");
 
-            //
-            String startDate = resultSet.getString("start_date");
-            String finishDate = resultSet.getString("finish_date");
+                task.setStartDateStr(String.join(" ", startDate.split("-")));
+                task.setFinishDateStr(String.join(" ", finishDate.split("-")));
 
-            task.setStartDateStr(String.join(" ", startDate.split("-")));
-            task.setFinishDateStr(String.join(" ", finishDate.split("-")));
+                task.setPercentComplete(resultSet.getInt("percent_complete"));
+                task.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
+                task.setPricePerHour(resultSet.getDouble("price_per_hour"));
 
-            task.setPercentComplete(resultSet.getInt("percent_complete"));
-            task.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
-            task.setPricePerHour(resultSet.getDouble("price_per_hour"));
-
-            return task;
+                return task;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean taskIsUsers(long userId, long id) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT * FROM project WHERE project_id = " + id + " AND user_id = " + userId;
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException ignore) {
+
+        }
+        return false;
+    }
+
+    public long getProjectIdByTaskId(long taskId) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT project_id FROM task WHERE task_id = " + taskId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public void deleteTaskById(long id) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "DELETE FROM task WHERE task_id = " + id;
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            System.out.println("her");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

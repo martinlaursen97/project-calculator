@@ -107,9 +107,4 @@ public class TaskController {
             return "error";
         }
     }
-
-    @GetMapping("/project/task/add-subtask")
-    public String addSubtask(@RequestParam(name = "id") long id) {
-        return "";
-    }
 }

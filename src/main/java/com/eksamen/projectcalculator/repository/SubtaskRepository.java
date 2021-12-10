@@ -44,4 +44,25 @@ public class SubtaskRepository {
         }
         return null;
     }
+
+    public void createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "INSERT INTO subtask(task_id, subtask_name, resource, start_date, finish_date, percent_complete, daily_work_hours, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement;
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, taskId);
+            preparedStatement.setString(2, taskName);
+            preparedStatement.setString(3, resource);
+            preparedStatement.setString(4, startDate);
+            preparedStatement.setString(5, finishDate);
+            preparedStatement.setInt(6, completion);
+            preparedStatement.setDouble(7, dailyWorkHours);
+            preparedStatement.setDouble(8, pricePerHour);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

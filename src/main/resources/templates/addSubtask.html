@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title></title>
+</head>
+<body>
+
+<div class="sidenav">
+    <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
+    <a th:href="@{/index}" style="margin-top:30px">Home</a>
+    <a th:href="@{/projects}">Projects</a>
+    <div th:if="${session.isAdmin}">
+        <a th:href="@{/users}">Admin</a>
+    </div>
+    <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
+</div>
+
+<div class="main">
+    <div class="center">
+        <div class="big-form-box">
+            <form name="addSubtaskVerify" th:action="@{/project/task/add-subtask-verify(id=${taskId})}" method="POST">
+                <div class="col-sm">
+                    <div class="col">
+                        <label for="name" class="control-label"></label>
+                        <input type="text" name="name" class="form-control" id="name" required
+                               placeholder="Subtask name">
+                    </div>
+                    <div class="col-sm">
+                        <label for="resource" class="control-label"></label>
+                        <input type="text" name="resource" class="form-control" id="resource" required
+                               placeholder="Resource">
+                    </div>
+                    <div class="col-sm">
+                        <label for="start" class="control-label"></label>
+                        <input type="date" name="start" class="form-control" id="start" required
+                               placeholder="Start date">
+                    </div>
+                    <div class="col-sm">
+                        <label for="finish" class="control-label"></label>
+                        <input type="date" name="finish" class="form-control" id="finish" required
+                               placeholder="Finish date">
+                    </div>
+                    <div class="col-sm">
+                        <label for="completion" class="control-label"></label>
+                        <input type="number" name="completion" class="form-control" id="completion"
+                               placeholder="Completion percentage">
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="hours" class="control-label"></label>
+                        <input type="number" name="hours" class="form-control" id="hours"
+                               placeholder="Daily work hours">
+                    </div>
+                    <div class="col-sm">
+                        <label for="priceprhr" class="control-label"></label>
+                        <input type="number" name="priceprhr" class="form-control" id="priceprhr"
+                               placeholder="Price per hour">
+                    </div>
+
+                    <div class="col">
+                        <div class="nav-links">
+                            <ul>
+                                <button name="post" type="submit" class="login-form-btn" style="margin-top: 20px">
+                                    Add
+                                </button>
+                                <a type="button" class="login-form-btn" style="text-decoration: none; color: white; margin-top: 10px;" th:href="@{/project/task(id=${taskId})}">
+                                    <p class="text-move">Cancel</p>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

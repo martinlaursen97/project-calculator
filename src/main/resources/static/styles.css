@@ -411,3 +411,12 @@ body {
     background-color: blue;
 }
 
+.index-gif {
+    width: 600px;
+    height: auto;
+}
+
+h2 {
+    margin-top: 50px;
+}
+

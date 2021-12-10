@@ -109,4 +109,8 @@ public class DataFacade {
     public String getProjectDeadlineById(long id) {
         return TASK_REPOSITORY.getProjectDeadlineById(id);
     }
+
+    public void createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        SUBTASK_REPOSITORY.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+    }
 }

@@ -196,7 +196,6 @@ body {
     outline: 1px solid grey;
     cursor: pointer;
     background-color: whitesmoke;
-    overflow: hidden;
 }
 
 .project-list-item:hover {
@@ -214,7 +213,6 @@ body {
 .project-list-item-name {
     min-height: 40px;
     width: 550px;
-    overflow: hidden;
 }
 
 .create-user-btn {

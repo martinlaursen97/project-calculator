@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <tr th:each="project: ${projects}">
-                    <a type="button" style="text-decoration: none; color: black;" th:href="@{/project(id=${project.projectId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
+                    <a type="button" style="text-decoration: none; color: black;" th:href="@{/project(id=${project.projectId})}" class="project-list-item">
                         <div class="project-list-item-id">
                             <td th:text="${project.projectId}"></td>
                         </div>

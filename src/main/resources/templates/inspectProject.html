@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
 
 
-
     <link rel="stylesheet" href="/styles.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
@@ -12,7 +11,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
 
-        google.charts.load('current', {'packages':['gantt']});
+        google.charts.load('current', {'packages': ['gantt']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
@@ -69,7 +68,7 @@
             }
 
             var options = {
-                height: height + (trackHeight*2),
+                height: height + (trackHeight * 2),
                 width: 900,
                 gantt: {
                     criticalPathEnabled: false,
@@ -88,6 +87,7 @@
             google.visualization.events.addListener(chart, 'select', selectHandler);
 
             chart.draw(data, options);
+
             function selectHandler() {
                 var selections = chart.getSelection();
                 if (selections.length !== 0) {
@@ -96,6 +96,7 @@
                     document.getElementById("taskLink").href = "project/task?id=" + id;
                 }
             }
+
             /*]]>*/
         }
     </script>
@@ -113,7 +114,9 @@
 </div>
 
 <div class="main">
-    <div class="chart-box" style="float: left">
+
+
+    <div class="chart-box">
         <div class="chart-box-options">
             <div class="chart-box-title" th:text="${project.projectName}"></div>
             <div class="test">
@@ -134,16 +137,23 @@
     </div>
 
 
-
-    <div class="task-box" style="float: right; margin-top: 160px; margin-right: 160px">
-        <b>Start: <h th:text="${project.startDateStr}"></h> - </b>
-        <b>Deadline: <h th:text="${project.deadlineDateStr}"></h> </b>
+    <div class="task-box" style="margin-left:100px; margin-top: 25px ">
+        <b>Start:
+            <h th:text="${project.startDateStr}"></h>
+            - </b>
+        <b>Deadline:
+            <h th:text="${project.deadlineDateStr}"></h>
+        </b>
         <div class="task-box-item-desc">
             Tasks + Subtasks:
         </div>
         <div class="task-box-item">
-            <b><div class="task-box-item-name">name:</div></b>
-            <b><div class="task-box-item-price">price:</div></b>
+            <b>
+                <div class="task-box-item-name">name:</div>
+            </b>
+            <b>
+                <div class="task-box-item-price">price:</div>
+            </b>
         </div>
         <tr th:each="task: ${project.tasks}">
             <div class="task-box-item">
@@ -152,7 +162,7 @@
             </div>
             <div th:if="${task.subtasks != null}">
                 <div th:each="subtask: ${task.subtasks}">
-                    <div class="task-box-item"  style="background-color: lightgray">
+                    <div class="task-box-item" style="background-color: lightgray">
                         <div class="task-box-item-name" th:text="${subtask.subtaskName}"></div>
                         <div class="task-box-item-price" th:text="${subtask.getPrice()}"></div>
                     </div>
@@ -160,8 +170,12 @@
             </div>
         </tr>
         <div class="task-box-item">
-            <b><div class="task-box-item-name">project total:</div></b>
-            <b><div class="task-box-item-price" th:text="${project.getTotalProjectPrice()}"></div></b>
+            <b>
+                <div class="task-box-item-name">project total:</div>
+            </b>
+            <b>
+                <div class="task-box-item-price" th:text="${project.getTotalProjectPrice()}"></div>
+            </b>
         </div>
         <div class="task-box-divider"></div>
     </div>

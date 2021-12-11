@@ -113,4 +113,36 @@ public class DataFacade {
     public void createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
         SUBTASK_REPOSITORY.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
+
+    public Task getTaskBySubtaskId(long subtaskId) {
+        long taskId = SUBTASK_REPOSITORY.getTaskIdBySubtaskId(subtaskId);
+        return TASK_REPOSITORY.getTaskById(taskId);
+    }
+
+    public Subtask getSubtaskById(long subtaskId) {
+        return SUBTASK_REPOSITORY.getSubtaskById(subtaskId);
+    }
+
+    public boolean subtaskIsUsers(long userId, long subtaskId) {
+        long taskId = SUBTASK_REPOSITORY.getTaskIdBySubtaskId(subtaskId);
+        long projectId = TASK_REPOSITORY.getProjectIdByTaskId(taskId);
+        return PROJECT_REPOSITORY.projectIsUsers(userId, projectId);
+    }
+
+    public long getProjectIdBySubtaskId(long subtaskId) {
+        long taskId = SUBTASK_REPOSITORY.getTaskIdBySubtaskId(subtaskId);
+        return TASK_REPOSITORY.getProjectIdByTaskId(taskId);
+    }
+
+    public void deleteSubtaskById(long subtaskId) {
+        SUBTASK_REPOSITORY.deleteSubtaskById(subtaskId);
+    }
+
+    public void updateTaskPercentById(long taskId, int percent) {
+        TASK_REPOSITORY.updateTaskPercentById(taskId, percent);
+    }
+
+    public void updateSubtaskPercentById(long subtaskId, int percent) {
+        SUBTASK_REPOSITORY.updateSubtaskPercentById(subtaskId, percent);
+    }
 }

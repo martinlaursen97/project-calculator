@@ -378,6 +378,21 @@ body {
     color: black;
 }
 
+.task-box-item-href {
+    height: 35px;
+    outline: 1px solid grey;
+    width: 470px;
+    margin-left: 15px;
+    text-decoration: none;
+    color: black;
+    display:block
+}
+
+.task-box-item-href:hover {
+    background-color: #b7b7b7;
+    color: black;
+}
+
 .task-box-item-name {
     float: left;
     height: 35px;

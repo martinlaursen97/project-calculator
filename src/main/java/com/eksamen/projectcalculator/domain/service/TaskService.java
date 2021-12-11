@@ -32,4 +32,12 @@ public class TaskService {
     public void deleteTaskById(long id) {
         FACADE.deleteTaskById(id);
     }
+
+    public Task getTaskBySubtaskId(long subtaskId) {
+        return FACADE.getTaskBySubtaskId(subtaskId);
+    }
+
+    public void updateTaskPercentById(long taskId, int percent) {
+        FACADE.updateTaskPercentById(taskId, percent);
+    }
 }

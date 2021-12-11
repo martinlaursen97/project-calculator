@@ -107,4 +107,19 @@ public class TaskController {
             return "error";
         }
     }
+
+    @PostMapping("/project/task/config")
+    public String configTask(@RequestParam(name = "id") long taskId, Model model, WebRequest request, RedirectAttributes redirectAttributes) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (TASK_SERVICE.taskIsUsers(userId, taskId)) {
+            int percent = Integer.parseInt(request.getParameter("percent"));
+            TASK_SERVICE.updateTaskPercentById(taskId, percent);
+            redirectAttributes.addAttribute("id", taskId);
+            return "redirect:/project/task";
+        } else {
+            return "error";
+        }
+    }
 }

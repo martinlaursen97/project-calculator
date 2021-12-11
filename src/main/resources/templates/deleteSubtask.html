@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <title></title>
+</head>
+<body>
+
+<!--Sidemenu-->
+<div class="sidenav">
+    <img src="images/logo5.png" style="cursor: pointer" onclick="window.location.href='index'" class="menu-img" alt=""/>
+    <a th:href="@{/index}" style="margin-top:30px">Home</a>
+    <a th:href="@{/projects}">Projects</a>
+    <div th:if="${session.isAdmin}">
+        <a th:href="@{/users}">Admin</a>
+    </div>
+    <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
+</div>
+
+
+<div class="main">
+    <div class="center">
+        <div class="small-box">
+            <div class="small-box-header">
+                <p th:text="${message}">
+            </div>
+            <div class="small-box-footer">
+                <a class="small-box-btn" type="button" th:href="@{/project/task/subtask(id=${subtaskId})}">Cancel</a>
+                <a class="small-box-btn" type="button" th:href="@{/project/task/subtask/delete-confirm(id=${subtaskId})}">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -188,4 +188,16 @@ public class TaskRepository {
         }
         return null;
     }
+
+    public void updateTaskPercentById(long taskId, int percent) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "UPDATE task SET percent_complete = " + percent + " WHERE task_id  = " + taskId;
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

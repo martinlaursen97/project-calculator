@@ -20,21 +20,36 @@
     <div class="center">
         <div class="task-container">
             <div class="task-box-header">
-                <div class="task-box-header-title" th:text="${task.taskName}"></div>
+                <div class="task-box-header-title" th:text="${subtask.subtaskName}"></div>
 
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            <p class="actions">Actions</p>
-                        </button>
-                        <div class="dropdown-content">
-                            <a th:href="@{/project/task/delete(id=${task.taskId})}">Delete task</a>
-                            <a th:href="@{/project/task/add-subtask(id=${task.taskId})}">Add subtask</a>
-                        </div>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <p class="actions">Actions</p>
+                    </button>
+                    <div class="dropdown-content">
+                        <a th:href="@{/project/task/subtask/delete(id=${subtask.subtaskId})}">Delete subtask</a>
                     </div>
+                </div>
 
             </div>
 
             <div class="task-box">
+                <div class="task-box-item-desc">
+                    Subtask:
+                </div>
+                <div class="task-box-item">
+                    <b><div class="task-box-item-name">name:</div></b>
+                    <b><div class="task-box-item-price">price:</div></b>
+                </div>
+                <div class="task-box-item">
+                    <div class="task-box-item-name" th:text="${subtask.subtaskName}"></div>
+                    <div class="task-box-item-price" th:text="${subtask.getPrice()}"></div>
+                </div>
+                <div class="task-box-item">
+                    <b><div class="task-box-item-name">subtask total:</div></b>
+                    <b><div class="task-box-item-price" th:text="${subtask.getPrice()}"></div></b>
+                </div>
+
                 <div class="task-box-item-desc">
                     Task:
                 </div>
@@ -42,42 +57,20 @@
                     <b><div class="task-box-item-name">name:</div></b>
                     <b><div class="task-box-item-price">price:</div></b>
                 </div>
-                <div class="task-box-item">
+                <a type="button" class="task-box-item-href" th:href="@{/project/task(id=${task.taskId})}">
                     <div class="task-box-item-name" th:text="${task.taskName}"></div>
                     <div class="task-box-item-price" th:text="${task.getPrice()}"></div>
-                </div>
-
-                <div class="task-box-item-desc">
-                    Subtasks:
-                </div>
-                <div class="task-box-item">
-                    <b><div class="task-box-item-name">name:</div></b>
-                    <b><div class="task-box-item-price">price:</div></b>
-                </div>
-                <tr th:each="subtask: ${task.subtasks}">
-                    <a class="task-box-item-href" th:href="@{/project/task/subtask(id=${subtask.subtaskId})}">
-                        <div class="task-box-item-name" th:text="${subtask.subtaskName}"></div>
-                        <div class="task-box-item-price" th:text="${subtask.getPrice()}"></div>
-                    </a>
-                </tr>
-                <div class="task-box-item">
-                    <b><div class="task-box-item-name">subtask total:</div></b>
-                    <b><div class="task-box-item-price" th:text="${task.getSubtasksPrice()}"></div></b>
-                </div>
-                <div class="task-box-item">
-                    <b><div class="task-box-item-name">task total:</div></b>
-                    <b><div class="task-box-item-price" th:text="${task.getTaskTotalPrice()}"></div></b>
-                </div>
+                </a>
 
                 <div class="task-box-item-desc">
                     Percent complete:
                 </div>
-                <form name="percentVerify" th:action="@{/project/task/config(id=${task.taskId})}" th:object="${task.taskId}" method="POST">
+                <form name="percentVerify" th:action="@{/project/task/subtask/config(id=${subtask.subtaskId})}" th:object="${subtask.taskId}" method="POST">
                     <div class="col-sm">
                         <div class="col">
                             <label for="percent" style="width: 340px" class="control-label"></label>
                             <input type="number" name="percent" class="form-control" id="percent" required
-                                   placeholder="Percent complete" th:value="${task.percentComplete}" min="0" max="100">
+                                   placeholder="Percent complete" th:value="${subtask.percentComplete}" min="0" max="100">
                         </div>
 
                         <div class="col">
@@ -93,7 +86,6 @@
                 </form>
 
                 <div class="task-box-divider"></div>
-
             </div>
         </div>
     </div>

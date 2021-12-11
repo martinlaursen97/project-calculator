@@ -103,10 +103,7 @@ public class Subtask {
     }
 
     public double getPrice() {
-        System.out.println(startDateStr);
-        System.out.println(finishDateStr);
-        System.out.println(dailyWorkHours);
-        System.out.println(pricePerHour);
+
         return Calculator.getDaysBetweenDates(startDateStr, finishDateStr) * dailyWorkHours * pricePerHour;
     }
 }

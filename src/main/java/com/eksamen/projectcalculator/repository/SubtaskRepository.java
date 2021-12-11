@@ -65,4 +65,78 @@ public class SubtaskRepository {
             e.printStackTrace();
         }
     }
+
+    public long getTaskIdBySubtaskId(long subtaskId) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT task_id FROM subtask WHERE subtask_id = " + subtaskId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public Subtask getSubtaskById(long subtaskId) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT * FROM subtask WHERE subtask_id = " + subtaskId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+           if (resultSet.next()) {
+                Subtask subtask = new Subtask();
+                subtask.setSubtaskId(resultSet.getLong("subtask_id"));
+                subtask.setTaskId(resultSet.getLong("task_id"));
+                subtask.setSubtaskName(resultSet.getString("subtask_name"));
+                subtask.setResource(resultSet.getString("resource"));
+
+                String startDate = resultSet.getString("start_date");
+                String finishDate = resultSet.getString("finish_date");
+
+                subtask.setStartDateStr(String.join(" ", startDate.split("-")));
+                subtask.setFinishDateStr(String.join(" ", finishDate.split("-")));
+
+                subtask.setPercentComplete(resultSet.getInt("percent_complete"));
+                subtask.setDailyWorkHours(resultSet.getDouble("daily_work_hours"));
+                subtask.setPricePerHour(resultSet.getDouble("price_per_hour"));
+
+                return subtask;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteSubtaskById(long subtaskId) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "DELETE FROM subtask WHERE subtask_id = " + subtaskId;
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSubtaskPercentById(long subtaskId, int percent) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "UPDATE subtask SET percent_complete = " + percent + " WHERE subtask_id  = " + subtaskId;
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

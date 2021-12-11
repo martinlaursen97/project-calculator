@@ -45,7 +45,7 @@
                 var finish = task.finishDateStr;
                 var percent = task.percentComplete;
 
-                data.addRow([id, name, null, new Date(start), new Date(finish), null, percent, null]);
+                data.addRow([id, name, resource, new Date(start), new Date(finish), null, percent, null]);
 
                 if (task.subtasks != null) {
 //
@@ -62,7 +62,7 @@
                         var subtaskResource = subtask.resource;
                         var dependency = subtask.taskId.toString();
 //
-                        data.addRow([subtaskId, subtaskName, null, new Date(subtaskStart), new Date(subtaskFinish), null, subtaskPercent, dependency]);
+                        data.addRow([subtaskId, subtaskName, subtaskResource, new Date(subtaskStart), new Date(subtaskFinish), null, subtaskPercent, dependency]);
                     }
                 }
             }
@@ -91,8 +91,13 @@
                 var selections = chart.getSelection();
                 if (selections.length !== 0) {
                     var selection = selections[0];
+                    var dependency = data.getValue(selection.row, 7);
                     var id = data.getValue(selection.row, 0);
-                    document.getElementById("taskLink").href = "project/task?id=" + id;
+                    if (dependency == null) {
+                        document.getElementById("taskLink").href = "project/task?id=" + id;
+                    } else {
+                        document.getElementById("taskLink").href = "project/task/subtask?id=" + id;
+                    }
                 }
             }
 
@@ -176,7 +181,11 @@
                 <div class="task-box-item-price" th:text="${project.getTotalProjectPrice()}"></div>
             </b>
         </div>
-        <div class="task-box-divider"></div>
+        <p style="margin: 10px">
+            When calculating the price of a task/subtask,
+            weekends are subtracted from the amount of days between the start and finish date.
+            <br><b>Formula: days * hours per day * hourly price = price</b>
+        </p>
     </div>
 </div>
 

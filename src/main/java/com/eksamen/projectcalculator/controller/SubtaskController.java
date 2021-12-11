@@ -48,6 +48,64 @@ public class SubtaskController {
         } else {
             return "error";
         }
+    }
 
+    @GetMapping("/project/task/subtask")
+    public String showSubtask(@RequestParam(name = "id") long subtaskId, Model model, WebRequest request) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (SUBTASK_SERVICE.subtaskIsUsers(userId, subtaskId)) {
+            model.addAttribute("subtask", SUBTASK_SERVICE.getSubtaskById(subtaskId));
+            model.addAttribute("task", TASK_SERVICE.getTaskBySubtaskId(subtaskId));
+
+            return "inspectSubtask";
+        } else {
+            return "error";
+        }
+    }
+
+    @GetMapping("/project/task/subtask/delete")
+    public String deleteSubtask(@RequestParam(name = "id") long subtaskId, WebRequest request, Model model) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (SUBTASK_SERVICE.subtaskIsUsers(userId, subtaskId)) {
+            model.addAttribute("subtaskId", subtaskId);
+            model.addAttribute("message", "Are you sure? This will delete the subtask.");
+            return "deleteSubtask";
+        } else {
+            return "error";
+        }
+    }
+
+    @GetMapping("/project/task/subtask/delete-confirm")
+    public String deleteTaskConfirm(@RequestParam(name = "id") long subtaskId, WebRequest request, RedirectAttributes redirectAttributes)  {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (SUBTASK_SERVICE.subtaskIsUsers(userId, subtaskId)) {
+            long projectId = SUBTASK_SERVICE.getProjectIdBySubtaskId(subtaskId);
+            redirectAttributes.addAttribute("id", projectId);
+            SUBTASK_SERVICE.deleteSubtaskById(subtaskId);
+            return "redirect:/project";
+        } else {
+            return "error";
+        }
+    }
+
+    @PostMapping("/project/task/subtask/config")
+    public String configSubtask(@RequestParam(name = "id") long subtaskId, WebRequest request, RedirectAttributes redirectAttributes) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        if (SUBTASK_SERVICE.subtaskIsUsers(userId, subtaskId)) {
+            int percent = Integer.parseInt(request.getParameter("percent"));
+            SUBTASK_SERVICE.updateTaskPercentById(subtaskId, percent);
+            redirectAttributes.addAttribute("id", subtaskId);
+            return "redirect:/project/task/subtask";
+        } else {
+            return "error";
+        }
     }
 }

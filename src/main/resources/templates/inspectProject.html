@@ -101,9 +101,14 @@
                 }
             }
 
+            google.visualization.events.addListener(chart, 'error', function (googleError) {
+                google.visualization.errors.removeError(googleError.id);
+            });
+
             /*]]>*/
         }
     </script>
+
 </head>
 <body>
 
@@ -137,7 +142,9 @@
                 </div>
             </div>
         </div>
-        <div id="chart_div" style=" margin: 10px auto 0;align-self: center;"></div>
+        <div th:if="${project.tasks != null}">
+            <div id="chart_div" style=" margin: 10px auto 0;align-self: center;"></div>
+        </div>
     </div>
 
 

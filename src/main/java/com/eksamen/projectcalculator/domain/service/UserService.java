@@ -1,6 +1,7 @@
 package com.eksamen.projectcalculator.domain.service;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
+import com.eksamen.projectcalculator.domain.exception.LoginSampleException;
 import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.repository.DataFacade;
 
@@ -28,5 +29,13 @@ public class UserService {
 
     public User getUserById(long id) {
         return FACADE.getUserById(id);
+    }
+
+    public boolean passwordsMatch(String password, String password2) throws LoginSampleException {
+        if (password.equals(password2)) {
+            return true;
+        } else {
+            throw new LoginSampleException("Passwords did now match");
+        }
     }
 }

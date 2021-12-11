@@ -1,6 +1,7 @@
 package com.eksamen.projectcalculator.controller;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
+import com.eksamen.projectcalculator.domain.exception.LoginSampleException;
 import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.domain.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -34,15 +35,22 @@ public class UserController {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String password2 = request.getParameter("password2");
             String admin = request.getParameter("admin");
             boolean isAdmin = (admin != null);
 
-            USER_SERVICE.createUser(email, password, isAdmin);
-            return "redirect:/users";
-        } catch (LoginException e) {
+            if (password.equals(password2)) {
+
+                USER_SERVICE.createUser(email, password, isAdmin);
+                return "redirect:/users";
+            } else {
+                throw new LoginSampleException("Passwords did not match!");
+            }
+        } catch (LoginException | LoginSampleException e) {
+            System.out.println("NO");
             model.addAttribute("error", e.getMessage());
-            return "register";
         }
+        return "register";
     }
 
     @GetMapping("/users")

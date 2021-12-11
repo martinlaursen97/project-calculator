@@ -18,7 +18,9 @@ public class DataFacade {
 
     // User
     public void createUser(String email, String password, boolean isAdmin) throws LoginException {
-        USER_REPOSITORY.createUser(email, password, isAdmin);
+        if (!USER_REPOSITORY.emailExists(email)) {
+            USER_REPOSITORY.createUser(email, password, isAdmin);
+        }
     }
 
     public User loginValid(String email, String password) throws LoginException {

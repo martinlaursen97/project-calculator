@@ -31,7 +31,7 @@ public class UserRepository {
         }
     }
 
-    public void createUser(String email, String password, boolean isAdmin) throws LoginException {
+    public void createUser(String email, String password, boolean isAdmin) {
         try {
             Connection connection = DBManager.getConnection();
             String query = "INSERT INTO user(email, password, admin) VALUES (?,?,?)";

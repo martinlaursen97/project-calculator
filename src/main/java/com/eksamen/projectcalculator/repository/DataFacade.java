@@ -20,6 +20,8 @@ public class DataFacade {
     public void createUser(String email, String password, boolean isAdmin) throws LoginException {
         if (!USER_REPOSITORY.emailExists(email)) {
             USER_REPOSITORY.createUser(email, password, isAdmin);
+        } else {
+            throw new LoginException("Email taken");
         }
     }
 

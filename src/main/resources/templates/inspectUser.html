@@ -13,7 +13,7 @@
     <a th:href="@{/index}" style="margin-top:30px">Home</a>
     <a th:href="@{/projects}">Projects</a>
     <div th:if="${session.isAdmin}">
-        <a th:href="@{/users}">Admin</a>
+        <a th:href="@{/users}" style="text-decoration: underline;">Admin</a>
     </div>
     <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
 </div>

@@ -136,7 +136,13 @@ body {
     .sidenav a {
         font-size: 18px;
     }
+
+    .sidenav a:active {
+        color: red;
+    }
 }
+
+
 
 .menu-img {
     height: auto;

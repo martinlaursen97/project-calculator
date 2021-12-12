@@ -20,40 +20,55 @@
 
 
 <div class="main">
-    <div class="project-list">
-        <div class="project-form-box">
-            <form name="adminOverview" th:action="@{/test}" method="POST">
-                <div class="row">
+    <div class="center">
+        <div class="project-list">
+            <div class="project-form-box">
+                <form name="adminOverview" th:action="@{/search}" method="POST">
                     <div class="row">
-                        <label for="email" class="control-label"></label>
-                        <input type="text" minlength="1" maxlength="50" name="email" class="form-control" id="email"
-                               style="width:200px; height: 35px; margin-left: 40px; margin-top: 5px;" placeholder="User E-mail">
-                    </div>
-                    <div class="row">
-                        <div class="nav-links">
-                            <ul>
-                                <button name="post" type="submit" class="project-add-btn">
-                                    <p class="plus"></p>
-                                </button>
-                            </ul>
+                        <div class="row">
+                            <label for="key" class="control-label"></label>
+                            <input type="text" minlength="1" maxlength="50" name="key" class="form-control" id="key"
+                                   style="width:200px; height: 35px; margin-left: 40px; margin-top: 5px;" placeholder="Search for email or id">
+                        </div>
+                        <div class="row">
+                            <div class="nav-links">
+                                <ul>
+                                    <button name="post" type="submit" class="project-add-btn">
+                                        <p class="plus">+</p>
+                                    </button>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="nav-links">
+                                <ul>
+                                    <a style="text-decoration: none; width: 100px; margin-left: 230px;" type="button" th:href="@{/register}" class="create-user-btn">
+                                        New user
+                                    </a>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="nav-links">
-                            <ul>
-                                <a style="text-decoration: none" type="button" th:href="@{/register}" class="create-user-btn">
-                                    Create user
-                                </a>
-                            </ul>
-                        </div>
+                </form>
+                <div class="project-list-item-desc">
+                    <div class="project-list-item-id">
+                        <b>ID:</b>
+                    </div>
+                    <div class="project-list-item-name">
+                        <b>Email:</b>
                     </div>
                 </div>
-            </form>
-            <tr th:each="user: ${users}">
-                <a type="button" style="text-decoration: none; color: black;" th:href="@{/showUser(id=${user.userId})}" class="project-list-item"> <!-- gå til endpoint, sæt requestparam (id) til at være projectid-->
-                    <td th:text="${user.email}"></td>
-                </a>
-            </tr>
+                <tr th:each="user: ${users}">
+                    <a type="button" style="text-decoration: none; color: black;" th:href="@{/showUser(id=${user.userId})}" class="project-list-item">
+                        <div class="project-list-item-id">
+                            <td th:text="${user.userId}"></td>
+                        </div>
+                        <div class="project-list-item-name">
+                            <td th:text="${user.email}"></td>
+                        </div>
+                    </a>
+                </tr>
+            </div>
         </div>
     </div>
 </div>

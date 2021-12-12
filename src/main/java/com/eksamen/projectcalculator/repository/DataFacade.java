@@ -31,9 +31,6 @@ public class DataFacade {
         return USER_REPOSITORY.getUsers();
     }
 
-    public List<User> getUserByEmail(String email) {
-        return USER_REPOSITORY.getUserByEmail(email);
-    }
 
     // Project
     public void deleteProjectById(long id) {
@@ -150,5 +147,9 @@ public class DataFacade {
 
     public void changeAdmin(Long userId) {
         USER_REPOSITORY.changeAdmin(userId);
+    }
+
+    public List<User> getUserByKey(String key) {
+        return USER_REPOSITORY.getUserByKey(key);
     }
 }

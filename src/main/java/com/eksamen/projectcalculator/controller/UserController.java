@@ -108,4 +108,17 @@ public class UserController {
         redirectAttributes.addAttribute("id", id);
         return  "redirect:/showUser";
     }
+
+    @PostMapping("/search")
+    public String search(WebRequest request, Model model) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        Boolean isAdmin = (Boolean) request.getAttribute("isAdmin", WebRequest.SCOPE_SESSION);
+        if (Boolean.FALSE.equals(isAdmin)) return "redirect:/index";
+
+        String key = request.getParameter("key");
+        model.addAttribute("users", USER_SERVICE.getUserByKey(key));
+        return "adminOverview";
+    }
 }

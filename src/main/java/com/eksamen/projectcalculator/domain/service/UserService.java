@@ -23,23 +23,17 @@ public class UserService {
         return FACADE.getUsers();
     }
 
-    public List<User> getUserByEmail(String email) {
-        return FACADE.getUserByEmail(email);
-    }
 
     public User getUserById(long id) {
         return FACADE.getUserById(id);
     }
 
-    public boolean passwordsMatch(String password, String password2) throws LoginSampleException {
-        if (password.equals(password2)) {
-            return true;
-        } else {
-            throw new LoginSampleException("Passwords did now match");
-        }
-    }
 
     public void changeAdmin(Long userId) {
         FACADE.changeAdmin(userId);
+    }
+
+    public List<User> getUserByKey(String key) {
+        return FACADE.getUserByKey(key);
     }
 }

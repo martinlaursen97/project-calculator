@@ -80,36 +80,11 @@ public class UserRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                User aUser = new User();
-                aUser.setUserId(resultSet.getLong("user_id"));
-                aUser.setEmail(resultSet.getString("email"));
-                aUser.setAdmin(resultSet.getBoolean("admin"));
-                users.add(aUser);
-            }
-            return users;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<User> getUserByEmail(String email) {
-        try {
-            Connection connection = DBManager.getConnection();
-
-            List<User> users = new ArrayList<>();
-
-            String query = "SELECT * FROM user WHERE email = '" + email + "'";//LIKE '%" + email + "%'";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                User aUser = new User();
-                aUser.setUserId(resultSet.getLong("user_id"));
-                aUser.setEmail(resultSet.getString("email"));
-                aUser.setAdmin(resultSet.getBoolean("admin"));
-                users.add(aUser);
+                User user = new User();
+                user.setUserId(resultSet.getLong("user_id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAdmin(resultSet.getBoolean("admin"));
+                users.add(user);
             }
             return users;
 
@@ -152,5 +127,31 @@ public class UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<User> getUserByKey(String key) {
+        try {
+            Connection connection = DBManager.getConnection();
+
+            List<User> users = new ArrayList<>();
+
+            String query = "SELECT * FROM user WHERE email LIKE '%" + key + "%' OR user_id = + '" + key + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getLong("user_id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAdmin(resultSet.getBoolean("admin"));
+                users.add(user);
+            }
+            System.out.println(users.size());
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

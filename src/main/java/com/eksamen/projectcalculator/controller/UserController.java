@@ -30,7 +30,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/registerVerify")
+    @PostMapping("/register-verify")
     public String registerVerify(WebRequest request, Model model) {
         try {
             String email = request.getParameter("email");
@@ -40,14 +40,12 @@ public class UserController {
             boolean isAdmin = (admin != null);
 
             if (password.equals(password2)) {
-
                 USER_SERVICE.createUser(email, password, isAdmin);
                 return "redirect:/users";
             } else {
                 throw new LoginSampleException("Passwords did not match!");
             }
         } catch (LoginException | LoginSampleException e) {
-            System.out.println("NO");
             model.addAttribute("error", e.getMessage());
         }
         return "register";
@@ -65,15 +63,6 @@ public class UserController {
         return "adminOverview";
     }
 
-    @PostMapping("/test")
-    public String getUser(WebRequest request, Model model) {
-        String email = request.getParameter("email");
-        model.addAttribute("users", USER_SERVICE.getUserByEmail(email));
-        System.out.println(email);
-
-        return "adminOverview";
-    }
-
     @GetMapping("/showUser")
     public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
@@ -81,7 +70,4 @@ public class UserController {
         model.addAttribute("user", USER_SERVICE.getUserById(id));
         return "inspectUser";
     }
-
-
-
 }

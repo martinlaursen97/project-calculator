@@ -15,8 +15,8 @@ public class UserService {
         return FACADE.loginValid(email, password);
     }
 
-    public void createUser(String email, String password, boolean isAdmin) throws LoginException {
-        FACADE.createUser(email, password, isAdmin);
+    public long createUser(String email, String password, boolean isAdmin) throws LoginException {
+        return FACADE.createUser(email, password, isAdmin);
     }
 
     public List<User> getUsers() {

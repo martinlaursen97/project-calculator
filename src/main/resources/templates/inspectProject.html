@@ -2,15 +2,11 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
-
-
     <link rel="stylesheet" href="/styles.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" th:inline="javascript"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
-
         google.charts.load('current', {'packages': ['gantt']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -108,7 +104,6 @@
             /*]]>*/
         }
     </script>
-
 </head>
 <body>
 
@@ -123,8 +118,6 @@
 </div>
 
 <div class="main">
-
-
     <div class="chart-box">
         <div class="chart-box-options">
             <div class="chart-box-title" th:text="${project.projectName}"></div>
@@ -142,11 +135,8 @@
                 </div>
             </div>
         </div>
-        <div th:if="${project.tasks != null}">
-            <div id="chart_div" style=" margin: 10px auto 0;align-self: center;"></div>
-        </div>
+        <div id="chart_div" style=" margin: 10px auto 0;align-self: center;"></div>
     </div>
-
 
     <div class="task-box" style="margin-left:100px; margin-top: 25px ">
         <b>Start:

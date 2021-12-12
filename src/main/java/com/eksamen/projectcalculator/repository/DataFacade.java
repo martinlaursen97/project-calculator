@@ -6,8 +6,6 @@ import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.model.User;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DataFacade {
@@ -17,9 +15,9 @@ public class DataFacade {
     private final TaskRepository TASK_REPOSITORY = new TaskRepository();
 
     // User
-    public void createUser(String email, String password, boolean isAdmin) throws LoginException {
+    public long createUser(String email, String password, boolean isAdmin) throws LoginException {
         if (!USER_REPOSITORY.emailExists(email)) {
-            USER_REPOSITORY.createUser(email, password, isAdmin);
+            return USER_REPOSITORY.createUser(email, password, isAdmin);
         } else {
             throw new LoginException("Email taken");
         }
@@ -42,8 +40,8 @@ public class DataFacade {
         PROJECT_REPOSITORY.deleteProjectById(id);
     }
 
-    public void createProject(long id, String projectName) {
-        PROJECT_REPOSITORY.createProject(id, projectName);
+    public long createProject(long id, String projectName) {
+        return PROJECT_REPOSITORY.createProject(id, projectName);
     }
 
     public List<Project> getProjectsByUserId(long userId) {
@@ -74,8 +72,8 @@ public class DataFacade {
         TASK_REPOSITORY.clearTasksByProjectId(id);
     }
 
-    public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
-        TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+    public long createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        return TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
 
 
@@ -114,8 +112,8 @@ public class DataFacade {
         return TASK_REPOSITORY.getProjectDeadlineById(id);
     }
 
-    public void createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
-        SUBTASK_REPOSITORY.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+    public long createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        return SUBTASK_REPOSITORY.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
 
     public Task getTaskBySubtaskId(long subtaskId) {

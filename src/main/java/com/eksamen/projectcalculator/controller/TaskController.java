@@ -28,7 +28,7 @@ public class TaskController {
         }
     }
 
-    @PostMapping("/project/addTaskVerify")
+    @PostMapping("/project/add-verify")
     public String addTaskVerify(@RequestParam(name="id") long id, WebRequest request, RedirectAttributes redirectAttributes) throws ParseException {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
@@ -42,7 +42,7 @@ public class TaskController {
             double dailyWorkHours = Double.parseDouble(request.getParameter("hours"));
             double pricePerHour = Double.parseDouble(request.getParameter("priceprhr"));
 
-            TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+            System.out.println(TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour));
             redirectAttributes.addAttribute("id", id);
 
             return "redirect:/project";
@@ -65,7 +65,7 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/project/clear/confirm")
+    @GetMapping("/project/clear-confirm")
     public String clearConfirm(@RequestParam(name = "id") long id, RedirectAttributes redirectAttributes, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";

@@ -6,7 +6,7 @@ import org.springframework.web.context.request.WebRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class FrontController {
+public class LoginController {
 
     @GetMapping("/index")
     public String index(WebRequest request) {
@@ -35,4 +35,3 @@ public class FrontController {
         return "register";
     }
 }
-

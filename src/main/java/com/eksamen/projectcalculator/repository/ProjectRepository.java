@@ -5,27 +5,30 @@ import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectRepository {
-    public void createProject(long id, String projectName) {
+    public Long createProject(long id, String projectName) {
         try {
             Connection connection = DBManager.getConnection();
             String query = "INSERT INTO project(user_id, project_name) VALUES (?, ?)";
             PreparedStatement preparedStatement;
 
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, id);
             preparedStatement.setString(2, projectName);
             preparedStatement.executeUpdate();
+
+            ResultSet resultSet  = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public boolean projectExists(String projectName) {

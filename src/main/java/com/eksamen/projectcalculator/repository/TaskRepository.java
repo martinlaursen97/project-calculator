@@ -1,24 +1,19 @@
 package com.eksamen.projectcalculator.repository;
 
-import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Task;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TaskRepository {
-    public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+    public long createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
         try {
             Connection connection = DBManager.getConnection();
             String query = "INSERT INTO task(project_id, task_name, resource, start_date, finish_date, percent_complete, daily_work_hours, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement;
 
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, projectId);
             preparedStatement.setString(2, taskName);
             preparedStatement.setString(3, resource);
@@ -28,9 +23,15 @@ public class TaskRepository {
             preparedStatement.setDouble(7, dailyWorkHours);
             preparedStatement.setDouble(8, pricePerHour);
             preparedStatement.executeUpdate();
+
+            ResultSet resultSet  = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return projectId;
     }
 
     public List<Task> getTasksByProjectId(long id) {

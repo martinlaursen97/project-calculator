@@ -2,7 +2,6 @@ package com.eksamen.projectcalculator.controller;
 
 import com.eksamen.projectcalculator.domain.exception.ProjectException;
 import com.eksamen.projectcalculator.domain.model.Project;
-import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,7 @@ public class ProjectController {
         return "projects";
     }
 
-    @PostMapping("/addVerify")
+    @PostMapping("/add-verify")
     public String createProjectVerify(WebRequest request, Model model) {
 
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -80,7 +79,7 @@ public class ProjectController {
         }
     }
 
-    @GetMapping("/project/deleteConfirm")
+    @GetMapping("/project/delete-confirm")
     public String deleteProjectConfirm(@RequestParam(name = "id") long id, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";

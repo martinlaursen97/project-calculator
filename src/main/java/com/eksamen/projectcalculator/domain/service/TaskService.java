@@ -9,8 +9,8 @@ public class TaskService {
 
     private final DataFacade FACADE = new DataFacade();
 
-    public void createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
-        FACADE.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+    public long createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        return FACADE.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
 
     public void clearTasksByProjectId(long id) {

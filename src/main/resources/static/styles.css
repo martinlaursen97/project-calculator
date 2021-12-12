@@ -157,6 +157,7 @@ body {
     height: 46px;
     background-color: whitesmoke;
     outline: 1px solid grey;
+    display:block
 }
 
 .project-add-btn {

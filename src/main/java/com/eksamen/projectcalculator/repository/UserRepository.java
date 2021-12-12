@@ -140,4 +140,19 @@ public class UserRepository {
         }
         return null;
     }
+
+    public void changeAdmin(long userId) {
+        try {
+            Connection connection = DBManager.getConnection();
+
+            String query = "UPDATE user SET admin = !admin WHERE user_id = " + userId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeQuery();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

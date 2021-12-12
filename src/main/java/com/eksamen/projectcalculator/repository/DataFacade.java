@@ -147,4 +147,8 @@ public class DataFacade {
     public void updateSubtaskPercentById(long subtaskId, int percent) {
         SUBTASK_REPOSITORY.updateSubtaskPercentById(subtaskId, percent);
     }
+
+    public void changeAdmin(Long userId) {
+        USER_REPOSITORY.changeAdmin(userId);
+    }
 }

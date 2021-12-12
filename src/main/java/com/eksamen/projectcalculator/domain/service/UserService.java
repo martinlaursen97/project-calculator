@@ -38,4 +38,8 @@ public class UserService {
             throw new LoginSampleException("Passwords did now match");
         }
     }
+
+    public void changeAdmin(Long userId) {
+        FACADE.changeAdmin(userId);
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -73,9 +74,20 @@ public class UserController {
 
     @GetMapping("/showUser")
     public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
-        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
 
         model.addAttribute("user", USER_SERVICE.getUserById(id));
         return "inspectUser";
+    }
+
+    @GetMapping("/changeAdmin")
+    public String changeAdmin(@RequestParam(name= "id") long id, Model model, WebRequest request, RedirectAttributes redirectAttributes){
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        USER_SERVICE.changeAdmin(userId);
+        redirectAttributes.addAttribute("id", id);
+        return  "redirect:/showUser";
     }
 }

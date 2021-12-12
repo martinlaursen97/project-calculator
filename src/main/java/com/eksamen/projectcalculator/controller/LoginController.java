@@ -8,8 +8,15 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    /*
+    Når en bruger logger ind, bliver user id og admin status gemt som session attributter,
+    som vi bruger til at sikre at det kun er alpha solutions brugere der har adgang til siden,
+    samt at det kun er adminstratorere, der har adgang til de adminstrative funktioner.
+    */
+
     @GetMapping("/index")
     public String index(WebRequest request) {
+        // Hvis userId er null, er der ikke blevet sat noget userId som session attribut.
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
@@ -21,6 +28,7 @@ public class LoginController {
         return "login";
     }
 
+    // Session attributter invalideres / fjernes, og brugeren er ikke længere logget på
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

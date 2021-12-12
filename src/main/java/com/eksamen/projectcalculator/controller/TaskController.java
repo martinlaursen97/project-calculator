@@ -15,6 +15,10 @@ public class TaskController {
     private final TaskService TASK_SERVICE = new TaskService();
     private final ProjectService PROJECT_SERVICE = new ProjectService();
 
+    /*
+    Step 1:  Brugeren er inde på en task og trykker Add task.
+    Brugeren udfylder en form.
+    */
     @GetMapping("/project/add")
     public String addTask(@RequestParam(name="id") long id, Model model, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -28,8 +32,11 @@ public class TaskController {
         }
     }
 
+    /*
+    Step 2:  Brugeren har udfyldt formen, og tasken oprettes i databasen.
+    */
     @PostMapping("/project/add-verify")
-    public String addTaskVerify(@RequestParam(name="id") long id, WebRequest request, RedirectAttributes redirectAttributes) throws ParseException {
+    public String addTaskVerify(@RequestParam(name="id") long id, WebRequest request, RedirectAttributes redirectAttributes) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
@@ -42,7 +49,7 @@ public class TaskController {
             double dailyWorkHours = Double.parseDouble(request.getParameter("hours"));
             double pricePerHour = Double.parseDouble(request.getParameter("priceprhr"));
 
-            System.out.println(TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour));
+            TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
             redirectAttributes.addAttribute("id", id);
 
             return "redirect:/project";
@@ -60,7 +67,6 @@ public class TaskController {
             model.addAttribute("task", TASK_SERVICE.getTaskById(id));
             return "inspectTask";
         } else {
-            System.out.println("NOT USERS");
             return "error";
         }
     }
@@ -93,6 +99,7 @@ public class TaskController {
         }
     }
 
+
     @GetMapping("/project/task/delete-confirm")
     public String deleteTaskConfirm(@RequestParam(name = "id") long id, WebRequest request, RedirectAttributes redirectAttributes)  {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -108,6 +115,7 @@ public class TaskController {
         }
     }
 
+    // Ændre færdigheds procent
     @PostMapping("/project/task/config")
     public String configTask(@RequestParam(name = "id") long taskId, Model model, WebRequest request, RedirectAttributes redirectAttributes) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);

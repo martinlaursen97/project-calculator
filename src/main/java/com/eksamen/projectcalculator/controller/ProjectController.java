@@ -27,11 +27,12 @@ public class ProjectController {
 
     @PostMapping("/add-verify")
     public String createProjectVerify(WebRequest request, Model model) {
-
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
         try {
+            // Brugeren indtaster projekt navnet, hvilket bliver hentet ud af en HTML form via WebRequest,
+            // og gemt i databasen med mindre at ProjectException opstår
             String projectName = request.getParameter("name");
             PROJECT_SERVICE.createProject(userId, projectName);
         } catch (ProjectException e) {
@@ -46,6 +47,8 @@ public class ProjectController {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
+        // Det er vigtigt at en bruger kun har adgang til sine egne projekter/tasks/subtasks,
+        // derfor tjekkes der om projektet tilhører brugeren FØR den fortsætter
         if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
             Project project = PROJECT_SERVICE.getProjectById(id);
             model.addAttribute("project", project);
@@ -55,6 +58,7 @@ public class ProjectController {
         }
     }
 
+    // Sletter alle tasks i et projekt
     @GetMapping("/project/clear")
     public String clear(@RequestParam(name = "id") long id, Model model, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);

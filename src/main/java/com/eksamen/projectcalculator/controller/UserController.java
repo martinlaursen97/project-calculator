@@ -17,10 +17,14 @@ public class UserController {
 
     @PostMapping("/verify")
     public String loginVerify(WebRequest request, Model model) {
+        // LoginException kastes hvis email og password, ikke matcher en bruger i databasen.
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             User user = USER_SERVICE.loginValid(email, password);
+
+            // Session attributter gemmes, og kan bruges over alt i programmet.
+            // Mest til at sikre at der kun gives adgang til brugere.
             request.setAttribute("userId", user.getUserId(), WebRequest.SCOPE_SESSION);
             request.setAttribute("isAdmin", user.isAdmin(), WebRequest.SCOPE_SESSION);
             return "redirect:/index";
@@ -37,8 +41,12 @@ public class UserController {
             String password = request.getParameter("password");
             String password2 = request.getParameter("password2");
             String admin = request.getParameter("admin");
+
+            // En admin vælger om en ny bruger er admin eller ej med en checkbox.
+            // Hvis checkboxen er krydset af, vil WebRequest hente en string værdi ud, og hvis ikke, er den null.
             boolean isAdmin = (admin != null);
 
+            // Adminstratoren skal skrive password to gange, for at sikre at han har tastet rigtigt.
             if (password.equals(password2)) {
                 USER_SERVICE.createUser(email, password, isAdmin);
                 return "redirect:/users";

@@ -15,6 +15,10 @@ public class SubtaskController {
     private final TaskService TASK_SERVICE = new TaskService();
     private final SubtaskService SUBTASK_SERVICE = new SubtaskService();
 
+    /*
+    Step 1:  Brugeren er inde på en task side og trykker Add subtask.
+    Dette endpoint giver brugeren en form at udfylde.
+    */
     @GetMapping("/project/task/add-subtask")
     public String addSubtask(@RequestParam(name = "id") long taskId, Model model, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -28,6 +32,11 @@ public class SubtaskController {
         }
     }
 
+    /*
+    Step 2:  Brugeren har udfyldt formen, og trykker add.
+    Inputs fra HTML formen hives ud med WebRequest, og sendes igennem lagene
+    hvor de til sidst når Subtask repository, og opretter en ny subtask i databasen.
+    */
     @PostMapping("/project/task/add-subtask-verify")
     public String addSubtaskVerify(@RequestParam(name = "id") long taskId, WebRequest request, RedirectAttributes redirectAttributes) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -94,6 +103,7 @@ public class SubtaskController {
         }
     }
 
+    // Ændre færdigheds procenten
     @PostMapping("/project/task/subtask/config")
     public String configSubtask(@RequestParam(name = "id") long subtaskId, WebRequest request, RedirectAttributes redirectAttributes) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);

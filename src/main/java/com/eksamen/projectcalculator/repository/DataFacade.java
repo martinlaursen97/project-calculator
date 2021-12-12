@@ -83,4 +83,8 @@ public class DataFacade {
     public Task getTaskById(long id) {
         return TASK_REPOSITORY.getTaskById(id);
     }
+
+    public void removeAdmin(long userId) {
+        USER_REPOSITORY.removeAdmin(userId);
+    }
 }

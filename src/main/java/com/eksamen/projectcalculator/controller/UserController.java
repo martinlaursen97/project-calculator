@@ -74,6 +74,13 @@ public class UserController {
         return "inspectUser";
     }
 
+    @GetMapping("/changeAdmin")
+    public String changeAdmin(@RequestParam(name= "id") long userId, Model model, WebRequest request){
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+
+        //model.addAttribute(USER_SERVICE.removeAdmin(userId));
+        return "inspectUser";
+    }
 
 
 }

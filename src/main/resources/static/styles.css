@@ -151,12 +151,35 @@ body {
     background-color: whitesmoke;
     outline: 1px solid grey;
 }
+.user-list {
+    margin-top: 10px;
+    margin-left: 100px;
+    width: 600px;
+    background-color: whitesmoke;
+    outline: 1px solid grey;
+}
 
 .project-form-box {
     width: 600px;
     height: 46px;
     background-color: whitesmoke;
     outline: 1px solid grey;
+}
+.user-form-box {
+    text-align: left;
+    width: 600px;
+    height: 30px;
+    background-color: whitesmoke;
+    outline: 1px solid grey;
+    border-width: thick;
+}
+
+.user-form-title-box {
+    width: 600px;
+    height: 46px;
+    background-color: whitesmoke;
+    outline: 1px solid grey;
+    border: 20px;
 }
 
 .project-add-btn {
@@ -331,4 +354,48 @@ body {
 .text-move {
     margin-top: 7px;
     position: relative;
+}
+
+.user-profile {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dropdown {
+    margin-top:10px;
+    margin-left: 520px;
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    color: var(--main);
+    padding: 5px;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: var(--main);
+}
+
+.actions-button {
+    color: white;
+    background-color: limegreen;
+    margin-bottom: 20px;
+
+
 }

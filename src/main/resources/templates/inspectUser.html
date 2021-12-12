@@ -20,21 +20,49 @@
 
 <div class="main">
     <div class="user-list">
-        <div class="project-form-box">
-            <label>E-mail: </label>
+        <div class="dropdown">
+            <button class="actions-button">Actions</button>
+            <div class="dropdown-content">
+                <a href="link">Delete user</a>
+
+                <a th:href="@{/changeAdmin(id=${user.userId})}">Change admin</a>
+
+            </div>
+        </div>
+        <h4 style="color: black" >User Profile</h4>
+    </div>
+</div>
+
+
+
+<div class="main">
+    <div class="user-list">
+        <div class="user-form-box"> når ja
+            <b><label style="margin-left:10px">E-mail: </label></b>
             <label th:text="${user.email}" class="control-label"></label>
         </div>
     </div>
 </div>
 
 
+
 <div class="main">
     <div class="user-list">
-        <div class="project-form-box">
-            <label>User ID: </label>
+        <div class="user-form-box">
+            <b><label style="margin-left:10px">User ID: </label></b>
             <label th:text="${user.userId}" class="control-label"></label>
         </div>
     </div>
 </div>
+
+<div class="main">
+    <div class="user-list">
+        <div class="user-form-box">
+            <b><label style="margin-left:10px">Admin: </label></b>
+            <label th:text="${user.isAdmin}" class="control-label"></label>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -29,4 +29,8 @@ public class UserService {
     public User getUserById(long id) {
         return FACADE.getUserById(id);
     }
+
+    public void removeAdmin(long userId) {
+        FACADE.removeAdmin(userId);
+    }
 }

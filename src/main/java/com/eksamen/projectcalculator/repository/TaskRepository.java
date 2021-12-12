@@ -150,7 +150,6 @@ public class TaskRepository {
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
-            System.out.println("her");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -132,6 +132,7 @@ public class UserRepository {
                 User user = new User();
                 user.setUserId(resultSet.getLong("user_id"));
                 user.setEmail(resultSet.getString("email"));
+                user.setAdmin(resultSet.getBoolean("admin"));
                 return user;
             }
 
@@ -145,12 +146,9 @@ public class UserRepository {
         try {
             Connection connection = DBManager.getConnection();
 
-            String query = "UPDATE user SET admin = !admin WHERE user_id = " + userId;
-
+            String query = "UPDATE user SET admin = NOT admin WHERE user_id = " + userId;
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.executeQuery();
-
-
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

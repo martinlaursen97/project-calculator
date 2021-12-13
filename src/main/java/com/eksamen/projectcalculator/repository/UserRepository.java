@@ -154,4 +154,26 @@ public class UserRepository {
         }
         return null;
     }
+
+    public User getUserByEmail(String email) {
+        try {
+            Connection connection = DBManager.getConnection();
+
+
+            String query = "SELECT * FROM user WHERE email = '" + email + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+           if (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getLong("user_id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAdmin(resultSet.getBoolean("admin"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

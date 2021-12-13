@@ -31,6 +31,13 @@ public class DataFacade {
         return USER_REPOSITORY.getUsers();
     }
 
+    public void changeAdmin(Long userId) {
+        USER_REPOSITORY.changeAdmin(userId);
+    }
+
+    public List<User> getUserByKey(String key) {
+        return USER_REPOSITORY.getUserByKey(key);
+    }
 
     // Project
     public void deleteProjectById(long id) {
@@ -73,7 +80,6 @@ public class DataFacade {
         return TASK_REPOSITORY.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
 
-
     public User getUserById(long id) {
         return USER_REPOSITORY.getUserById(id);
     }
@@ -92,7 +98,6 @@ public class DataFacade {
         return PROJECT_REPOSITORY.projectIsUsers(userId, projectId);
     }
 
-
     public long getProjectIdById(long id) {
         return TASK_REPOSITORY.getProjectIdByTaskId(id);
     }
@@ -109,6 +114,11 @@ public class DataFacade {
         return TASK_REPOSITORY.getProjectDeadlineById(id);
     }
 
+    public void updateTaskPercentById(long taskId, int percent) {
+        TASK_REPOSITORY.updateTaskPercentById(taskId, percent);
+    }
+
+    // Subtask
     public long createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
         return SUBTASK_REPOSITORY.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
     }
@@ -137,19 +147,7 @@ public class DataFacade {
         SUBTASK_REPOSITORY.deleteSubtaskById(subtaskId);
     }
 
-    public void updateTaskPercentById(long taskId, int percent) {
-        TASK_REPOSITORY.updateTaskPercentById(taskId, percent);
-    }
-
     public void updateSubtaskPercentById(long subtaskId, int percent) {
         SUBTASK_REPOSITORY.updateSubtaskPercentById(subtaskId, percent);
-    }
-
-    public void changeAdmin(Long userId) {
-        USER_REPOSITORY.changeAdmin(userId);
-    }
-
-    public List<User> getUserByKey(String key) {
-        return USER_REPOSITORY.getUserByKey(key);
     }
 }

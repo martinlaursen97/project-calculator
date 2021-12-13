@@ -1,20 +1,25 @@
 package com.eksamen.projectcalculator.repository;
 
+import com.eksamen.projectcalculator.domain.exception.ProjectException;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.User;
+import com.eksamen.projectcalculator.domain.service.ProjectService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProjectRepositoryTest {
+public class ProjectServiceTest {
 
     // Should_ExpectedBehavior_When_StateUnderTest
-    private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
+
+    private final ProjectService PROJECT_SERVICE = new ProjectService();
+
+    // Bliver brugt til at lave enkelte test users, til at tildele projekter
     private final UserRepository USER_REPOSITORY = new UserRepository();
 
 
     @Test
-    public void Should_ReturnNull_When_RetrievingProjectAfterDelete() {
+    public void Should_AddProjectToDb_When_ProjectCreated() throws ProjectException {
         // Arrange
         String testEmail = "projectCreateTest@hotmail.dk";
 
@@ -23,18 +28,14 @@ public class ProjectRepositoryTest {
         }
 
         User user = USER_REPOSITORY.getUserByEmail(testEmail);
-        long id = PROJECT_REPOSITORY.createProject(user.getUserId(), "test project");
-        Project project = PROJECT_REPOSITORY.getProjectById(id);
 
-        boolean expected = project != null;
+        long expected = PROJECT_SERVICE.createProject(user.getUserId(), "test project");
 
         // Act
-        PROJECT_REPOSITORY.deleteProjectById(id);
-        Project after = PROJECT_REPOSITORY.getProjectById(id);
-
-        boolean actual = after == null;
+        Project project = PROJECT_SERVICE.getProjectById(expected);
+        long actual = project.getProjectId();
 
         // Assert
-        assertEquals(expected, actual);
+        assertEquals(actual, expected);
     }
 }

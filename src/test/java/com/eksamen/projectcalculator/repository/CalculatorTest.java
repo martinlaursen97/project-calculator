@@ -2,8 +2,11 @@ package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Calculator;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+/*
+Author Jakob
+ */
 
 public class CalculatorTest {
 

@@ -27,6 +27,10 @@ public class Calculator {
                 }
                 cal1.add(Calendar.DATE, 1);
             }
+            if ((Calendar.SATURDAY != cal1.get(Calendar.DAY_OF_WEEK))
+                    && (Calendar.SUNDAY != cal1.get(Calendar.DAY_OF_WEEK))) {
+                numberOfDays++;
+            }
             return numberOfDays;
         } catch (ParseException e) {
             e.printStackTrace();

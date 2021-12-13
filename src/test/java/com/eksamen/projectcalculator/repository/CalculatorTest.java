@@ -17,15 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 Author Jakob & Martin
  */
 
+// Should_ExpectedBehavior_When_StateUnderTest
 public class CalculatorTest {
 
-    @Test // Tæller ikke den sidste dag.
-    public void calculator() {
+    @Test
+    public void Should_ReturnNumberOfWorkDaysBetweenDates_When_GivenTwoDates() {
 
         // Arrange - Calculatoren tæller ikke weekender med som arbejdsdage
-        String date1 = "2021 12 10"; // fredag
-        String date2 = "2021 12 20"; // mandag
-        int expectedWorkDays = 6;
+        String date1 = "2021 12 18"; // lørdag
+        String date2 = "2021 12 19"; // søndag
+        int expectedWorkDays = 0;
 
         // Act
         int actualWorkDays = Calculator.getDaysBetweenDates(date1, date2);
@@ -38,12 +39,12 @@ public class CalculatorTest {
     public void Should_CalculatePriceOfTask_When_GivenStartAndFinishDates() {
         // Arrange
         Task task = new Task();
-        task.setDailyWorkHours(10);
-        task.setPricePerHour(1000);
-        task.setStartDateStr("2021 12 10");
-        task.setFinishDateStr("2021 12 20");
+        task.setDailyWorkHours(5);
+        task.setPricePerHour(150);
+        task.setStartDateStr("2021 12 18");
+        task.setFinishDateStr("2021 12 19");
 
-        double expected = 60000;
+        double expected = 0;
 
         // Act
         double actual = task.getPrice();
@@ -75,7 +76,7 @@ public class CalculatorTest {
         // Arrange
         Task task = new Task();
         task.setDailyWorkHours(10);
-        task.setPricePerHour(1000);
+        task.setPricePerHour(100);
         // 6  days
         task.setStartDateStr("2021 12 10");
         task.setFinishDateStr("2021 12 20");
@@ -84,7 +85,7 @@ public class CalculatorTest {
         subtask.setDailyWorkHours(10);
         subtask.setPricePerHour(1000);
         // 6 days
-        subtask.setStartDateStr("2021 12 10");
+        subtask.setStartDateStr("2021 12 15");
         subtask.setFinishDateStr("2021 12 20");
 
         List<Subtask> subtasks = new ArrayList<>();

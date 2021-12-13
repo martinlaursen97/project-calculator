@@ -13,7 +13,7 @@ public class UserRepositoryTest {
 
     // Finder bruger og kalder på changeAdmin, finder brugeren igen og ser om isAdmin har ændret sig
     @Test
-    public void Should_SwapAdminTrueFalse_When_AdminToggled() {
+        public void Should_SwapAdminTrueFalse_When_AdminToggled() {
         // Arrange
         String testEmail = "adminToggleTest@hotmail.dk";
 

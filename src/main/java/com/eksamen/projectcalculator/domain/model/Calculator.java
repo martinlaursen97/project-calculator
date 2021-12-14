@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class Calculator {
 
-    // Tæller ikke finish datoen som en arbejdsdag
     public static int getDaysBetweenDates(String start, String finish) {
         try {
             DateFormat df = new SimpleDateFormat("yyyy MM dd");

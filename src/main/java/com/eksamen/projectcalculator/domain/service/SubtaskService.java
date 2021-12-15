@@ -6,8 +6,17 @@ import com.eksamen.projectcalculator.repository.DataFacade;
 public class SubtaskService {
     private final DataFacade FACADE = new DataFacade();
 
-    public long createSubtask(long taskId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
-        return FACADE.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+    public long createSubtask(long taskId, String subtaskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
+        Subtask subtask = new Subtask();
+        subtask.setId(taskId);
+        subtask.setName(subtaskName);
+        subtask.setResource(resource);
+        subtask.setStartDateStr(startDate);
+        subtask.setFinishDateStr(finishDate);
+        subtask.setPercentComplete(completion);
+        subtask.setDailyWorkHours(dailyWorkHours);
+        subtask.setPricePerHour(pricePerHour);
+        return FACADE.createSubtask(subtask);
     }
 
     public Subtask getSubtaskById(long subtaskId) {

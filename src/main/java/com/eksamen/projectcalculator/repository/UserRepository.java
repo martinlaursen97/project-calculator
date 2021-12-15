@@ -2,11 +2,13 @@ package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.User;
+import com.eksamen.projectcalculator.domain.service.CRUDRepository;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository {
+public class UserRepository implements CRUDRepository<User> {
 
     public User loginValid(String email, String password) throws LoginException {
         try {
@@ -30,16 +32,17 @@ public class UserRepository {
         }
     }
 
-    public Long createUser(String email, String password, boolean isAdmin) {
+    @Override
+    public long create(User user) {
         try {
             Connection connection = DBManager.getConnection();
             String query = "INSERT INTO user(email, password, admin) VALUES (?,?,?)";
             PreparedStatement preparedStatement;
 
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-            preparedStatement.setBoolean(3, isAdmin);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setBoolean(3, user.isAdmin());
             preparedStatement.executeUpdate();
 
             ResultSet resultSet  = preparedStatement.getGeneratedKeys();
@@ -50,51 +53,11 @@ public class UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return -1;
     }
 
-    public boolean emailExists(String email) {
-        try {
-            Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM user WHERE email = '" + email + "'";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return resultSet.next();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public List<User> getUsers() {
-
-        try {
-            Connection connection = DBManager.getConnection();
-
-            List<User> users = new ArrayList<>();
-
-            String query = "SELECT * FROM user";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                User user = new User();
-                user.setUserId(resultSet.getLong("user_id"));
-                user.setEmail(resultSet.getString("email"));
-                user.setAdmin(resultSet.getBoolean("admin"));
-                users.add(user);
-            }
-            return users;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public User getUserById(long id) {
+    @Override
+    public User read(long id) {
         try {
             Connection connection = DBManager.getConnection();
 
@@ -117,7 +80,13 @@ public class UserRepository {
         return null;
     }
 
-    public void changeAdmin(long userId) {
+    @Override
+    public void update(long objId, double val) {
+
+    }
+
+    @Override
+    public void update(long userId) {
         try {
             Connection connection = DBManager.getConnection();
 
@@ -127,6 +96,58 @@ public class UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void delete(long objId) {
+
+    }
+
+    @Override
+    public List<User> getAllById(long userId) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAll() {
+
+        try {
+            Connection connection = DBManager.getConnection();
+
+            List<User> users = new ArrayList<>();
+
+            String query = "SELECT * FROM user ORDER BY user_id DESC";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getLong("user_id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAdmin(resultSet.getBoolean("admin"));
+                users.add(user);
+            }
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean emailExists(String email) {
+        try {
+            Connection connection = DBManager.getConnection();
+            String query = "SELECT * FROM user WHERE email = '" + email + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public List<User> getUserByKey(String key) {
@@ -158,7 +179,6 @@ public class UserRepository {
     public User getUserByEmail(String email) {
         try {
             Connection connection = DBManager.getConnection();
-
 
             String query = "SELECT * FROM user WHERE email = '" + email + "'";
             PreparedStatement preparedStatement = connection.prepareStatement(query);

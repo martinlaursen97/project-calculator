@@ -22,12 +22,16 @@ public class TaskServiceTest {
         String testEmail = "adminToggleTest@hotmail.dk";
 
         if (!USER_REPOSITORY.emailExists(testEmail)) {
-            USER_REPOSITORY.createUser(testEmail, "test", false);
+            User user = new User();
+            user.setEmail(testEmail);
+            user.setPassword("test");
+            user.setAdmin(false);
+            USER_REPOSITORY.create(user);
         }
 
         User user = USER_REPOSITORY.getUserByEmail(testEmail);
 
-        long id = PROJECT_REPOSITORY.createProject(user.getUserId(), "test");
+        long id = PROJECT_REPOSITORY.create(new Project(user.getUserId(), "test project"));
 
         long taskId = TASK_SERVICE.createTask(id, "test", "test", "2021-01-01", "2021-02-02", 1, 1, 1);
 

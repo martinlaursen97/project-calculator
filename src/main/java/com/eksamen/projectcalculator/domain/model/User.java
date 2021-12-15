@@ -1,26 +1,15 @@
 package com.eksamen.projectcalculator.domain.model;
 
+import java.util.List;
+
 public class User {
     private long userId;
     private String email;
     private String password;
     private boolean isAdmin;
+    private List<Project> projects;
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
-    public User(long userId, String email, String password) {
-        this.userId = userId;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User() {}
+    public User() { }
 
     public long getUserId() {
         return userId;
@@ -46,13 +35,19 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", isAdmin=" + isAdmin +
-                '}';
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

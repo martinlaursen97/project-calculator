@@ -24,7 +24,11 @@ public class ProjectServiceTest {
         String testEmail = "projectCreateTest@hotmail.dk";
 
         if (!USER_REPOSITORY.emailExists(testEmail)) {
-            USER_REPOSITORY.createUser(testEmail, "test", false);
+            User user = new User();
+            user.setEmail(testEmail);
+            user.setPassword("test");
+            user.setAdmin(false);
+            USER_REPOSITORY.create(user);
         }
 
         User user = USER_REPOSITORY.getUserByEmail(testEmail);

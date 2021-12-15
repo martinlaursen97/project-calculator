@@ -10,8 +10,12 @@ public class ProjectService {
     private final DataFacade FACADE = new DataFacade();
 
     public long createProject(long id, String projectName) throws ProjectException {
-        if (projectName.length() > 0 && projectName.length() <= 50) {
-            return FACADE.createProject(id, projectName);
+        if (!projectName.isEmpty() && projectName.length() <= 50) {
+            Project project = new Project();
+            project.setUserId(id);
+            project.setProjectName(projectName);
+
+            return FACADE.createProject(project);
         } else {
             throw new ProjectException("Invalid input");
         }

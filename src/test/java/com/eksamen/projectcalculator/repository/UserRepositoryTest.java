@@ -18,14 +18,18 @@ public class UserRepositoryTest {
         String testEmail = "adminToggleTest@hotmail.dk";
 
         if (!USER_REPOSITORY.emailExists(testEmail)) {
-            USER_REPOSITORY.createUser(testEmail, "test", false);
+            User user = new User();
+            user.setEmail(testEmail);
+            user.setPassword("test");
+            user.setAdmin(false);
+            USER_REPOSITORY.create(user);
         }
 
         User before = USER_REPOSITORY.getUserByEmail(testEmail);
         boolean expected = before.isAdmin();
 
         // Act
-        USER_REPOSITORY.changeAdmin(before.getUserId());
+        USER_REPOSITORY.update(before.getUserId());
         User after = USER_REPOSITORY.getUserByEmail(testEmail);
 
         boolean actual = after.isAdmin();

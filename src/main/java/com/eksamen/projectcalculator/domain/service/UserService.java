@@ -14,7 +14,15 @@ public class UserService {
     }
 
     public long createUser(String email, String password, boolean isAdmin) throws LoginException {
-        return FACADE.createUser(email, password, isAdmin);
+        if (!FACADE.emailExists(email)) {
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setAdmin(isAdmin);
+            return FACADE.createUser(user);
+        } else {
+            throw new LoginException("Email taken");
+        }
     }
 
     public List<User> getUsers() {

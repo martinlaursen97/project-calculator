@@ -6,6 +6,9 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" th:inline="javascript"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- Gantt diagram via Google Charts API https://developers.google.com/chart/interactive/docs/gallery/ganttchart -->
+
     <script type="text/javascript" th:inline="javascript">
         google.charts.load('current', {'packages': ['gantt']});
         google.charts.setOnLoadCallback(drawChart);
@@ -34,8 +37,8 @@
 
                 var task = tasks[i];
 
-                var id = task.taskId.toString();
-                var name = task.taskName;
+                var id = task.id.toString();
+                var name = task.name;
                 var resource = task.resource;
                 var start = task.startDateStr;
                 var finish = task.finishDateStr;
@@ -44,21 +47,20 @@
                 data.addRow([id, name, resource, new Date(start), new Date(finish), null, percent, null]);
 
                 if (task.subtasks != null) {
-//
+
                     for (var j = 0; j < task.subtasks.length; j++) {
                         height += trackHeight;
-//
+
                         var subtask = task.subtasks[j];
-//
-                        var subtaskId = "s" + subtask.subtaskId.toString();
-                        var subtaskName = subtask.subtaskName;
+
+                        var subtaskId = "s" + subtask.id.toString();
+                        var subtaskName = subtask.name;
                         var subtaskStart = subtask.startDateStr;
                         var subtaskFinish = subtask.finishDateStr;
                         var subtaskPercent = subtask.percentComplete;
                         var subtaskResource = subtask.resource;
-                        var dependency = subtask.taskId.toString();
-//
-                        data.addRow([subtaskId, subtaskName, subtaskResource, new Date(subtaskStart), new Date(subtaskFinish), null, subtaskPercent, dependency]);
+
+                        data.addRow([subtaskId, subtaskName, subtaskResource, new Date(subtaskStart), new Date(subtaskFinish), null, subtaskPercent, id]);
                     }
                 }
             }
@@ -93,7 +95,7 @@
                     if (dependency == null) {
                         document.getElementById("taskLink").href = "project/task?id=" + id;
                     } else {
-                        document.getElementById("taskLink").href = "project/task/subtask?id=" + id;
+                        document.getElementById("taskLink").href = "project/task/subtask?id=" + id.substring(1);
                     }
                 }
             }
@@ -158,14 +160,14 @@
             </b>
         </div>
         <tr th:each="task: ${project.tasks}">
-            <a class="task-box-item-href" th:href="@{/project/task(id=${task.taskId})}">
-                <div class="task-box-item-name" th:text="${task.taskName}"></div>
+            <a class="task-box-item-href" th:href="@{/project/task(id=${task.id})}">
+                <div class="task-box-item-name" th:text="${task.name}"></div>
                 <div class="task-box-item-price" th:text="${task.getPrice()}"></div>
             </a>
             <div th:if="${task.subtasks != null}">
                 <div th:each="subtask: ${task.subtasks}">
-                    <a class="task-box-item-href-sub" th:href="@{/project/task/subtask(id=${subtask.subtaskId})}">
-                        <div class="task-box-item-name" th:text="${subtask.subtaskName}"></div>
+                    <a class="task-box-item-href-sub" th:href="@{/project/task/subtask(id=${subtask.id})}">
+                        <div class="task-box-item-name" th:text="${subtask.name}"></div>
                         <div class="task-box-item-price" th:text="${subtask.getPrice()}"></div>
                     </a>
                 </div>

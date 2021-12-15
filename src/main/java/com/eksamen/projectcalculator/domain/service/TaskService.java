@@ -1,5 +1,6 @@
 package com.eksamen.projectcalculator.domain.service;
 
+import com.eksamen.projectcalculator.domain.model.Assignment;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.repository.DataFacade;
 
@@ -8,7 +9,16 @@ public class TaskService {
     private final DataFacade FACADE = new DataFacade();
 
     public long createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
-        return FACADE.createTask(projectId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+        Assignment task = new Task();
+        task.setForeignId(projectId);
+        task.setName(taskName);
+        task.setResource(resource);
+        task.setStartDateStr(startDate);
+        task.setFinishDateStr(finishDate);
+        task.setPercentComplete(completion);
+        task.setDailyWorkHours(dailyWorkHours);
+        task.setPricePerHour(pricePerHour);
+        return FACADE.createTask(task);
     }
 
     public void clearTasksByProjectId(long id) {

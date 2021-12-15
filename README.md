@@ -24,6 +24,7 @@ Before using this program, you have to do theese things first:
 
 ## Contributors
 Contributors of this project:
+
 Jakob - [@jakobmajiddd](https://github.com/jakobmajiddd)
 
 Martin - [@martinlaursen97](https://github.com/martinlaursen97)

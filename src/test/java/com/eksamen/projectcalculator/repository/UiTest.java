@@ -1,40 +1,33 @@
 package com.eksamen.projectcalculator.repository;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
-import io.github.bonigarcia.wdm.webdriver.WebDriverBrowser;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class UiTest {
-    /*
 
-    private static WebDriverBrowser driver;
-
-    @BeforeAll
-    public static void setDriver() {
-        WebDriverManager.chromedriver().setup();
+    public static void main(String[] args) {
+        setup();
     }
 
-    @BeforeEach
-    void setUp() {
-        driver = new ChromeDriverManager();
-    }
-
-    @AfterAll
-    void tearDown(){
-        driver.quit();
-    }
 
     @Test
-    void openGoogle() {
-        driver.get("https://google.dk");
+    public static void setup() {
+
+        //Load driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Jakob M\\Downloads\\chromedriver_win32");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.google.dk");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+        driver.quit();
 
     }
 
-     */
 
 }
+

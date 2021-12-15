@@ -145,7 +145,10 @@ public class TaskRepository {
     public String getProjectStartDateById(long projectId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT start_date FROM task WHERE project_id = " + projectId + " ORDER BY start_date";
+            String query = "(SELECT start_date FROM task WHERE project_id = " + projectId + ") " +
+                    "UNION " +
+                    "(SELECT s.start_date FROM subtask s INNER JOIN task t ON s.task_id = t.task_id WHERE t.project_id = " + projectId + ") " +
+                    "ORDER BY start_date ASC;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -162,7 +165,10 @@ public class TaskRepository {
     public String getProjectDeadlineById(long projectId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT finish_date FROM task WHERE project_id = " + projectId + " ORDER BY finish_date";
+            String query = "(SELECT finish_date FROM task WHERE project_id = " + projectId + ") " +
+                    "UNION " +
+                    "(SELECT s.finish_date FROM subtask s INNER JOIN task t ON s.task_id = t.task_id WHERE t.project_id = " + projectId + ") " +
+                    "ORDER BY finish_date DESC;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();

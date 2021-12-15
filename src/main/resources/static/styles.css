@@ -400,6 +400,22 @@ body {
     color: black;
 }
 
+.task-box-item-href-sub {
+    height: 35px;
+    outline: 1px solid grey;
+    width: 470px;
+    margin-left: 15px;
+    text-decoration: none;
+    background-color: #d2d2d2;
+    color: black;
+    display:block
+}
+
+.task-box-item-href-sub:hover {
+    background-color: #b7b7b7;
+    color: black;
+}
+
 .task-box-item-name {
     float: left;
     height: 35px;

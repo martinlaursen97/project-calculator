@@ -3,7 +3,6 @@ package com.eksamen.projectcalculator.domain.service;
 import com.eksamen.projectcalculator.domain.exception.ProjectException;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.repository.DataFacade;
-
 import java.util.List;
 
 public class ProjectService {

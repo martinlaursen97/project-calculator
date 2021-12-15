@@ -5,7 +5,6 @@ import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.model.User;
-
 import java.util.List;
 
 public class DataFacade {

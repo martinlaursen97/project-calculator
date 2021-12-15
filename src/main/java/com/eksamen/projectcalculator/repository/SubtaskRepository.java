@@ -1,7 +1,6 @@
 package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Subtask;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

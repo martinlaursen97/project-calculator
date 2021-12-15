@@ -1,15 +1,12 @@
 package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Project;
-
-import com.eksamen.projectcalculator.domain.exception.LoginException;
-import com.eksamen.projectcalculator.domain.model.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectRepository {
+
     public Long createProject(long id, String projectName) {
         try {
             Connection connection = DBManager.getConnection();
@@ -29,19 +26,6 @@ public class ProjectRepository {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public boolean projectExists(String projectName) {
-        try {
-            Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM project WHERE project_name = '" + projectName + "'";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
-        } catch (SQLException ignore) {
-
-        }
-        return false;
     }
 
     public List<Project> getProjectsByUserId(long userId) {

@@ -1,10 +1,8 @@
 package com.eksamen.projectcalculator.domain.service;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
-import com.eksamen.projectcalculator.domain.exception.LoginSampleException;
 import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.repository.DataFacade;
-
 import java.util.List;
 
 public class UserService {

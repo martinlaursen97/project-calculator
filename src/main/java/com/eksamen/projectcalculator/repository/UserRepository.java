@@ -2,12 +2,12 @@ package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.exception.LoginException;
 import com.eksamen.projectcalculator.domain.model.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
+
     public User loginValid(String email, String password) throws LoginException {
         try {
             User user = new User();

@@ -80,11 +80,13 @@ public class UserController {
         return "adminOverview";
     }
 
+
     @GetMapping("/showUser")
     public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
+        //kun en admin kan få vist brugere, derfor skal vi sikre os at brugeren er admin
         Boolean isAdmin = (Boolean) request.getAttribute("isAdmin", WebRequest.SCOPE_SESSION);
         if (Boolean.FALSE.equals(isAdmin)) return "redirect:/index";
 

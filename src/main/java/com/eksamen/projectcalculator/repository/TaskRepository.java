@@ -1,12 +1,12 @@
 package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Task;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskRepository {
+
     public long createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
         try {
             Connection connection = DBManager.getConnection();
@@ -111,19 +111,6 @@ public class TaskRepository {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public boolean taskIsUsers(long userId, long id) {
-        try {
-            Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM project WHERE project_id = " + id + " AND user_id = " + userId;
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
-        } catch (SQLException ignore) {
-
-        }
-        return false;
     }
 
     public long getProjectIdByTaskId(long taskId) {

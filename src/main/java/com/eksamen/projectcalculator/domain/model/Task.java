@@ -1,6 +1,5 @@
 package com.eksamen.projectcalculator.domain.model;
 
-import java.util.Date;
 import java.util.List;
 
 public class Task {

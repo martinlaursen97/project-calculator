@@ -1,10 +1,5 @@
 package com.eksamen.projectcalculator.domain.model;
 
-import java.lang.reflect.Array;
-import java.time.DateTimeException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class Project {

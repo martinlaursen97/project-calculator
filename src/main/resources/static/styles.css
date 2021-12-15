@@ -152,13 +152,29 @@ body {
 
 .project-list {
     margin-top: 100px;
-
     width: 600px;
     background-color: whitesmoke;
     outline: 1px solid grey;
 }
 
+
+.user-list {
+    margin-left:200px;
+    margin-top: 10px;
+    width: 600px;
+    background-color: whitesmoke;
+    outline: 1px solid grey;
+}
 .project-form-box {
+    width: 600px;
+    height: 46px;
+    background-color: whitesmoke;
+    outline: 1px solid grey;
+    display:block
+}
+
+.user-form-box {
+    margin-top:0px;
     width: 600px;
     height: 46px;
     background-color: whitesmoke;
@@ -254,7 +270,10 @@ body {
     font-size: 20px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
+
+
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
@@ -296,6 +315,10 @@ body {
 .actions {
     margin-top: -13px;
     position: relative;
+}
+.actions-button {
+    background-color:lawngreen;
+    border:0px;
 }
 
 .small-box {
@@ -363,7 +386,6 @@ body {
 .task-box-header-btn {
     width: 80px;
     height: 40px;
-
     float: right;
 }
 
@@ -440,5 +462,11 @@ body {
 
 h2 {
     margin-top: 50px;
+}
+
+.complete-box {
+    background-color: whitesmoke;
+    margin-top: 100px;
+    width: 600px;
 }
 

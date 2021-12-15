@@ -89,7 +89,7 @@ public class SubtaskController {
     }
 
     @GetMapping("/project/task/subtask/delete-confirm")
-    public String deleteTaskConfirm(@RequestParam(name = "id") long subtaskId, WebRequest request, RedirectAttributes redirectAttributes)  {
+    public String deleteSubtaskConfirm(@RequestParam(name = "id") long subtaskId, WebRequest request, RedirectAttributes redirectAttributes)  {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
@@ -111,7 +111,7 @@ public class SubtaskController {
 
         if (SUBTASK_SERVICE.subtaskIsUsers(userId, subtaskId)) {
             int percent = Integer.parseInt(request.getParameter("percent"));
-            SUBTASK_SERVICE.updateTaskPercentById(subtaskId, percent);
+            SUBTASK_SERVICE.updateSubtaskPercentById(subtaskId, percent);
             redirectAttributes.addAttribute("id", subtaskId);
             return "redirect:/project/task/subtask";
         } else {

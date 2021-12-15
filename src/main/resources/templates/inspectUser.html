@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/styles.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <meta charset="UTF-8"/>
 </head>
 
 <body>
@@ -20,50 +21,35 @@
 
 
 <div class="main">
-    <div class="user-list">
-        <div class="dropdown">
-            <button class="actions-button">Actions</button>
-            <div class="dropdown-content">
-                <a href="link">Delete user</a>
+    <div class="center">
+            <div class="task-container" style="background-color: whitesmoke; border: 1px solid grey;">
+                <div class="task-box-header">
+                    <div class="task-box-header-title" style="background-color: white;">User Profile</div>
 
-                <a th:href="@{/changeAdmin(id=${user.userId})}">Change admin</a>
+                    <div class="dropdown">
+                        <button class="dropbtn" style="border-radius: 5px">
+                            <p class="actions">Actions</p>
+                        </button>
+                        <div class="dropdown-content">
+                            <a th:href="@{/changeAdmin(id=${user.userId})}">Change admin</a>
+                        </div>
+                    </div>
+                </div>
 
 
-            </div>
-        </div>
-        <h4 style="color: black" >User Profile</h4>
-    </div>
-</div>
-
-
-
-<div class="main">
-    <div class="user-list">
-        <div class="user-form-box">
             <b><label style="margin-left:10px">E-mail: </label></b>
-            <label th:text="${user.email}" class="control-label"></label>
-        </div>
-    </div>
-</div>
+            <br><label th:text="${user.email}" class="control-label"></label><br>
 
 
-
-<div class="main">
-    <div class="user-list">
-        <div class="user-form-box">
             <b><label style="margin-left:10px">User ID: </label></b>
-            <label th:text="${user.userId}" class="control-label"></label>
-        </div>
-    </div>
-</div>
+            <label th:text="${user.userId}" class="control-label"></label><br>
 
-<div class="main">
-    <div class="user-list">
-        <div class="user-form-box">
+
             <b><label style="margin-left:10px">Admin: </label></b>
             <label th:text="${user.isAdmin}" class="control-label"></label>
+
         </div>
-    </div>
+</div>
 </div>
 
 </body>

@@ -3,8 +3,6 @@ package com.eksamen.projectcalculator.domain.service;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.repository.DataFacade;
 
-import java.util.Date;
-
 public class TaskService {
 
     private final DataFacade FACADE = new DataFacade();

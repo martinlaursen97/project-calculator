@@ -15,6 +15,7 @@ public class ProjectController {
 
     private final ProjectService PROJECT_SERVICE = new ProjectService();
 
+    //viser ens projekter
     @GetMapping("/projects")
     public String projects(WebRequest request, Model model) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -38,7 +39,6 @@ public class ProjectController {
         } catch (ProjectException e) {
             model.addAttribute("error", e.getMessage());
         }
-
         return "redirect:/projects";
     }
 

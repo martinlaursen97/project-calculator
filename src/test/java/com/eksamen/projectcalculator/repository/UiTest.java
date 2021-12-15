@@ -2,14 +2,13 @@ package com.eksamen.projectcalculator.repository;
 
 
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 import java.util.concurrent.TimeUnit;
 
 
 public class UiTest {
-
+/*
     public static void main(String[] args) {
         setup();
     }
@@ -27,6 +26,8 @@ public class UiTest {
         driver.quit();
 
     }
+
+ */
 
 
 }

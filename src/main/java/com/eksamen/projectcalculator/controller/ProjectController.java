@@ -50,7 +50,6 @@ public class ProjectController {
         // Det er vigtigt at en bruger kun har adgang til sine egne projekter/tasks/subtasks,
         // derfor tjekkes der om projektet tilhører brugeren FØR den fortsætter
         if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
-            System.out.println("true");
             Project project = PROJECT_SERVICE.getProjectById(id);
             model.addAttribute("project", project);
             return "inspectProject";

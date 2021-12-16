@@ -23,9 +23,9 @@ public class CalculatorTest {
     public void Should_ReturnNumberOfWorkDaysBetweenDates_When_GivenTwoDates() {
 
         // Arrange - Calculatoren tæller ikke weekender med som arbejdsdage
-        String date1 = "2021 12 18"; // lørdag
-        String date2 = "2021 12 19"; // søndag
-        int expectedWorkDays = 0;
+        String date1 = "2021 12 10"; // lørdag
+        String date2 = "2021 12 20"; // søndag
+        int expectedWorkDays = 7;
 
         // Act
         int actualWorkDays = Calculator.getWorkDaysBetweenDates(date1, date2);
@@ -61,7 +61,7 @@ public class CalculatorTest {
         subtask.setStartDateStr("2021 12 10");
         subtask.setFinishDateStr("2021 12 20");
 
-        double expected = 60000;
+        double expected = 70000;
 
         // Act
         double actual = subtask.getPrice();
@@ -75,16 +75,16 @@ public class CalculatorTest {
         // Arrange
         Task task = new Task();
         task.setDailyWorkHours(10);
-        task.setPricePerHour(100);
-        // 6  days
+        task.setPricePerHour(1000);
+        // 7  days
         task.setStartDateStr("2021 12 10");
         task.setFinishDateStr("2021 12 20");
 
         Subtask subtask = new Subtask();
         subtask.setDailyWorkHours(10);
         subtask.setPricePerHour(1000);
-        // 6 days
-        subtask.setStartDateStr("2021 12 15");
+        // 7 days
+        subtask.setStartDateStr("2021 12 10");
         subtask.setFinishDateStr("2021 12 20");
 
         List<Subtask> subtasks = new ArrayList<>();
@@ -99,8 +99,8 @@ public class CalculatorTest {
 
         project.setTasks(tasks);
 
-        // 1000 * 10 * 6 * 2
-        double expected = 120000;
+        // 1000 * 10 * 7 * 2
+        double expected = 140000;
 
         // Act
         double actual = project.getTotalProjectPrice();

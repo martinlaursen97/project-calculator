@@ -63,6 +63,8 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         try {
             String query = "DELETE FROM project WHERE project_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, projectId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

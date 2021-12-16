@@ -5,6 +5,8 @@ import com.eksamen.projectcalculator.domain.model.*;
 
 import java.util.List;
 
+// @author
+
 public class DataFacade {
     private static DataFacade instance = null;
 
@@ -27,7 +29,7 @@ public class DataFacade {
         return instance;
     }
 
-    // User
+    // -------------------------------- User --------------------------------
 
     public long createUser(User user) {
         return USER_REPOSITORY.create(user);
@@ -53,9 +55,12 @@ public class DataFacade {
         return USER_REPOSITORY.emailExists(email);
     }
 
+    public void deleteUserById(long id) {
+        USER_REPOSITORY.delete(id);
+    }
 
 
-    //  Project
+    //  -------------------------------- Project --------------------------------
 
     public void deleteProjectById(long id) {
         PROJECT_REPOSITORY.delete(id);
@@ -89,8 +94,7 @@ public class DataFacade {
     }
 
 
-
-    // Task
+    // -------------------------------- Task --------------------------------
 
     public void clearTasksByProjectId(long id) {
         TASK_REPOSITORY.clearTasksByProjectId(id);
@@ -103,7 +107,6 @@ public class DataFacade {
     public User getUserById(long id) {
         return USER_REPOSITORY.read(id);
     }
-
 
     public Task getTaskById(long id) {
         Task task = TASK_REPOSITORY.read(id);
@@ -138,7 +141,9 @@ public class DataFacade {
         TASK_REPOSITORY.update(task);
     }
 
-    // Subtask
+
+    // -------------------------------- Subtask --------------------------------
+
     public long createSubtask(Subtask subtask) {
         return SUBTASK_REPOSITORY.create(subtask);
     }

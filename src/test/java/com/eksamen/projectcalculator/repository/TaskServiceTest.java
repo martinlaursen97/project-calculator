@@ -1,5 +1,6 @@
 package com.eksamen.projectcalculator.repository;
 
+import com.eksamen.projectcalculator.domain.exception.InvalidDateException;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Task;
 import com.eksamen.projectcalculator.domain.model.User;
@@ -17,7 +18,7 @@ public class TaskServiceTest {
 
     // Opretter task i database, og ser om den kan findes igen.
     @Test
-    public void Should_AddNewTaskToDb_When_CreateTask() {
+    public void Should_AddNewTaskToDb_When_CreateTask() throws InvalidDateException {
         // Arrange
         String testEmail = "adminToggleTest@hotmail.dk";
 

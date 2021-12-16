@@ -35,7 +35,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/register-verify")
+    @PostMapping("/users/register-verify")
     public String registerVerify(WebRequest request, Model model) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
@@ -81,7 +81,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/showUser")
+    @GetMapping("/users/user")
     public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
@@ -94,7 +94,7 @@ public class UserController {
         return "inspectUser";
     }
 
-    @GetMapping("/changeAdmin")
+    @GetMapping("/users/user/admin")
     public String changeAdmin(@RequestParam(name= "id") long id, WebRequest request, RedirectAttributes redirectAttributes){
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
@@ -102,16 +102,45 @@ public class UserController {
         Boolean isAdmin = (Boolean) request.getAttribute("isAdmin", WebRequest.SCOPE_SESSION);
         if (Boolean.FALSE.equals(isAdmin)) return "redirect:/index";
 
+        // Man skal ikke kunne ændre sin egen admin status
         if (userId == id) {
-            request.setAttribute("isAdmin", false, WebRequest.SCOPE_SESSION);
+            return "error";
         }
 
         USER_SERVICE.changeAdmin(id);
         redirectAttributes.addAttribute("id", id);
-        return  "redirect:/showUser";
+        return  "redirect:/users/user";
     }
 
-    @PostMapping("/search")
+    @GetMapping("/users/user/delete")
+    public String deleteProject(@RequestParam(name = "id") long id, Model model, WebRequest request) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        Boolean isAdmin = (Boolean) request.getAttribute("isAdmin", WebRequest.SCOPE_SESSION);
+        if (Boolean.FALSE.equals(isAdmin)) return "redirect:/index";
+
+        model.addAttribute("user", USER_SERVICE.getUserById(id));
+        String message;
+        if (id != userId) {
+            message = "Are you sure? This will delete the user.";
+        } else {
+            message = "WARNING you are trying to delete your own user!";
+        }
+        model.addAttribute("message", message);
+        return "deleteUser";
+    }
+
+    @GetMapping("/users/user/delete-confirm")
+    public String deleteProjectConfirm(@RequestParam(name = "id") long id, WebRequest request) {
+        Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
+        if (userId == null) return "login";
+
+        USER_SERVICE.deleteUserById(id);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/users/search")
     public String search(WebRequest request, Model model) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";

@@ -44,4 +44,8 @@ public class UserService {
     public List<User> getUserByKey(String key) {
         return FACADE.getUserByKey(key);
     }
+
+    public void deleteUserById(long id) {
+        FACADE.deleteUserById(id);
+    }
 }

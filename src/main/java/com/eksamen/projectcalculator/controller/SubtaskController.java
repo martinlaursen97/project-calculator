@@ -1,5 +1,6 @@
 package com.eksamen.projectcalculator.controller;
 
+import com.eksamen.projectcalculator.domain.exception.InvalidDateException;
 import com.eksamen.projectcalculator.domain.service.SubtaskService;
 import com.eksamen.projectcalculator.domain.service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -38,11 +39,15 @@ public class SubtaskController {
     hvor de til sidst når Subtask repository, og opretter en ny subtask i databasen.
     */
     @PostMapping("/project/task/add-subtask-verify")
-    public String addSubtaskVerify(@RequestParam(name = "id") long taskId, WebRequest request, RedirectAttributes redirectAttributes) {
+    public String addSubtaskVerify(@RequestParam(name = "id") long taskId, WebRequest request, RedirectAttributes redirectAttributes, Model model) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
+        redirectAttributes.addAttribute("id", taskId);
+
         if (TASK_SERVICE.taskIsUsers(userId, taskId)) {
+
+            try {
             String taskName = request.getParameter("name");
             String resource = request.getParameter("resource");
             String startDate = request.getParameter("start");
@@ -52,8 +57,12 @@ public class SubtaskController {
             double pricePerHour = Double.parseDouble(request.getParameter("priceprhr"));
 
             SUBTASK_SERVICE.createSubtask(taskId, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
-            redirectAttributes.addAttribute("id", taskId);
             return "redirect:/project/task";
+            } catch (InvalidDateException e) {
+                model.addAttribute("id", taskId);
+                model.addAttribute("error", e.getMessage());
+                return "addSubtask";
+            }
         } else {
             return "error";
         }

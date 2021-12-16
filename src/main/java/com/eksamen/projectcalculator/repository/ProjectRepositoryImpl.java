@@ -8,14 +8,14 @@ import java.util.List;
 
 public class ProjectRepositoryImpl implements ProjectRepository {
 
+    private Connection connection = DBManager.getConnection();
+
     @Override
     public long create(Project project) {
         try {
-            Connection connection = DBManager.getConnection();
             String query = "INSERT INTO project(user_id, project_name) VALUES (?, ?)";
-            PreparedStatement preparedStatement;
 
-            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, project.getUserId());
             preparedStatement.setString(2, project.getProjectName());
             preparedStatement.executeUpdate();
@@ -33,11 +33,10 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public Project read(long projectId) {
         try {
-            Connection connection = DBManager.getConnection();
-
-            String query = "SELECT * FROM project WHERE project_id = " + projectId;
+            String query = "SELECT * FROM project WHERE project_id = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, projectId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -62,10 +61,8 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public void delete(long projectId) {
         try {
-            Connection connection = DBManager.getConnection();
-            String query = "DELETE FROM project WHERE project_id = " + projectId;
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement(query);
+            String query = "DELETE FROM project WHERE project_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,11 +72,11 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public List<Project> getProjectsByUserId(long userId) {
         try {
-            Connection connection = DBManager.getConnection();
             List<Project> projects = new ArrayList<>();
-            String query = "SELECT * FROM project WHERE user_id = " + userId + " ORDER BY project_id DESC";
+            String query = "SELECT * FROM project WHERE user_id = ? ORDER BY project_id DESC";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -97,18 +94,21 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
     @Override
-    public boolean projectIsUsers(long userId, long id) {
+    public boolean projectIsUsers(long userId, long projectId) {
+
         try {
-            Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM project WHERE project_id = " + id + " AND user_id = " + userId;
+            String query = "SELECT * FROM project WHERE project_id = ? AND user_id = ? ";
+
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, projectId);
+            preparedStatement.setLong(2, userId);
+
             ResultSet resultSet = preparedStatement.executeQuery();
+
             return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
-
 }

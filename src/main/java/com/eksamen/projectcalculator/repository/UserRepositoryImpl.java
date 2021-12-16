@@ -37,10 +37,10 @@ public class UserRepositoryImpl implements UserRepository {
     public User read(long id) {
         try {
             Connection connection = DBManager.getConnection();
-
-            String query = "SELECT * FROM user WHERE user_id = " + id;
-
+            String query = "SELECT * FROM user WHERE user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -62,8 +62,10 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             Connection connection = DBManager.getConnection();
 
-            String query = "UPDATE user SET admin = NOT admin WHERE user_id = " + user.getUserId();
+            String query = "UPDATE user SET admin = NOT admin WHERE user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,9 +76,10 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(long userId) {
         try {
             Connection connection = DBManager.getConnection();
-
-            String query = "DELETE FROM user WHERE user_id = " + userId;
+            String query = "DELETE FROM user WHERE user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, userId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,8 +91,11 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             User user = new User();
             Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM user WHERE email = '" + email + "' AND password = " + password;
+            String query = "SELECT * FROM user WHERE email = ? AND password = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -112,9 +118,7 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> getAll() {
         try {
             Connection connection = DBManager.getConnection();
-
             List<User> users = new ArrayList<>();
-
             String query = "SELECT * FROM user ORDER BY user_id DESC";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -138,8 +142,10 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean emailExists(String email) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM user WHERE email = '" + email + "'";
+            String query = "SELECT * FROM user WHERE email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return resultSet.next();
@@ -154,11 +160,12 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> getUserByKey(String key) {
         try {
             Connection connection = DBManager.getConnection();
-
             List<User> users = new ArrayList<>();
-
-            String query = "SELECT * FROM user WHERE email LIKE '%" + key + "%' OR user_id = + '" + key + "'";
+            String query = "SELECT * FROM user WHERE email LIKE '%" + key + "%' OR user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, key);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -168,7 +175,6 @@ public class UserRepositoryImpl implements UserRepository {
                 user.setAdmin(resultSet.getBoolean("admin"));
                 users.add(user);
             }
-            System.out.println(users.size());
             return users;
 
         } catch (SQLException e) {
@@ -181,9 +187,10 @@ public class UserRepositoryImpl implements UserRepository {
     public User getUserByEmail(String email) {
         try {
             Connection connection = DBManager.getConnection();
-
-            String query = "SELECT * FROM user WHERE email = '" + email + "'";
+            String query = "SELECT * FROM user WHERE email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
            if (resultSet.next()) {

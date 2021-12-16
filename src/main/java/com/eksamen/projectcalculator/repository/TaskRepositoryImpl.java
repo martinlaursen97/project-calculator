@@ -13,9 +13,8 @@ public class TaskRepositoryImpl implements TaskRepository {
         try {
             Connection connection = DBManager.getConnection();
             String query = "INSERT INTO task(project_id, task_name, resource, start_date, finish_date, percent_complete, daily_work_hours, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement;
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, task.getForeignId());
             preparedStatement.setString(2, task.getName());
             preparedStatement.setString(3, task.getResource());
@@ -40,9 +39,10 @@ public class TaskRepositoryImpl implements TaskRepository {
     public Task read(long taskId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM task WHERE task_id = " + taskId;
-
+            String query = "SELECT * FROM task WHERE task_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, taskId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -74,9 +74,11 @@ public class TaskRepositoryImpl implements TaskRepository {
     public void update(Task task) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "UPDATE task SET percent_complete = " + task.getPercentComplete() + " WHERE task_id  = " + task.getId();
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement(query);
+            String query = "UPDATE task SET percent_complete = ? WHERE task_id  = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, task.getPercentComplete());
+            preparedStatement.setLong(2, task.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,9 +89,10 @@ public class TaskRepositoryImpl implements TaskRepository {
     public void delete(long taskId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "DELETE FROM task WHERE task_id = " + taskId;
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement(query);
+            String query = "DELETE FROM task WHERE task_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, taskId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,9 +104,10 @@ public class TaskRepositoryImpl implements TaskRepository {
         try {
             Connection connection = DBManager.getConnection();
             List<Task> tasks = new ArrayList<>();
-            String query = "SELECT * FROM task WHERE project_id = " + projectId;
-
+            String query = "SELECT * FROM task WHERE project_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, projectId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -135,9 +139,10 @@ public class TaskRepositoryImpl implements TaskRepository {
     public void clearTasksByProjectId(long id) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "DELETE FROM task WHERE project_id = " + id;
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement(query);
+            String query = "DELETE FROM task WHERE project_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,9 +153,10 @@ public class TaskRepositoryImpl implements TaskRepository {
     public long getProjectIdByTaskId(long taskId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT project_id FROM task WHERE task_id = " + taskId;
-
+            String query = "SELECT project_id FROM task WHERE task_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, taskId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -166,12 +172,15 @@ public class TaskRepositoryImpl implements TaskRepository {
     public String getProjectStartDateById(long projectId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "(SELECT start_date FROM task WHERE project_id = " + projectId + ") " +
+            String query = "(SELECT start_date FROM task WHERE project_id = ?) " +
                     "UNION " +
-                    "(SELECT s.start_date FROM subtask s INNER JOIN task t ON s.task_id = t.task_id WHERE t.project_id = " + projectId + ") " +
+                    "(SELECT s.start_date FROM subtask s INNER JOIN task t ON s.task_id = t.task_id WHERE t.project_id = ?) " +
                     "ORDER BY start_date ASC;";
-
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, projectId);
+            preparedStatement.setLong(2, projectId);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -187,12 +196,14 @@ public class TaskRepositoryImpl implements TaskRepository {
     public String getProjectDeadlineById(long projectId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "(SELECT finish_date FROM task WHERE project_id = " + projectId + ") " +
+            String query = "(SELECT finish_date FROM task WHERE project_id = ?) " +
                     "UNION " +
-                    "(SELECT s.finish_date FROM subtask s INNER JOIN task t ON s.task_id = t.task_id WHERE t.project_id = " + projectId + ") " +
+                    "(SELECT s.finish_date FROM subtask s INNER JOIN task t ON s.task_id = t.task_id WHERE t.project_id = ?) " +
                     "ORDER BY finish_date DESC;";
-
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, projectId);
+            preparedStatement.setLong(2, projectId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

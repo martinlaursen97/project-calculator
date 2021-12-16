@@ -18,12 +18,11 @@
     <a th:href="@{/logout}" style="margin-top:30px">Log out</a>
 </div>
 
-
 <div class="main">
     <div class="center">
         <div class="project-list">
             <div class="project-form-box">
-                <form name="adminOverview" th:action="@{/search}" method="POST">
+                <form name="adminOverview" th:action="@{/users/search}" method="POST">
                     <div class="row">
                         <div class="row">
                             <label for="key" class="control-label"></label>
@@ -42,7 +41,7 @@
                         <div class="row">
                             <div class="nav-links">
                                 <ul>
-                                    <a style="text-decoration: none; width: 100px; margin-left: 230px;" type="button" th:href="@{/register}" class="create-user-btn">
+                                    <a style="text-decoration: none; width: 100px; margin-left: 230px;" type="button" th:href="@{/users/register}" class="create-user-btn">
                                         New user
                                     </a>
                                 </ul>
@@ -59,7 +58,7 @@
                     </div>
                 </div>
                 <tr th:each="user: ${users}">
-                    <a type="button" style="text-decoration: none; color: black;" th:href="@{/showUser(id=${user.userId})}" class="project-list-item">
+                    <a type="button" style="text-decoration: none; color: black;" th:href="@{/users/user(id=${user.userId})}" class="project-list-item">
                         <div class="project-list-item-id">
                             <td th:text="${user.userId}"></td>
                         </div>

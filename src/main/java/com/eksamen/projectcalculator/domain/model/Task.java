@@ -1,7 +1,5 @@
 package com.eksamen.projectcalculator.domain.model;
 
-import com.eksamen.projectcalculator.util.Calculator;
-
 import java.util.List;
 
 public class Task extends Assignment {

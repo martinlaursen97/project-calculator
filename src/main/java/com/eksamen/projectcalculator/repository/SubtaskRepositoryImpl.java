@@ -13,9 +13,8 @@ public class SubtaskRepositoryImpl implements SubtaskRepository {
         try {
             Connection connection = DBManager.getConnection();
             String query = "INSERT INTO subtask(task_id, subtask_name, resource, start_date, finish_date, percent_complete, daily_work_hours, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement;
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, subtask.getId());
             preparedStatement.setString(2, subtask.getName());
             preparedStatement.setString(3, subtask.getResource());
@@ -40,9 +39,10 @@ public class SubtaskRepositoryImpl implements SubtaskRepository {
     public Subtask read(long subtaskId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT * FROM subtask WHERE subtask_id = " + subtaskId;
-
+            String query = "SELECT * FROM subtask WHERE subtask_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, subtaskId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -74,9 +74,11 @@ public class SubtaskRepositoryImpl implements SubtaskRepository {
     public void update(Subtask subtask) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "UPDATE subtask SET percent_complete = " + subtask.getPercentComplete() + " WHERE subtask_id  = " + subtask.getId();
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement(query);
+            String query = "UPDATE subtask SET percent_complete = ? WHERE subtask_id  = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, subtask.getPercentComplete());
+            preparedStatement.setLong(2, subtask.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,9 +89,10 @@ public class SubtaskRepositoryImpl implements SubtaskRepository {
     public void delete(long subtaskId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "DELETE FROM subtask WHERE subtask_id = " + subtaskId;
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement(query);
+            String query = "DELETE FROM subtask WHERE subtask_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, subtaskId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,9 +104,10 @@ public class SubtaskRepositoryImpl implements SubtaskRepository {
         try {
             Connection connection = DBManager.getConnection();
             List<Subtask> subtasks = new ArrayList<>();
-            String query = "SELECT * FROM subtask WHERE task_id = " + taskId;
-
+            String query = "SELECT * FROM subtask WHERE task_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, taskId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -137,9 +141,10 @@ public class SubtaskRepositoryImpl implements SubtaskRepository {
     public long getTaskIdBySubtaskId(long subtaskId) {
         try {
             Connection connection = DBManager.getConnection();
-            String query = "SELECT task_id FROM subtask WHERE subtask_id = " + subtaskId;
-
+            String query = "SELECT task_id FROM subtask WHERE subtask_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setLong(1, subtaskId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

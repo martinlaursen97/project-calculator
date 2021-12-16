@@ -11,11 +11,7 @@ public class Project {
     private String startDateStr;
     private String deadlineDateStr;
 
-
-
-    public Project() {
-
-    }
+    public Project() { }
 
     public Project(long userId, String projectName) {
         this.userId = userId;

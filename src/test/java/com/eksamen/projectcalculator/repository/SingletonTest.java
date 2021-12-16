@@ -1,7 +1,6 @@
 package com.eksamen.projectcalculator.repository;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 

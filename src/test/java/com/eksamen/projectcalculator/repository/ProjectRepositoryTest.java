@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjectRepositoryTest {
 
     // Should_ExpectedBehavior_When_StateUnderTest
-    private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
-    private final UserRepository USER_REPOSITORY = new UserRepository();
+    private final ProjectRepositoryImpl PROJECT_REPOSITORY = new ProjectRepositoryImpl();
+    private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();
 
 
     @Test
@@ -19,18 +19,23 @@ public class ProjectRepositoryTest {
         String testEmail = "projectCreateTest@hotmail.dk";
 
         if (!USER_REPOSITORY.emailExists(testEmail)) {
-            USER_REPOSITORY.createUser(testEmail, "test", false);
+            User user = new User();
+            user.setEmail(testEmail);
+            user.setPassword("test");
+            user.setAdmin(false);
+            USER_REPOSITORY.create(user);
         }
 
         User user = USER_REPOSITORY.getUserByEmail(testEmail);
-        long id = PROJECT_REPOSITORY.createProject(user.getUserId(), "test project");
-        Project project = PROJECT_REPOSITORY.getProjectById(id);
+
+        long id = PROJECT_REPOSITORY.create(new Project(user.getUserId(), "test project"));
+        Project project = PROJECT_REPOSITORY.read(id);
 
         boolean expected = project != null;
 
         // Act
-        PROJECT_REPOSITORY.deleteProjectById(id);
-        Project after = PROJECT_REPOSITORY.getProjectById(id);
+        PROJECT_REPOSITORY.delete(id);
+        Project after = PROJECT_REPOSITORY.read(id);
 
         boolean actual = after == null;
 

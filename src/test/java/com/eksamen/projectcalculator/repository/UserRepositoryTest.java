@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class UserRepositoryTest {
 
-    private final UserRepository USER_REPOSITORY = new UserRepository();
+    private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();
 
     // Should_ExpectedBehavior_When_StateUnderTest
 
@@ -18,14 +18,18 @@ public class UserRepositoryTest {
         String testEmail = "adminToggleTest@hotmail.dk";
 
         if (!USER_REPOSITORY.emailExists(testEmail)) {
-            USER_REPOSITORY.createUser(testEmail, "test", false);
+            User user = new User();
+            user.setEmail(testEmail);
+            user.setPassword("test");
+            user.setAdmin(false);
+            USER_REPOSITORY.create(user);
         }
 
         User before = USER_REPOSITORY.getUserByEmail(testEmail);
         boolean expected = before.isAdmin();
 
         // Act
-        USER_REPOSITORY.changeAdmin(before.getUserId());
+        USER_REPOSITORY.update(before);
         User after = USER_REPOSITORY.getUserByEmail(testEmail);
 
         boolean actual = after.isAdmin();

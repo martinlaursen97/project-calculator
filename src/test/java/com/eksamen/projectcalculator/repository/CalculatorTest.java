@@ -1,10 +1,9 @@
 package com.eksamen.projectcalculator.repository;
 
-import com.eksamen.projectcalculator.domain.model.Calculator;
+import com.eksamen.projectcalculator.util.Calculator;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
 
@@ -29,7 +28,7 @@ public class CalculatorTest {
         int expectedWorkDays = 0;
 
         // Act
-        int actualWorkDays = Calculator.getDaysBetweenDates(date1, date2);
+        int actualWorkDays = Calculator.getWorkDaysBetweenDates(date1, date2);
 
         // Assert
         assertEquals(expectedWorkDays, actualWorkDays);

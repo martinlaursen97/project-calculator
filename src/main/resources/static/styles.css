@@ -323,15 +323,16 @@ body {
 
 .small-box {
     background-color: var(--second);
-    width: 200px;
-    height: 100px;
+    width: 250px;
+    height: 150px;
     border-radius: 20px;
     margin-top: 200px;
     box-shadow: 5px 10px 10px;
 }
 
 .small-box-header {
-    height: 50px;
+    height: 100px;
+    margin: 5px;
 }
 
 .small-box-footer {
@@ -356,6 +357,12 @@ body {
     border-radius: 20px;
     margin-top: 200px;
     box-shadow: 5px 10px 10px;
+}
+
+.big-form-box-error {
+    color: red;
+    font-size: 20px;
+    height: 15px;
 }
 
 .text-move {

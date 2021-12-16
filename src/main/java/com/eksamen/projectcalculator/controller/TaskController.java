@@ -1,5 +1,6 @@
 package com.eksamen.projectcalculator.controller;
 
+import com.eksamen.projectcalculator.domain.exception.InvalidDateException;
 import com.eksamen.projectcalculator.domain.service.ProjectService;
 import com.eksamen.projectcalculator.domain.service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -35,23 +36,30 @@ public class TaskController {
     Step 2:  Brugeren har udfyldt formen, og tasken oprettes i databasen.
     */
     @PostMapping("/project/add-verify")
-    public String addTaskVerify(@RequestParam(name="id") long id, WebRequest request, RedirectAttributes redirectAttributes) {
+    public String addTaskVerify(@RequestParam(name="id") long id, WebRequest request, RedirectAttributes redirectAttributes, Model model) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
+        redirectAttributes.addAttribute("id", id);
+
         if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
-            String taskName = request.getParameter("name");
-            String resource = request.getParameter("resource");
-            String startDate = request.getParameter("start");
-            String finishDate = request.getParameter("finish");
-            int completion = Integer.parseInt(request.getParameter("completion"));
-            double dailyWorkHours = Double.parseDouble(request.getParameter("hours"));
-            double pricePerHour = Double.parseDouble(request.getParameter("priceprhr"));
 
-            TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
-            redirectAttributes.addAttribute("id", id);
+            try {
+                String taskName = request.getParameter("name");
+                String resource = request.getParameter("resource");
+                String startDate = request.getParameter("start");
+                String finishDate = request.getParameter("finish");
+                int completion = Integer.parseInt(request.getParameter("completion"));
+                double dailyWorkHours = Double.parseDouble(request.getParameter("hours"));
+                double pricePerHour = Double.parseDouble(request.getParameter("priceprhr"));
 
-            return "redirect:/project";
+                TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
+                return "redirect:/project";
+            } catch (InvalidDateException e) {
+                model.addAttribute("taskId", id);
+                model.addAttribute("error", e.getMessage());
+                return "addTask";
+            }
         } else {
             return "error";
         }

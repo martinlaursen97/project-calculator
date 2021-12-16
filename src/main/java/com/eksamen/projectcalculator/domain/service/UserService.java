@@ -7,14 +7,22 @@ import java.util.List;
 
 public class UserService {
 
-    private final DataFacade FACADE = new DataFacade();
+    private final DataFacade FACADE = DataFacade.getInstance();
 
     public User loginValid(String email, String password) throws LoginException {
         return FACADE.loginValid(email, password);
     }
 
     public long createUser(String email, String password, boolean isAdmin) throws LoginException {
-        return FACADE.createUser(email, password, isAdmin);
+        if (!FACADE.emailExists(email)) {
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setAdmin(isAdmin);
+            return FACADE.createUser(user);
+        } else {
+            throw new LoginException("Email taken");
+        }
     }
 
     public List<User> getUsers() {
@@ -28,10 +36,16 @@ public class UserService {
 
 
     public void changeAdmin(Long userId) {
-        FACADE.changeAdmin(userId);
+        User user = new User();
+        user.setUserId(userId);
+        FACADE.changeAdmin(user);
     }
 
     public List<User> getUserByKey(String key) {
         return FACADE.getUserByKey(key);
+    }
+
+    public void deleteUserById(long id) {
+        FACADE.deleteUserById(id);
     }
 }

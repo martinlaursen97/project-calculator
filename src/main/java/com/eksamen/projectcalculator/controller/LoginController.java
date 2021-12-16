@@ -35,7 +35,7 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/users/register")
     public String registerUser(WebRequest request) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";

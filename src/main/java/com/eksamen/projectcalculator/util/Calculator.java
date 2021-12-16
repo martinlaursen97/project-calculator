@@ -1,4 +1,4 @@
-package com.eksamen.projectcalculator.domain.model;
+package com.eksamen.projectcalculator.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Calculator {
 
-    public static int getDaysBetweenDates(String start, String finish) {
+    public static int getWorkDaysBetweenDates(String start, String finish) {
         try {
             DateFormat df = new SimpleDateFormat("yyyy MM dd");
             Date date1 = df.parse(start);

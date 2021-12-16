@@ -21,6 +21,7 @@
 <div class="main">
     <div class="center">
         <div class="big-form-box">
+            <div class="big-form-box-error" th:text="${error}"></div>
             <form name="addTaskVerify" th:action="@{/project/add-verify(id=${id})}" method="POST">
                 <div class="col-sm">
                     <div class="col">
@@ -46,18 +47,18 @@
                     <div class="col-sm">
                         <label for="completion" class="control-label"></label>
                         <input type="number" name="completion" class="form-control" id="completion"
-                               placeholder="Completion percentage" min="0" max="100">
+                               placeholder="Completion percentage" min="0" max="100" required>
                     </div>
 
                     <div class="col-sm">
                         <label for="hours" class="control-label"></label>
                         <input type="number" name="hours" class="form-control" id="hours"
-                               placeholder="Daily work hours">
+                               placeholder="Daily work hours" step=".01" required>
                     </div>
                     <div class="col-sm">
                         <label for="priceprhr" class="control-label"></label>
                         <input type="number" name="priceprhr" class="form-control" id="priceprhr"
-                               placeholder="Price per hour">
+                               placeholder="Price per hour" step=".01" required>
                     </div>
 
                     <div class="col">

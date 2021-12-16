@@ -5,21 +5,17 @@ import java.util.List;
 public class Project {
 
     private long projectId;
+    private long userId;
     private String projectName;
     private List<Task> tasks;
     private String startDateStr;
     private String deadlineDateStr;
 
-    public Project(long projectId, String projectName, List<Task> tasks, String startDateStr, String deadlineDateStr) {
-        this.projectId = projectId;
+    public Project() { }
+
+    public Project(long userId, String projectName) {
+        this.userId = userId;
         this.projectName = projectName;
-        this.tasks = tasks;
-        this.startDateStr = startDateStr;
-        this.deadlineDateStr = deadlineDateStr;
-    }
-
-    public Project() {
-
     }
 
     public long getProjectId() {
@@ -28,6 +24,14 @@ public class Project {
 
     public void setProjectId(long projectId) {
         this.projectId = projectId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getProjectName() {

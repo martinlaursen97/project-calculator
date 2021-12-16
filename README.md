@@ -1,19 +1,13 @@
 # Kalkulationsværktøj (Eksamensprojekt)
 
 
-## Prerequisties
-Before using this program, you have to do theese things first:
-- Instal MySQL Workbench and installed an IDEA fx. IntelliJ or Eclipse
-- Connected to the internet
-- Need a terminal to get the project to your desktop.
-- Read the README file.
-
-## Using the application
-- Clone tis repository to your desktoo.
-- Open the project with an IDEA (we used IntelliJ).
-- HVORDAN CONNECTER MAN TIL DATABSEN? 
-- Run the scritp and execute it all.
-- Fill this adresse to your browser http://localhost:8080. 
+## Use on localhost
+Before using this program, you have to the following:
+- Clone this project
+- Create the database with the mysql scripts from the sql folder
+- Set your environment variables to: url (jdbc:mysql://127.0.0.1:3306/alphasolutions?serverTimezone=UTC), user (your mysql username), password (your mysql password).
+- Run the program
+- Use: username: admin@hotmail.dk, password: 123321, to login with, or create your own users in the database.
 
 ## Contributing to Kalkulationsværktøj
 1. Fork this repository.

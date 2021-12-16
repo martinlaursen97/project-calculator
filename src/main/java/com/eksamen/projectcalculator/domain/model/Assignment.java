@@ -1,6 +1,6 @@
 package com.eksamen.projectcalculator.domain.model;
 
-import com.eksamen.projectcalculator.util.Calculator;
+import com.eksamen.projectcalculator.domain.service.Calculator;
 
 public abstract class Assignment {
 

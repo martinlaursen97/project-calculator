@@ -1,4 +1,4 @@
-package com.eksamen.projectcalculator.util;
+package com.eksamen.projectcalculator.domain.service;
 
 import java.text.DateFormat;
 import java.text.ParseException;

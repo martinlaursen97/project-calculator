@@ -1,6 +1,6 @@
 package com.eksamen.projectcalculator.repository;
 
-import com.eksamen.projectcalculator.util.Calculator;
+import com.eksamen.projectcalculator.domain.service.Calculator;
 import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;

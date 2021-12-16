@@ -40,7 +40,6 @@ public class TaskController {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
         if (userId == null) return "login";
 
-        redirectAttributes.addAttribute("id", id);
 
         if (PROJECT_SERVICE.projectIsUsers(userId, id)) {
 
@@ -53,9 +52,11 @@ public class TaskController {
                 double dailyWorkHours = Double.parseDouble(request.getParameter("hours"));
                 double pricePerHour = Double.parseDouble(request.getParameter("priceprhr"));
 
+                redirectAttributes.addAttribute("id", id);
                 TASK_SERVICE.createTask(id, taskName, resource, startDate, finishDate, completion, dailyWorkHours, pricePerHour);
                 return "redirect:/project";
             } catch (InvalidDateException e) {
+                model.addAttribute("id", id);
                 model.addAttribute("taskId", id);
                 model.addAttribute("error", e.getMessage());
                 return "addTask";

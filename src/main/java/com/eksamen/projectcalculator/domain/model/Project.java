@@ -2,6 +2,8 @@ package com.eksamen.projectcalculator.domain.model;
 
 import java.util.List;
 
+// @A
+
 public class Project {
 
     private long projectId;

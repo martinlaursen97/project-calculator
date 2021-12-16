@@ -6,6 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Martin
+ */
+
 public class ProjectRepositoryImpl implements ProjectRepository {
 
     private Connection connection = DBManager.getConnection();

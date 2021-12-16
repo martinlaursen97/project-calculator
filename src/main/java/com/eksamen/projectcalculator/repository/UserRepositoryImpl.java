@@ -7,6 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Martin
+ */
+
 public class UserRepositoryImpl implements UserRepository {
 
     @Override

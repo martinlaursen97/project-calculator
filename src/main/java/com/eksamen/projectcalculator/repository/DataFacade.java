@@ -5,7 +5,9 @@ import com.eksamen.projectcalculator.domain.model.*;
 
 import java.util.List;
 
-// @author
+/**
+ * @author Martin
+ */
 
 public class DataFacade {
     private static DataFacade instance = null;

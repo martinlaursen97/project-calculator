@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+
 @Controller
 public class UserController {
     private final UserService USER_SERVICE = new UserService();
+
+    /**
+     * @author Martin
+     */
 
     @PostMapping("/verify")
     public String loginVerify(WebRequest request, Model model) {
@@ -34,6 +40,10 @@ public class UserController {
             return "login";
         }
     }
+
+    /**
+     * @author Jakob, Martin
+     */
 
     @PostMapping("/users/register-verify")
     public String registerVerify(WebRequest request, Model model) {
@@ -68,6 +78,10 @@ public class UserController {
         return "register";
     }
 
+    /**
+     * @author Jakob
+     */
+
     @GetMapping("/users")
     public String getAdminOverview(Model model, WebRequest request){
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);
@@ -80,6 +94,9 @@ public class UserController {
         return "adminOverview";
     }
 
+    /**
+     * @author Younes
+     */
 
     @GetMapping("/users/user")
     public String showUser(@RequestParam(name = "id") long id, Model model, WebRequest request) {
@@ -93,6 +110,10 @@ public class UserController {
         model.addAttribute("user", USER_SERVICE.getUserById(id));
         return "inspectUser";
     }
+
+    /**
+     * @author Martin, Younes
+     */
 
     @GetMapping("/users/user/admin")
     public String changeAdmin(@RequestParam(name= "id") long id, WebRequest request, RedirectAttributes redirectAttributes){
@@ -111,6 +132,10 @@ public class UserController {
         redirectAttributes.addAttribute("id", id);
         return  "redirect:/users/user";
     }
+
+    /**
+     * @author Martin
+     */
 
     @GetMapping("/users/user/delete")
     public String deleteProject(@RequestParam(name = "id") long id, Model model, WebRequest request) {
@@ -139,6 +164,10 @@ public class UserController {
         USER_SERVICE.deleteUserById(id);
         return "redirect:/users";
     }
+
+    /**
+     * @author Martin, Younes
+     */
 
     @PostMapping("/users/search")
     public String search(WebRequest request, Model model) {

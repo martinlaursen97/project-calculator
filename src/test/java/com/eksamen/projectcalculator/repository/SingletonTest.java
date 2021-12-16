@@ -1,10 +1,12 @@
 package com.eksamen.projectcalculator.repository;
 
 import org.junit.jupiter.api.Test;
-
 import java.sql.Connection;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * @author Martin
+ */
 
 public class SingletonTest {
 

@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * @author Martin
+ */
+
 public class UserRepositoryTest {
 
     private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();

@@ -16,6 +16,10 @@ public abstract class Assignment {
     protected double dailyWorkHours;
     protected double pricePerHour;
 
+    /**
+     * @author Martin
+     */
+
     // Udregner prisen af en assignment, ud fra arbejdsdage, timer, pris
     public double getPrice() {
         return Calculator.getWorkDaysBetweenDates(startDateStr, finishDateStr) * dailyWorkHours * pricePerHour;

@@ -8,6 +8,10 @@ import com.eksamen.projectcalculator.domain.service.TaskService;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Martin
+ */
+
 public class TaskServiceTest {
 
     private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();

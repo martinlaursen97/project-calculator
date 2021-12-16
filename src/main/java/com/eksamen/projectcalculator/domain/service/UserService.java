@@ -5,6 +5,10 @@ import com.eksamen.projectcalculator.domain.model.User;
 import com.eksamen.projectcalculator.repository.DataFacade;
 import java.util.List;
 
+/**
+ * @author Martin, Younes
+ */
+
 public class UserService {
 
     private final DataFacade FACADE = DataFacade.getInstance();

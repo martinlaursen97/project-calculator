@@ -17,6 +17,10 @@ public class Task extends Assignment {
         this.subtasks = subtasks;
     }
 
+    /**
+     * @author Younes, Martin
+     */
+
     public double getSubtasksPrice() {
         double sum = 0.0;
         if (subtasks != null) {

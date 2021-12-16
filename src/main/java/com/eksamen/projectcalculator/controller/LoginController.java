@@ -14,6 +14,10 @@ public class LoginController {
     samt at det kun er adminstratorere, der har adgang til de adminstrative funktioner.
     */
 
+    /**
+     * @author Jakob
+     */
+
     @GetMapping("/index")
     public String index(WebRequest request) {
         // Hvis userId er null, er der ikke blevet sat noget userId som session attribut.
@@ -23,10 +27,18 @@ public class LoginController {
         return "index";
     }
 
+    /**
+     * @author Martin
+     */
+
     @GetMapping("/")
     public String login() {
         return "login";
     }
+
+    /**
+     * @author Martin
+     */
 
     // Session attributter invalideres / fjernes, og brugeren er ikke længere logget på
     @GetMapping("/logout")
@@ -34,6 +46,10 @@ public class LoginController {
         session.invalidate();
         return "login";
     }
+
+    /**
+     * @author Martin, Younes
+     */
 
     @GetMapping("/users/register")
     public String registerUser(WebRequest request) {

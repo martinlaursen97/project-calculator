@@ -68,6 +68,10 @@ public class Project {
         this.deadlineDateStr = deadlineDateStr;
     }
 
+    /**
+     * @author Martin, Younes
+     */
+
     public double getTotalProjectPrice() {
         if (tasks == null) return 0.0;
 

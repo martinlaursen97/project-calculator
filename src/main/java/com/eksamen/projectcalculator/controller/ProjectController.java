@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * @author Martin
+ */
+
 @Controller
 public class ProjectController {
 
     private final ProjectService PROJECT_SERVICE = new ProjectService();
 
-    //viser ens projekter
     @GetMapping("/projects")
     public String projects(WebRequest request, Model model) {
         Long userId = (Long) request.getAttribute("userId", WebRequest.SCOPE_SESSION);

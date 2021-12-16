@@ -5,16 +5,20 @@ import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.domain.model.Task;
 import org.junit.jupiter.api.Test;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
-Author Jakob & Martin
+/**
+ * @author Jakob, Martin
  */
+
+/*
+    Environment variabler med url, user, password, som passer til din database,
+    skal muligvis sættes til test klasserne, før integrationstests vil fungere.
+*/
+
 
 // Should_ExpectedBehavior_When_StateUnderTest
 public class CalculatorTest {

@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * @author Martin
+ */
+
 @Controller
 public class SubtaskController {
     private final TaskService TASK_SERVICE = new TaskService();

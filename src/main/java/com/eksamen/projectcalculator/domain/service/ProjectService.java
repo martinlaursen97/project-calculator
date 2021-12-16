@@ -5,6 +5,10 @@ import com.eksamen.projectcalculator.domain.model.Project;
 import com.eksamen.projectcalculator.repository.DataFacade;
 import java.util.List;
 
+/**
+ * @author Martin
+ */
+
 public class ProjectService {
 
     private final DataFacade FACADE = DataFacade.getInstance();

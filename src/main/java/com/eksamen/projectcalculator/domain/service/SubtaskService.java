@@ -8,6 +8,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Martin
+ */
+
 public class SubtaskService {
 
     private final DataFacade FACADE = DataFacade.getInstance();

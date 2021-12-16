@@ -9,6 +9,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Martin
+ */
+
 public class TaskService {
 
     private final DataFacade FACADE = DataFacade.getInstance();

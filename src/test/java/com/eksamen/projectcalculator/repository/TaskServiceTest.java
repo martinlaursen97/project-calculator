@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskServiceTest {
 
-    private final UserRepository USER_REPOSITORY = new UserRepository();
-    private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
+    private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();
+    private final ProjectRepositoryImpl PROJECT_REPOSITORY = new ProjectRepositoryImpl();
 
     private final TaskService TASK_SERVICE = new TaskService();
     // Should_ExpectedBehavior_When_StateUnderTest

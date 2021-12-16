@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserService {
 
-    private final DataFacade FACADE = new DataFacade();
+    private final DataFacade FACADE = DataFacade.getInstance();
 
     public User loginValid(String email, String password) throws LoginException {
         return FACADE.loginValid(email, password);
@@ -36,7 +36,9 @@ public class UserService {
 
 
     public void changeAdmin(Long userId) {
-        FACADE.changeAdmin(userId);
+        User user = new User();
+        user.setUserId(userId);
+        FACADE.changeAdmin(user);
     }
 
     public List<User> getUserByKey(String key) {

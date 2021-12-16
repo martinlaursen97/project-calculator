@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ProjectService {
 
-    private final DataFacade FACADE = new DataFacade();
+    private final DataFacade FACADE = DataFacade.getInstance();
 
     public long createProject(long id, String projectName) throws ProjectException {
         if (!projectName.isEmpty() && projectName.length() <= 50) {

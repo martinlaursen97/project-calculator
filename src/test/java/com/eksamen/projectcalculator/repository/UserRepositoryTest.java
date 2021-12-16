@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class UserRepositoryTest {
 
-    private final UserRepository USER_REPOSITORY = new UserRepository();
+    private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();
 
     // Should_ExpectedBehavior_When_StateUnderTest
 
@@ -29,7 +29,7 @@ public class UserRepositoryTest {
         boolean expected = before.isAdmin();
 
         // Act
-        USER_REPOSITORY.update(before.getUserId());
+        USER_REPOSITORY.update(before);
         User after = USER_REPOSITORY.getUserByEmail(testEmail);
 
         boolean actual = after.isAdmin();

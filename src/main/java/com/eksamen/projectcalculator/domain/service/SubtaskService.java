@@ -4,7 +4,8 @@ import com.eksamen.projectcalculator.domain.model.Subtask;
 import com.eksamen.projectcalculator.repository.DataFacade;
 
 public class SubtaskService {
-    private final DataFacade FACADE = new DataFacade();
+
+    private final DataFacade FACADE = DataFacade.getInstance();
 
     public long createSubtask(long taskId, String subtaskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
         Subtask subtask = new Subtask();
@@ -36,6 +37,9 @@ public class SubtaskService {
     }
 
     public void updateSubtaskPercentById(long subtaskId, int percent) {
-        FACADE.updateSubtaskPercentById(subtaskId, percent);
+        Subtask subtask = new Subtask();
+        subtask.setId(subtaskId);
+        subtask.setPercentComplete(percent);
+        FACADE.updateSubtask(subtask);
     }
 }

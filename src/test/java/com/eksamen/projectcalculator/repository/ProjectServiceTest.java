@@ -15,7 +15,7 @@ public class ProjectServiceTest {
     private final ProjectService PROJECT_SERVICE = new ProjectService();
 
     // Bliver brugt til at lave enkelte test users, til at tildele projekter
-    private final UserRepository USER_REPOSITORY = new UserRepository();
+    private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();
 
 
     @Test

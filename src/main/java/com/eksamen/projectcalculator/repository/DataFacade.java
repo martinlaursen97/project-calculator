@@ -6,14 +6,30 @@ import com.eksamen.projectcalculator.domain.model.*;
 import java.util.List;
 
 public class DataFacade {
-    private final SubtaskRepository SUBTASK_REPOSITORY = new SubtaskRepository();
-    private final UserRepository USER_REPOSITORY = new UserRepository();
-    private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
-    private final TaskRepository TASK_REPOSITORY = new TaskRepository();
+    private static DataFacade instance = null;
+
+    private final SubtaskRepository SUBTASK_REPOSITORY;
+    private final UserRepository USER_REPOSITORY;
+    private final ProjectRepository PROJECT_REPOSITORY;
+    private final TaskRepository TASK_REPOSITORY;
+
+    public DataFacade() {
+        SUBTASK_REPOSITORY = new SubtaskRepositoryImpl();
+        USER_REPOSITORY = new UserRepositoryImpl();
+        PROJECT_REPOSITORY = new ProjectRepositoryImpl();
+        TASK_REPOSITORY = new TaskRepositoryImpl();
+    }
+
+    public static DataFacade getInstance() {
+        if (instance == null) {
+            instance = new DataFacade();
+        }
+        return instance;
+    }
 
     // User
 
-    public long createUser(User user) throws LoginException {
+    public long createUser(User user) {
         return USER_REPOSITORY.create(user);
     }
 
@@ -25,8 +41,8 @@ public class DataFacade {
         return USER_REPOSITORY.getAll();
     }
 
-    public void changeAdmin(Long userId) {
-        USER_REPOSITORY.update(userId);
+    public void changeAdmin(User user) {
+        USER_REPOSITORY.update(user);
     }
 
     public List<User> getUserByKey(String key) {
@@ -50,15 +66,15 @@ public class DataFacade {
     }
 
     public List<Project> getProjectsByUserId(long userId) {
-        return PROJECT_REPOSITORY.getAllById(userId);
+        return PROJECT_REPOSITORY.getProjectsByUserId(userId);
     }
 
     public Project getProjectById(long id) {
         Project project = PROJECT_REPOSITORY.read(id);
-        List<Task> tasks = TASK_REPOSITORY.getAllById(id);
+        List<Task> tasks = TASK_REPOSITORY.getTasksByProjectId(id);
 
         for (Task task : tasks) {
-            List<Subtask> subtasks = SUBTASK_REPOSITORY.getAllById(task.getId());
+            List<Subtask> subtasks = SUBTASK_REPOSITORY.getSubtasksByTaskId(task.getId());
             if (subtasks != null) {
                 task.setSubtasks(subtasks);
             }
@@ -91,7 +107,7 @@ public class DataFacade {
 
     public Task getTaskById(long id) {
         Task task = TASK_REPOSITORY.read(id);
-        List<Subtask> subtasks = SUBTASK_REPOSITORY.getAllById(task.getId());
+        List<Subtask> subtasks = SUBTASK_REPOSITORY.getSubtasksByTaskId(task.getId());
         task.setSubtasks(subtasks);
         return task;
     }
@@ -118,8 +134,8 @@ public class DataFacade {
         return TASK_REPOSITORY.getProjectDeadlineById(id);
     }
 
-    public void updateTaskPercentById(long taskId, int percent) {
-        TASK_REPOSITORY.update(taskId, percent);
+    public void updateSubtask(Task task) {
+        TASK_REPOSITORY.update(task);
     }
 
     // Subtask
@@ -151,10 +167,7 @@ public class DataFacade {
         SUBTASK_REPOSITORY.delete(subtaskId);
     }
 
-    public void updateSubtaskPercentById(long subtaskId, int percent) {
-        SUBTASK_REPOSITORY.update(subtaskId, percent);
+    public void updateSubtask(Subtask subtask) {
+        SUBTASK_REPOSITORY.update(subtask);
     }
-
-
-
 }

@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjectRepositoryTest {
 
     // Should_ExpectedBehavior_When_StateUnderTest
-    private final ProjectRepository PROJECT_REPOSITORY = new ProjectRepository();
-    private final UserRepository USER_REPOSITORY = new UserRepository();
+    private final ProjectRepositoryImpl PROJECT_REPOSITORY = new ProjectRepositoryImpl();
+    private final UserRepositoryImpl USER_REPOSITORY = new UserRepositoryImpl();
 
 
     @Test

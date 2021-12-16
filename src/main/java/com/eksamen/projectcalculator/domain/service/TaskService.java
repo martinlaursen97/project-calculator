@@ -6,7 +6,7 @@ import com.eksamen.projectcalculator.repository.DataFacade;
 
 public class TaskService {
 
-    private final DataFacade FACADE = new DataFacade();
+    private final DataFacade FACADE = DataFacade.getInstance();
 
     public long createTask(long projectId, String taskName, String resource, String startDate, String finishDate, int completion, double dailyWorkHours, double pricePerHour) {
         Assignment task = new Task();
@@ -46,6 +46,9 @@ public class TaskService {
     }
 
     public void updateTaskPercentById(long taskId, int percent) {
-        FACADE.updateTaskPercentById(taskId, percent);
+        Task task = new Task();
+        task.setId(taskId);
+        task.setPercentComplete(percent);
+        FACADE.updateSubtask(task);
     }
 }

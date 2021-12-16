@@ -4,6 +4,8 @@ import com.eksamen.projectcalculator.util.Calculator;
 
 public abstract class Assignment {
 
+    // Denne model indeholder attributter og metoder til tasks og subtasks
+
     protected long id;
     protected long foreignId;
     protected String name;
@@ -14,6 +16,7 @@ public abstract class Assignment {
     protected double dailyWorkHours;
     protected double pricePerHour;
 
+    // Udregner prisen af en assignment, ud fra arbejdsdage, timer, pris
     public double getPrice() {
         return Calculator.getWorkDaysBetweenDates(startDateStr, finishDateStr) * dailyWorkHours * pricePerHour;
     }

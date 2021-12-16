@@ -6,6 +6,8 @@ Before using this program, you have to the following:
 - Clone this project
 - Create the database with the mysql scripts from the sql folder
 - Set your environment variables to: url (jdbc:mysql://127.0.0.1:3306/alphasolutions?serverTimezone=UTC), user (your mysql username), password (your mysql password).
+- Run the program
+- Use: username: admin@hotmail.dk, password: 123321, to login with, or create your own users in the database.
 
 ## Contributing to Kalkulationsværktøj
 1. Fork this repository.

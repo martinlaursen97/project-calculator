@@ -1,7 +1,6 @@
 package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Project;
-import com.eksamen.projectcalculator.domain.service.CRUDRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.eksamen.projectcalculator.domain.service;
+package com.eksamen.projectcalculator.repository;
 
 import com.eksamen.projectcalculator.domain.model.Project;
 

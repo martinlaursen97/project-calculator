@@ -1,5 +1,6 @@
 # Kalkulationsværktøj (Eksamensprojekt)
 
+For at prøve programmet igennem Heroku: email: notadmin@hotmail.dk, password: 123321
 
 ## Use on localhost
 Before using this program, you have to the following:

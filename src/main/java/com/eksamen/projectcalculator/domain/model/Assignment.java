@@ -22,7 +22,11 @@ public abstract class Assignment {
 
     // Udregner prisen af en assignment, ud fra arbejdsdage, timer, pris
     public double getPrice() {
-        return Calculator.getWorkDaysBetweenDates(startDateStr, finishDateStr) * dailyWorkHours * pricePerHour;
+        return getWorkDays() * dailyWorkHours * pricePerHour;
+    }
+
+    public double getWorkDays() {
+        return Calculator.getWorkDaysBetweenDates(startDateStr, finishDateStr);
     }
 
     public long getId() {

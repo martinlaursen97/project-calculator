@@ -34,21 +34,12 @@
             </div>
 
             <div class="task-box">
-                <div class="task-box-item-desc">
-                    Subtask:
-                </div>
-                <div class="task-box-item">
-                    <b><div class="task-box-item-name">name:</div></b>
-                    <b><div class="task-box-item-price">price:</div></b>
-                </div>
-                <div class="task-box-item">
-                    <div class="task-box-item-name" th:text="${subtask.name}"></div>
-                    <div class="task-box-item-price" th:text="${subtask.getPrice()}"></div>
-                </div>
-                <div class="task-box-item">
-                    <b><div class="task-box-item-name">subtask total:</div></b>
-                    <b><div class="task-box-item-price" th:text="${subtask.getPrice()}"></div></b>
-                </div>
+
+                <b>Name: </b><p th:text="${subtask.name}"></p>
+                <b>Work days: </b><p th:text="${subtask.getWorkDays()}"></p>
+                <b>Hours per day: </b><p th:text="${subtask.dailyWorkHours}"></p>
+                <b>Price per hour: </b><p th:text="${subtask.pricePerHour}"></p>
+                <b>Price: days * hours * price per hour = </b><p th:text="${subtask.getPrice()}"></p>
 
                 <div class="task-box-item-desc">
                     Task:
